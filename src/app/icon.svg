@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" fill="#e8e6e1"/>
+  <g transform="translate(4.6 2.4) scale(0.318)">
+    <path d="M10 12 L40 20 L40 74 L10 82 Z" fill="#0d1f33"/>
+    <path
+      d="M40 18 L64 14 L64 80 L40 76 Z"
+      fill="none"
+      stroke="#0d1f33"
+      stroke-width="7"
+      stroke-linejoin="miter"
+    />
+  </g>
+</svg>
