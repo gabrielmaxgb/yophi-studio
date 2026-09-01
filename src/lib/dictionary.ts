@@ -155,7 +155,8 @@ const pt: Dictionary = {
 		title: "YOPHI — Se parece de qualquer um, não é o seu",
 		description:
 			"Estúdio de conteúdo, design e tecnologia. Se o site serve pra qualquer um, o cliente também vai.",
-		ogDescription: "YOPHI. Se parece de qualquer um, não é o seu. A gente faz o outro.",
+		ogDescription:
+			"YOPHI. Se parece de qualquer um, não é o seu. A gente faz o outro.",
 	},
 	nav: {
 		home: "Início",
@@ -173,7 +174,8 @@ const pt: Dictionary = {
 			"Pra quem já vende. E ainda perde gente no primeiro clique porque o site parece de todo mundo.",
 		cta: "Começar o seu projeto",
 		ctaSecondary: "Ver o trabalho",
-		ctaHint: "Manda três frases. A gente responde se entra — e o que faria no ar.",
+		ctaHint:
+			"Manda três frases. A gente responde se entra — e o que faria no ar.",
 		formLabel: "Forma",
 		formAside: "Do que você é ao que o cliente encontra.",
 		stages: ["YOPHI", "POSIÇÃO", "CONTEÚDO", "DIGITAL", "USO"],
@@ -206,14 +208,16 @@ const pt: Dictionary = {
 	selectedWork: {
 		eyebrow: "Arquivo",
 		headline: "Isso a gente assina.",
-		invite: "Dois no ar. O resto mostra o tipo. Entra — e vê se é isso que o seu precisa.",
+		invite:
+			"Dois no ar. O resto mostra o tipo. Entra — e vê se é isso que o seu precisa.",
 		all: "Ver o trabalho",
 	},
 	services: {
 		eyebrow: "O que fazemos",
 		headline: "Da cara",
 		headlineBreak: "ao que entra no ar.",
-		aside: "Não tem pacote. Tem o que falta pra o seu parar de parecer de qualquer um.",
+		aside:
+			"Não tem pacote. Tem o que falta pra o seu parar de parecer de qualquer um.",
 		items: [
 			{
 				number: "01",
@@ -260,7 +264,8 @@ const pt: Dictionary = {
 		cta: "Começar o seu projeto",
 	},
 	footer: {
-		blurb: "Se o site parece de qualquer um, o cliente também vai. A gente faz o outro.",
+		blurb:
+			"Se o site parece de qualquer um, o cliente também vai. A gente faz o outro.",
 		navigate: "Navegar",
 		presence: "Estúdio",
 		presenceLine: "Conteúdo, design",
@@ -270,7 +275,8 @@ const pt: Dictionary = {
 	},
 	work: {
 		metaTitle: "Arquivo",
-		metaDescription: "Trabalhos da YOPHI. O que ficou no ar — e o tipo que a gente faz.",
+		metaDescription:
+			"Trabalhos da YOPHI. O que ficou no ar — e o tipo que a gente faz.",
 		eyebrow: "Arquivo",
 		headline: "O que ficou no ar.",
 		intro:
@@ -342,18 +348,15 @@ const pt: Dictionary = {
 				disciplines: ["Identidade", "Digital"],
 				problem:
 					"A adega tinha nome. A loja online podia ser de qualquer importadora.",
-				solution:
-					"O rótulo manda. A loja cala o bastante pra deixar escolher.",
+				solution: "O rótulo manda. A loja cala o bastante pra deixar escolher.",
 				outcomes: ["Loja", "Catálogo", "Identidade"],
 				impact: "[+X% de venda pela loja]",
 			},
 			"lima-advocacia": {
 				sector: "Direito",
 				disciplines: ["Posicionamento", "Digital"],
-				problem:
-					"Escritório sério atrás de um site de advogado de template.",
-				solution:
-					"Nome, casos, o resto fora. Sem coluna grega na capa.",
+				problem: "Escritório sério atrás de um site de advogado de template.",
+				solution: "Nome, casos, o resto fora. Sem coluna grega na capa.",
 				outcomes: ["Site", "Texto", "Posicionamento"],
 				impact: "[+X pedidos de reunião pelo site]",
 			},
@@ -370,8 +373,7 @@ const pt: Dictionary = {
 			"estudio-rio": {
 				sector: "Música",
 				disciplines: ["Identidade", "Digital"],
-				problem:
-					"O som existia. Online, era bio do Instagram e um Linktree.",
+				problem: "O som existia. Online, era bio do Instagram e um Linktree.",
 				solution:
 					"Discografia na frente. Press kit depois. O player não pede licença pra aparecer.",
 				outcomes: ["Site", "Arquivo", "Identidade"],
@@ -382,8 +384,7 @@ const pt: Dictionary = {
 				disciplines: ["Conteúdo", "Direção de arte", "Digital"],
 				problem:
 					"A peça na mesa tinha peso. No feed, era artesanato de marketplace.",
-				solution:
-					"Cada peça com nome. Sem fundo infinito de crochê.",
+				solution: "Cada peça com nome. Sem fundo infinito de crochê.",
 				outcomes: ["Site", "Editorial", "Lookbook"],
 				impact: "[+X% de encomenda direta]",
 			},
@@ -416,7 +417,8 @@ const pt: Dictionary = {
 		metaDescription: "Manda o projeto pra YOPHI. Três frases bastam.",
 		eyebrow: "Contato",
 		headline: "Manda o que as pessoas encontram hoje.",
-		intro: "Quem é, o que está errado no ar, o que você quer no lugar. A gente responde em poucos dias.",
+		intro:
+			"Quem é, o que está errado no ar, o que você quer no lugar. A gente responde em poucos dias.",
 		email: "hello@yophi.studio",
 		tag: "Criativo × Tecnologia",
 		name: "Nome",
@@ -425,7 +427,8 @@ const pt: Dictionary = {
 		message: "O que as pessoas encontram hoje?",
 		submit: "Enviar o projeto",
 		successTitle: "Chegou.",
-		successBody: "A gente lê e responde com o que faria — ou com o que não faria.",
+		successBody:
+			"A gente lê e responde com o que faria — ou com o que não faria.",
 	},
 };
 
@@ -434,7 +437,8 @@ const en: Dictionary = {
 		title: "YOPHI — If it looks like anyone's, it isn't yours",
 		description:
 			"A studio for content, design and technology. If the site could belong to anyone, the client goes there too.",
-		ogDescription: "YOPHI. If it looks like anyone's, it isn't yours. We make the other one.",
+		ogDescription:
+			"YOPHI. If it looks like anyone's, it isn't yours. We make the other one.",
 	},
 	nav: {
 		home: "Home",
@@ -452,7 +456,8 @@ const en: Dictionary = {
 			"For the business that already sells. And still loses people on the first click because the site looks like everyone else's.",
 		cta: "Start your project",
 		ctaSecondary: "See the work",
-		ctaHint: "Send three lines. We reply whether we take it — and what we'd put live.",
+		ctaHint:
+			"Send three lines. We reply whether we take it — and what we'd put live.",
 		formLabel: "Form",
 		formAside: "From what you are to what the client finds.",
 		stages: ["YOPHI", "POSITION", "CONTENT", "DIGITAL", "USE"],
@@ -485,7 +490,8 @@ const en: Dictionary = {
 	selectedWork: {
 		eyebrow: "Archive",
 		headline: "Work we put our name on.",
-		invite: "Two live. The rest shows the kind. Come in — and see if that's what yours needs.",
+		invite:
+			"Two live. The rest shows the kind. Come in — and see if that's what yours needs.",
 		all: "See the work",
 	},
 	services: {
@@ -518,7 +524,8 @@ const en: Dictionary = {
 	},
 	process: {
 		eyebrow: "How we work",
-		headline: "We start from what the business already is. Not what's in fashion.",
+		headline:
+			"We start from what the business already is. Not what's in fashion.",
 		steps: {
 			SEE: "We understand the business.",
 			DEFINE: "We name the difference.",
@@ -539,7 +546,8 @@ const en: Dictionary = {
 		cta: "Start your project",
 	},
 	footer: {
-		blurb: "If the site looks like anyone's, the client goes there too. We make the other one.",
+		blurb:
+			"If the site looks like anyone's, the client goes there too. We make the other one.",
 		navigate: "Navigate",
 		presence: "Studio",
 		presenceLine: "Content, design",
@@ -549,10 +557,12 @@ const en: Dictionary = {
 	},
 	work: {
 		metaTitle: "Archive",
-		metaDescription: "Work from YOPHI. What stayed live — and the kind we make.",
+		metaDescription:
+			"Work from YOPHI. What stayed live — and the kind we make.",
 		eyebrow: "Archive",
 		headline: "What stayed live.",
-		intro: "Not a studio shop window. What's already live. Come in and see if that's what yours needs.",
+		intro:
+			"Not a studio shop window. What's already live. Come in and see if that's what yours needs.",
 		disciplines: "What went in",
 		challenge: "The problem",
 		intervention: "What went live",
@@ -628,8 +638,7 @@ const en: Dictionary = {
 			"lima-advocacia": {
 				sector: "Law",
 				disciplines: ["Positioning", "Digital"],
-				problem:
-					"A serious firm behind a lawyer-template site.",
+				problem: "A serious firm behind a lawyer-template site.",
 				solution:
 					"The name, the cases, everything else out. No Greek column on the cover.",
 				outcomes: ["Site", "Copy", "Positioning"],
@@ -660,8 +669,7 @@ const en: Dictionary = {
 				disciplines: ["Content", "Art direction", "Digital"],
 				problem:
 					"The piece on the table had weight. In the feed, it was marketplace craft.",
-				solution:
-					"Each piece with a name. No endless crochet backdrop.",
+				solution: "Each piece with a name. No endless crochet backdrop.",
 				outcomes: ["Site", "Editorial", "Lookbook"],
 				impact: "[+X% of direct orders]",
 			},
@@ -694,7 +702,8 @@ const en: Dictionary = {
 		metaDescription: "Send YOPHI the project. Three lines are enough.",
 		eyebrow: "Contact",
 		headline: "Send what people find today.",
-		intro: "Who it is, what's wrong live, what you want instead. We reply in a few days.",
+		intro:
+			"Who it is, what's wrong live, what you want instead. We reply in a few days.",
 		email: "hello@yophi.studio",
 		tag: "Creative × Technology",
 		name: "Name",
@@ -703,7 +712,8 @@ const en: Dictionary = {
 		message: "What do people find today?",
 		submit: "Send the project",
 		successTitle: "Got it.",
-		successBody: "We'll read it and reply with what we'd put live — or what we wouldn't.",
+		successBody:
+			"We'll read it and reply with what we'd put live — or what we wouldn't.",
 	},
 };
 
