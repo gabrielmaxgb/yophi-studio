@@ -39,7 +39,7 @@ export function Philosophy() {
             <p className="text-[0.65rem] tracking-[0.28em] text-stone uppercase">
               {dict.philosophy.label}
             </p>
-            <p className="font-serif text-[clamp(1.8rem,4vw,3.2rem)] tracking-[0.06em] uppercase">
+            <p className="max-w-xl font-serif text-[clamp(1.35rem,3vw,2.1rem)] leading-snug text-ink">
               {dict.philosophy.closing}
             </p>
           </div>

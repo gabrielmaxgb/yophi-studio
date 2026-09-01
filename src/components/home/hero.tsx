@@ -10,6 +10,7 @@ import {
   stagger,
 } from "animejs";
 import { LocaleLink } from "@/components/i18n/locale-link";
+import { ArchiveLink } from "@/components/work/archive-gate";
 import { useI18n } from "@/components/i18n/locale-provider";
 import { isFinePointer, prefersReducedMotion } from "@/lib/motion";
 import { cn } from "@/lib/utils";
@@ -235,6 +236,7 @@ export function Hero() {
   return (
     <section
       ref={rootRef}
+      aria-labelledby="hero-headline"
       className="relative min-h-dvh overflow-hidden bg-deep text-paper"
     >
       <div className="pointer-events-none absolute inset-0">
@@ -272,7 +274,7 @@ export function Hero() {
         <div className="flex flex-col gap-8 md:gap-10">
           <p
             className="font-serif text-[clamp(3.5rem,12vw,8.5rem)] leading-[0.9] tracking-[0.08em] uppercase"
-            aria-label="Yophi"
+            aria-hidden
           >
             {letters.map((letter) => (
               <span
@@ -286,39 +288,48 @@ export function Hero() {
           </p>
 
           <div className="flex flex-col gap-4">
-            <p
+            <h1
+              id="hero-headline"
               data-hero-line
-              className="font-serif text-[clamp(1.6rem,4vw,2.75rem)] leading-[1.15] text-paper/92 opacity-0"
+              className="font-serif text-[clamp(1.6rem,4vw,2.75rem)] leading-[1.15] text-paper opacity-0"
             >
               {dict.hero.headline}
-            </p>
+            </h1>
             <p
               data-hero-copy
-              className="max-w-md text-[0.95rem] leading-relaxed text-paper/60 opacity-0 md:text-base"
+              className="max-w-md text-base leading-relaxed text-paper/80 opacity-0 md:text-[1.05rem]"
             >
               {dict.hero.body}
             </p>
+            <p
+              data-hero-copy
+              className="max-w-md text-[0.95rem] leading-relaxed text-paper/72 opacity-0"
+            >
+              {dict.hero.audience}
+            </p>
           </div>
 
-          <div
-            data-hero-meta
-            className="flex flex-wrap items-center gap-6 opacity-0"
-          >
-            <LocaleLink
-              href="/contact"
-              className="group inline-flex items-center gap-3 border-b border-paper/40 pb-1 text-[0.7rem] tracking-[0.22em] uppercase transition-colors hover:border-paper"
-            >
-              {dict.hero.cta}
-              <span className="transition-transform group-hover:translate-x-1">
-                →
-              </span>
-            </LocaleLink>
-            <LocaleLink
-              href="/work"
-              className="text-[0.7rem] tracking-[0.22em] text-paper/50 uppercase transition-colors hover:text-paper"
-            >
-              {dict.hero.ctaSecondary}
-            </LocaleLink>
+          <div data-hero-meta className="flex flex-col gap-3 opacity-0">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+              <LocaleLink
+                href="/contact"
+                className="group inline-flex min-h-12 items-center gap-3 bg-paper px-6 py-3.5 text-[0.7rem] tracking-[0.22em] text-deep uppercase transition-colors hover:bg-paper/90"
+              >
+                {dict.hero.cta}
+                <span className="transition-transform group-hover:translate-x-1">
+                  →
+                </span>
+              </LocaleLink>
+              <ArchiveLink
+                href="/work"
+                className="inline-flex min-h-12 items-center text-[0.7rem] tracking-[0.22em] text-paper/80 uppercase transition-colors hover:text-paper"
+              >
+                {dict.hero.ctaSecondary}
+              </ArchiveLink>
+            </div>
+            <p className="max-w-sm text-[0.8rem] leading-relaxed text-paper/65">
+              {dict.hero.ctaHint}
+            </p>
           </div>
         </div>
 
@@ -351,7 +362,7 @@ export function Hero() {
 
           <div className="mt-6 flex items-end justify-between gap-4 border-t border-paper/15 pt-4">
             <div>
-              <p className="text-[0.6rem] tracking-[0.28em] text-paper/40 uppercase">
+              <p className="text-[0.6rem] tracking-[0.28em] text-paper/60 uppercase">
                 {dict.hero.formLabel}
               </p>
               <p
@@ -361,7 +372,7 @@ export function Hero() {
                 Yophi
               </p>
             </div>
-            <p className="max-w-[10rem] text-right text-[0.65rem] leading-relaxed tracking-[0.06em] text-paper/40">
+            <p className="max-w-[10rem] text-right text-[0.7rem] leading-relaxed tracking-[0.06em] text-paper/65">
               {dict.hero.formAside}
             </p>
           </div>

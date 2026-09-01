@@ -107,7 +107,9 @@
   }
 
   html.archive-lock,
-  html.archive-lock body {
+  html.archive-lock body,
+  html.archive-cover,
+  html.archive-cover body {
     overflow: hidden;
     height: 100%;
     overscroll-behavior: none;
@@ -122,6 +124,31 @@
   ::selection {
     background: color-mix(in srgb, var(--deep) 85%, transparent);
     color: var(--paper);
+  }
+
+  a:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    z-index: 100;
+    transform: translateY(-160%);
+    background: var(--paper);
+    color: var(--ink);
+    padding: 0.65rem 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .skip-link:focus {
+    transform: none;
+    outline: 2px solid var(--ink);
+    outline-offset: 4px;
   }
 }
 
@@ -146,5 +173,11 @@
   .hairline {
     height: 1px;
     background: var(--line);
+  }
+}
+
+@keyframes cover-spin {
+  to {
+    transform: rotate(360deg);
   }
 }

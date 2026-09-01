@@ -94,7 +94,7 @@ export function Worlds() {
               className="h-px flex-1 origin-left bg-ink/30"
             />
           </div>
-          <p className="max-w-md text-center text-sm text-stone">
+          <p className="max-w-md text-center text-sm leading-relaxed text-ink/75">
             {dict.worlds.meetCopy}
           </p>
         </div>

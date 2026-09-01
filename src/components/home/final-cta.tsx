@@ -12,7 +12,7 @@ export function FinalCta() {
     <section className="bg-deep text-paper">
       <div className="mx-auto max-w-[1400px] px-5 py-28 md:px-10 md:py-40">
         <Reveal>
-          <p className="text-[0.65rem] tracking-[0.28em] text-paper/40 uppercase">
+          <p className="text-[0.65rem] tracking-[0.28em] text-paper/65 uppercase">
             {dict.finalCta.eyebrow}
           </p>
         </Reveal>
@@ -25,12 +25,12 @@ export function FinalCta() {
           delay={160}
           className="mt-10 flex flex-col gap-6 md:mt-14 md:flex-row md:items-center md:gap-10"
         >
-          <p className="max-w-sm text-sm leading-relaxed text-paper/55">
+          <p className="max-w-sm text-sm leading-relaxed text-paper/75">
             {dict.finalCta.body}
           </p>
           <LocaleLink
             href="/contact"
-            className="group inline-flex w-fit items-center gap-3 border border-paper/35 px-6 py-4 text-[0.7rem] tracking-[0.22em] uppercase transition-colors hover:border-paper hover:bg-paper hover:text-deep"
+            className="group inline-flex min-h-12 w-fit items-center gap-3 bg-paper px-6 py-4 text-[0.7rem] tracking-[0.22em] text-deep uppercase transition-colors hover:bg-paper/90"
           >
             {dict.finalCta.cta}
             <span className="transition-transform group-hover:translate-x-1">

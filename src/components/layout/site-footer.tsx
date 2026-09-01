@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { YophiLogo } from "@/components/brand/yophi-logo";
 import { LocaleLink } from "@/components/i18n/locale-link";
+import { ArchiveLink } from "@/components/work/archive-gate";
 import { useI18n } from "@/components/i18n/locale-provider";
 import { stripLocale } from "@/lib/i18n";
 
@@ -23,7 +24,7 @@ export function SiteFooter() {
             wordmarkClassName="text-4xl tracking-[0.16em] md:text-5xl"
             studioClassName="text-[0.7rem] tracking-[0.46em] text-paper/70"
           />
-          <p className="max-w-sm text-sm leading-relaxed text-paper/65">
+          <p className="max-w-sm text-sm leading-relaxed text-paper/80">
             {dict.footer.blurb}
           </p>
         </div>
@@ -33,21 +34,21 @@ export function SiteFooter() {
             {dict.footer.navigate}
           </p>
           <div className="flex flex-col gap-2 text-sm">
-            <LocaleLink
+            <ArchiveLink
               href="/work"
-              className="hover:text-paper/80 transition-colors"
+              className="inline-flex min-h-11 items-center text-paper/85 transition-colors hover:text-paper"
             >
               {dict.nav.work}
-            </LocaleLink>
+            </ArchiveLink>
             <LocaleLink
               href="/studio"
-              className="hover:text-paper/80 transition-colors"
+              className="inline-flex min-h-11 items-center text-paper/85 transition-colors hover:text-paper"
             >
               {dict.nav.studio}
             </LocaleLink>
             <LocaleLink
               href="/contact"
-              className="hover:text-paper/80 transition-colors"
+              className="inline-flex min-h-11 items-center text-paper/85 transition-colors hover:text-paper"
             >
               {dict.nav.contact}
             </LocaleLink>
@@ -66,7 +67,7 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div className="border-paper/10 mx-auto flex max-w-[1400px] flex-col gap-2 border-t px-5 py-6 text-[0.65rem] tracking-[0.16em] text-paper/40 uppercase md:flex-row md:items-center md:justify-between md:px-10">
+      <div className="border-paper/10 mx-auto flex max-w-[1400px] flex-col gap-2 border-t px-5 py-6 text-[0.65rem] tracking-[0.16em] text-paper/60 uppercase md:flex-row md:items-center md:justify-between md:px-10">
         <span>
           © {new Date().getFullYear()} {dict.footer.copyright}
         </span>

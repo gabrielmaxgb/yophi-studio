@@ -70,14 +70,14 @@ export function Services() {
         <Reveal>
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div className="flex flex-col gap-4">
-              <p className="text-[0.65rem] tracking-[0.28em] text-paper/45 uppercase">
+              <p className="text-[0.65rem] tracking-[0.28em] text-paper/70 uppercase">
                 {dict.services.eyebrow}
               </p>
               <SplitHeadline className="font-serif text-[clamp(2.2rem,5vw,4rem)] leading-none">
                 {`${dict.services.headline} ${dict.services.headlineBreak}`}
               </SplitHeadline>
             </div>
-            <p className="max-w-xs text-sm leading-relaxed text-paper/55">
+            <p className="max-w-xs text-sm leading-relaxed text-paper/75">
               {dict.services.aside}
             </p>
           </div>
@@ -98,14 +98,14 @@ export function Services() {
                 />
                 <p
                   data-service-num
-                  className="editorial-num text-[0.75rem] tracking-[0.2em] text-paper/40"
+                  className="editorial-num text-[0.75rem] tracking-[0.2em] text-paper/65"
                 >
                   {service.number}
                 </p>
                 <p className="font-serif text-3xl tracking-[0.04em] uppercase md:text-4xl">
                   {service.title}
                 </p>
-                <p className="text-sm tracking-[0.08em] text-paper/55 uppercase md:text-right">
+                <p className="text-sm tracking-[0.08em] text-paper/75 uppercase md:text-right">
                   {service.items.join(" / ")}
                 </p>
               </div>

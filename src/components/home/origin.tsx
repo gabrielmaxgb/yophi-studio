@@ -111,14 +111,14 @@ export function Origin() {
           </p>
           <p
             data-origin-rest
-            className="text-[0.7rem] tracking-[0.28em] text-stone uppercase"
+            className="text-[0.7rem] tracking-[0.28em] text-ink/70 uppercase"
           >
             {dict.origin.note}
           </p>
         </div>
 
         <div data-origin-rest className="mt-14 max-w-lg">
-          <p className="font-serif text-[clamp(1.35rem,2.8vw,1.85rem)] leading-snug text-ink/80">
+            <p className="font-serif text-[clamp(1.35rem,2.8vw,1.85rem)] leading-snug text-ink">
             {dict.origin.copy}
             <br />
             {dict.origin.copyLine2}

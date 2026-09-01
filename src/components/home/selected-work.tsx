@@ -1,6 +1,6 @@
 "use client";
 
-import { LocaleLink } from "@/components/i18n/locale-link";
+import { ArchiveLink } from "@/components/work/archive-gate";
 import { useI18n } from "@/components/i18n/locale-provider";
 import { Reveal } from "@/components/motion/reveal";
 
@@ -21,15 +21,15 @@ export function SelectedWork() {
           </h2>
         </Reveal>
         <Reveal delay={140} className="mt-5 max-w-md">
-          <p className="text-base leading-relaxed text-ink/65">
+          <p className="text-base leading-relaxed text-ink/80">
             {dict.selectedWork.invite}
           </p>
         </Reveal>
 
         <Reveal delay={200} className="mt-14 md:mt-16">
-          <LocaleLink
+          <ArchiveLink
             href="/work"
-            className="group inline-flex flex-col items-start gap-8"
+            className="group inline-flex min-h-11 flex-col items-start gap-8"
           >
             <span className="relative flex h-16 w-44 items-center justify-between" aria-hidden>
               <span className="size-16 rounded-full border border-line transition-colors group-hover:border-ink" />
@@ -41,7 +41,7 @@ export function SelectedWork() {
                 →
               </span>
             </span>
-          </LocaleLink>
+          </ArchiveLink>
         </Reveal>
       </div>
     </section>

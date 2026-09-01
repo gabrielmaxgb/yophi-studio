@@ -6,6 +6,7 @@ import { animate, stagger } from "animejs";
 import { prefersReducedMotion } from "@/lib/motion";
 import { LanguageSwitchInk } from "@/components/i18n/language-switch";
 import { LocaleLink } from "@/components/i18n/locale-link";
+import { ArchiveLink } from "@/components/work/archive-gate";
 import { useI18n } from "@/components/i18n/locale-provider";
 import {
   Sheet,
@@ -79,14 +80,16 @@ export function SiteHeader() {
             const active = current === link.href;
             const isContact = link.href === "/contact";
 
+            const LinkTag = link.href === "/work" ? ArchiveLink : LocaleLink;
+
             return (
-              <LocaleLink
+              <LinkTag
                 key={link.href}
                 href={link.href}
                 className={cn(
                   "group flex items-center gap-2.5 px-5 text-[0.65rem] tracking-[0.2em] uppercase transition-colors",
                   isContact && "border-l border-ink/10",
-                  active ? "text-ink" : "text-ink/45 hover:text-ink"
+                  active ? "text-ink" : "text-ink/70 hover:text-ink"
                 )}
               >
                 <span className="editorial-num text-[0.58rem] text-ink/35">
@@ -102,7 +105,7 @@ export function SiteHeader() {
                 >
                   {link.label}
                 </span>
-              </LocaleLink>
+              </LinkTag>
             );
           })}
         </nav>
@@ -149,19 +152,23 @@ export function SiteHeader() {
                 >
                   {dict.nav.home}
                 </LocaleLink>
-                {links.map((link) => (
-                  <LocaleLink
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    className="flex items-baseline gap-4 px-2 py-3"
-                  >
-                    <span className="editorial-num text-[0.7rem] tracking-[0.18em] text-stone">
-                      {link.index}
-                    </span>
-                    <span className="font-serif text-3xl">{link.label}</span>
-                  </LocaleLink>
-                ))}
+                {links.map((link) => {
+                  const LinkTag =
+                    link.href === "/work" ? ArchiveLink : LocaleLink;
+                  return (
+                    <LinkTag
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setOpen(false)}
+                      className="flex items-baseline gap-4 px-2 py-3"
+                    >
+                      <span className="editorial-num text-[0.7rem] tracking-[0.18em] text-stone">
+                        {link.index}
+                      </span>
+                      <span className="font-serif text-3xl">{link.label}</span>
+                    </LinkTag>
+                  );
+                })}
               </nav>
               <div className="border-line border-t px-6 py-5">
                 <LanguageSwitchInk />

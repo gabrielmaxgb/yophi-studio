@@ -110,7 +110,7 @@ export function Process() {
                 >
                   {key}
                 </p>
-                <p className="text-sm leading-relaxed text-ink/65">
+                <p className="text-sm leading-relaxed text-ink/80">
                   {dict.process.steps[key]}
                 </p>
               </div>

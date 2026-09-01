@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DM_Sans, Instrument_Serif } from "next/font/google";
+import { ArchiveGate } from "@/components/work/archive-gate";
 import { LocaleProvider } from "@/components/i18n/locale-provider";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -76,12 +77,19 @@ export default async function LangLayout({
       data-scroll-behavior="smooth"
       className={`${sans.variable} ${serif.variable}`}
     >
-      <body className="min-h-dvh flex flex-col">
+      <body className="min-h-dvh flex flex-col" suppressHydrationWarning>
         <LocaleProvider locale={lang} dict={dict}>
-          <StudioCursor />
-          <SiteHeader />
-          <main className="flex-1">{children}</main>
-          <SiteFooter />
+          <ArchiveGate>
+            <a href="#conteudo" className="skip-link">
+              {dict.nav.skip}
+            </a>
+            <StudioCursor />
+            <SiteHeader />
+            <main id="conteudo" className="flex-1" tabIndex={-1}>
+              {children}
+            </main>
+            <SiteFooter />
+          </ArchiveGate>
         </LocaleProvider>
       </body>
     </html>

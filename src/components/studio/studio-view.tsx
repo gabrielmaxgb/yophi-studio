@@ -90,7 +90,7 @@ export function StudioView() {
           <Reveal delay={160} className="mt-16">
             <LocaleLink
               href="/contact"
-              className="group inline-flex items-center gap-3 border-b border-ink/30 pb-1 text-[0.7rem] tracking-[0.22em] uppercase transition-colors hover:border-ink"
+              className="group inline-flex min-h-12 w-fit items-center gap-3 bg-deep px-6 py-4 text-[0.7rem] tracking-[0.22em] text-paper uppercase transition-colors hover:bg-deep/90"
             >
               {dict.studio.workWithUs}
               <span className="transition-transform group-hover:translate-x-1">

@@ -31,7 +31,7 @@ export function ContactForm() {
           </h1>
         </Reveal>
         <Reveal delay={140} className="mt-8 max-w-md">
-          <p className="text-base leading-relaxed text-ink/65">
+          <p className="text-base leading-relaxed text-ink/80">
             {dict.contact.intro}
           </p>
         </Reveal>
