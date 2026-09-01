@@ -141,11 +141,10 @@ export type Dictionary = {
 
 const pt: Dictionary = {
 	meta: {
-		title: "YOPHI — Presença digital com opinião",
+		title: "YOPHI — Se parece de qualquer um, não é o seu",
 		description:
-			"Estratégia, conteúdo, design e tecnologia. Um estúdio que faz o negócio ser visto — do jeito dele.",
-		ogDescription:
-			"Estúdio de conteúdo, design e tecnologia. Presença digital com opinião.",
+			"Estúdio de conteúdo, design e tecnologia. Se o site serve para qualquer um, não serve.",
+		ogDescription: "YOPHI. Se parece de qualquer um, não é o seu.",
 	},
 	nav: {
 		home: "Início",
@@ -156,17 +155,17 @@ const pt: Dictionary = {
 		language: "Idioma",
 	},
 	hero: {
-		headline: "Presença digital com opinião.",
-		body: "Estratégia, conteúdo, design e tecnologia. Do posicionamento ao que a pessoa usa — sem fórmula.",
+		headline: "Se parece de qualquer um, não é o seu.",
+		body: "A gente faz o que a pessoa encontra — e reconhece.",
 		cta: "Começar um projeto",
 		ctaSecondary: "Ver o arquivo",
 		formLabel: "Forma",
 		formAside: "Da ideia ao que fica no ar.",
-		stages: ["YOPHI", "POSIÇÃO", "CONTEÚDO", "DIGITAL", "EXPERIÊNCIA"],
+		stages: ["YOPHI", "POSIÇÃO", "CONTEÚDO", "DIGITAL", "USO"],
 	},
 	philosophy: {
 		eyebrow: "Filosofia",
-		headline: "Presença não é um logo.",
+		headline: "Logo não basta.",
 		lines: [
 			"É como o negócio aparece.",
 			"Como ele soa.",
@@ -183,10 +182,11 @@ const pt: Dictionary = {
 		creativeCopy:
 			"Voz e imagem que a marca reconhece — e que não parece campanha.",
 		digital: "Digital",
-		digitalTags: "Web · Produtos · Sistemas · Tecnologia",
-		digitalCopy: "Site, produto, sistema. O que a pessoa usa, não o que o estúdio exibe.",
+		digitalTags: "Sites · Produtos · Sistemas · Tecnologia",
+		digitalCopy:
+			"Site, produto, sistema. O que a pessoa usa, não o que o estúdio exibe.",
 		meet: "Criativo × Tecnologia",
-		meetCopy: "Um lado dá cara. O outro faz isso viver.",
+		meetCopy: "Um lado dá cara. O outro coloca no ar.",
 	},
 	selectedWork: {
 		eyebrow: "Arquivo",
@@ -195,8 +195,8 @@ const pt: Dictionary = {
 	},
 	services: {
 		eyebrow: "O que fazemos",
-		headline: "Do primeiro olhar",
-		headlineBreak: "ao que a pessoa usa.",
+		headline: "Da cara",
+		headlineBreak: "ao que entra no ar.",
 		aside: "Não tem pacote. Entra o que o trabalho pede.",
 		items: [
 			{
@@ -212,7 +212,7 @@ const pt: Dictionary = {
 			{
 				number: "03",
 				title: "Digital",
-				items: ["Sites", "Landing pages", "E-commerce"],
+				items: ["Sites", "Páginas", "Loja"],
 			},
 			{
 				number: "04",
@@ -226,7 +226,7 @@ const pt: Dictionary = {
 		headline: "Partimos do que o negócio já é. Não do que está na moda.",
 		steps: {
 			SEE: "Entendemos o negócio.",
-			DEFINE: "Achamos o que o diferencia.",
+			DEFINE: "Nomeamos a diferença.",
 			SHAPE: "Damos forma a isso.",
 			BUILD: "Colocamos no ar.",
 			EVOLVE: "Acompanhamos depois.",
@@ -234,18 +234,17 @@ const pt: Dictionary = {
 	},
 	origin: {
 		note: "Do hebraico — beleza",
-		copy: "Presença digital não é enfeite.",
-		copyLine2: "É o negócio, visível.",
+		copy: "Não é enfeite.",
+		copyLine2: "É ser reconhecido.",
 	},
 	finalCta: {
 		eyebrow: "Próximo",
-		headline: "Vamos fazer o seu negócio ser visto.",
-		body: "Manda o que a empresa é — e o que as pessoas encontram hoje.",
+		headline: "Chega de parecer o mesmo.",
+		body: "Conta o que a empresa é — e o que as pessoas encontram hoje.",
 		cta: "Começar um projeto",
 	},
 	footer: {
-		blurb:
-			"Estratégia, conteúdo, design e tecnologia. Presença com opinião.",
+		blurb: "Se parece de qualquer um, não é o seu.",
 		navigate: "Navegar",
 		presence: "Presença",
 		presenceLine: "A beleza de",
@@ -255,9 +254,9 @@ const pt: Dictionary = {
 	},
 	work: {
 		metaTitle: "Arquivo",
-		metaDescription: "Trabalhos da YOPHI. Presença com opinião — conteúdo, design, digital.",
+		metaDescription: "Trabalhos da YOPHI. O que ficou no ar.",
 		eyebrow: "Arquivo",
-		headline: "Trabalhos com opinião.",
+		headline: "O que ficou no ar.",
 		intro:
 			"Não é vitrine de estúdio. É o que ficou no ar quando o trabalho acabou.",
 		disciplines: "O que entrou",
@@ -275,20 +274,29 @@ const pt: Dictionary = {
 					"A gente fez o contrário. maxdecoyer.com — preto e branco, dois idiomas, arquivo na frente. A foto manda. O resto cala.",
 				outcomes: ["Site", "PT / EN", "Arquivo"],
 			},
+			"dra-ana-cardenas": {
+				sector: "Odontologia",
+				disciplines: ["Posicionamento", "Digital"],
+				problem:
+					"O consultório tinha cara. O site podia ser de qualquer dentista de Brasília.",
+				solution:
+					"draanacardenas.com — ela na frente, o ritmo do consultório. Sem foto de banco, sem clínica de vitrine.",
+				outcomes: ["Site", "Posicionamento", "Brasília"],
+			},
 			"atelier-luz": {
 				sector: "Moda",
 				disciplines: ["Conteúdo", "Direção de arte", "Digital"],
 				problem:
-					"Na rua a marca tinha peso. Online, era mais uma marca de roupa.",
+					"Na rua a marca tinha peso. No site, era mais uma marca de roupa.",
 				solution:
-					"Uma linguagem que a coleção reconhece — e um lookbook que não parece e-commerce com pose.",
+					"Uma linguagem que a coleção reconhece — e um lookbook que não parece loja com pose.",
 				outcomes: ["Identidade", "Editorial", "Lookbook"],
 			},
 			"orbit-systems": {
-				sector: "Tecnologia B2B",
+				sector: "Tecnologia",
 				disciplines: ["Posicionamento", "Digital", "Tecnologia"],
 				problem:
-					"Produto bom atrás de um site que podia ser de qualquer um. A diferença morria no hero.",
+					"Produto bom atrás de um site que servia para qualquer empresa. A diferença parava na primeira tela.",
 				solution:
 					"Reescrevemos até a tela vender sozinha. O comercial parou de explicar e passou a apontar.",
 				outcomes: ["Site", "Interface", "Automação"],
@@ -297,53 +305,50 @@ const pt: Dictionary = {
 	},
 	studio: {
 		metaTitle: "Estúdio",
-		metaDescription: "O que é a YOPHI e de onde vem o nome.",
+		metaDescription: "O que é a YOPHI — e de onde vem o nome.",
 		eyebrow: "Estúdio",
 		headline: "Direção criativa e digital. No mesmo teto.",
 		intro:
-			"Não vendemos post. Não vendemos site. Cuidamos de como a empresa aparece — e do que a pessoa acha quando chega.",
+			"Não vendemos post. Não vendemos site. Cuidamos de como a empresa aparece — e do que a pessoa encontra quando chega.",
 		how: "Como pensamos",
 		howHeadline: "O que a pessoa encontra é o trabalho.",
 		p1: "Logo, post e site sozinhos são peça.",
-		p2: "O que vale é o conjunto: voz, imagem, sistema. É isso que a pessoa encontra.",
+		p2: "O conjunto é voz, imagem, sistema. É o que a pessoa encontra.",
 		p3: "O criativo faz notar. O digital faz funcionar.",
 		team: "Time",
 		teamHeadline: "Dois lados. Um teto.",
 		creative: "Criativo",
 		creativeTags: "Conteúdo · Direção · Narrativa",
-		creativeCopy:
-			"Voz, imagem e um jeito de publicar que a marca reconhece como seu.",
+		creativeCopy: "Voz e imagem que a marca reconhece como suas.",
 		digital: "Digital",
-		digitalTags: "Produto · Web · Sistemas",
-		digitalCopy: "Sites, produtos e sistemas que a pessoa usa de verdade.",
-		workWithUs: "Vamos conversar",
+		digitalTags: "Produto · Sites · Sistemas",
+		digitalCopy: "Site, produto, sistema. O que a pessoa usa.",
+		workWithUs: "Começar um projeto",
 	},
 	contact: {
 		metaTitle: "Contato",
-		metaDescription: "Fale com a YOPHI sobre o projeto.",
+		metaDescription: "Fala do projeto com a YOPHI.",
 		eyebrow: "Contato",
 		headline: "Fala do projeto.",
-		intro:
-			"Quem é, qual o problema, o que as pessoas encontram hoje. Sem pitch.",
+		intro: "Quem é, qual o problema, o que as pessoas encontram hoje.",
 		email: "hello@yophi.studio",
 		tag: "Criativo × Tecnologia",
 		name: "Nome",
 		emailLabel: "E-mail",
 		company: "Empresa",
-		message: "Sobre o projeto",
+		message: "O que as pessoas encontram hoje?",
 		submit: "Enviar",
-		successTitle: "Chegou.",
-		successBody: "Respondemos em breve.",
+		successTitle: "Recebemos.",
+		successBody: "A gente responde em breve.",
 	},
 };
 
 const en: Dictionary = {
 	meta: {
-		title: "YOPHI — Digital presence with a point of view",
+		title: "YOPHI — If it looks like anyone's, it isn't yours",
 		description:
-			"Strategy, content, design and technology. A studio that makes a business seen — as itself.",
-		ogDescription:
-			"A studio for content, design and technology. Digital presence with a point of view.",
+			"A studio for content, design and technology. If the site could belong to anyone, it doesn't.",
+		ogDescription: "YOPHI. If it looks like anyone's, it isn't yours.",
 	},
 	nav: {
 		home: "Home",
@@ -354,48 +359,48 @@ const en: Dictionary = {
 		language: "Language",
 	},
 	hero: {
-		headline: "Digital presence with a point of view.",
-		body: "Strategy, content, design, technology. From position to what people actually use — no formula.",
+		headline: "If it looks like anyone's, it isn't yours.",
+		body: "We make what people find — and recognize.",
 		cta: "Start a project",
-		ctaSecondary: "The archive",
+		ctaSecondary: "See the archive",
 		formLabel: "Form",
 		formAside: "From the idea to what stays live.",
-		stages: ["YOPHI", "POSITION", "CONTENT", "DIGITAL", "EXPERIENCE"],
+		stages: ["YOPHI", "POSITION", "CONTENT", "DIGITAL", "USE"],
 	},
 	philosophy: {
 		eyebrow: "Philosophy",
-		headline: "A presence is more than a logo.",
+		headline: "A logo isn't enough.",
 		lines: [
-			"It is what people see.",
-			"What they feel.",
-			"What they remember.",
-			"What they use.",
+			"It is how the business shows up.",
+			"How it sounds.",
+			"What stays in the head.",
+			"And what people can actually do.",
 		],
 		label: "The whole",
-		closing: "A single piece is window dressing. We build the whole.",
+		closing: "A single piece is a shop window. We make the whole.",
 	},
 	worlds: {
-		eyebrow: "Two crafts · one studio",
+		eyebrow: "Two sides · one studio",
 		creative: "Creative",
 		creativeTags: "Content · Social · Video · Art direction",
 		creativeCopy:
 			"Voice and image the brand recognizes — without reading as a campaign.",
 		digital: "Digital",
-		digitalTags: "Web · Products · Systems · Technology",
+		digitalTags: "Sites · Products · Systems · Technology",
 		digitalCopy:
 			"Site, product, system. What people use, not what the studio shows off.",
 		meet: "Creative × Technology",
-		meetCopy: "One side gives it a face. The other makes it live.",
+		meetCopy: "One side gives it a face. The other puts it live.",
 	},
 	selectedWork: {
 		eyebrow: "Archive",
 		headline: "Work we put our name on.",
-		all: "The archive",
+		all: "See the archive",
 	},
 	services: {
 		eyebrow: "What we do",
-		headline: "From the first impression",
-		headlineBreak: "to the last click.",
+		headline: "From the look",
+		headlineBreak: "to what goes live.",
 		aside: "No packages. We bring in what the work asks for.",
 		items: [
 			{
@@ -411,7 +416,7 @@ const en: Dictionary = {
 			{
 				number: "03",
 				title: "Digital",
-				items: ["Websites", "Landing pages", "E-commerce"],
+				items: ["Sites", "Pages", "Store"],
 			},
 			{
 				number: "04",
@@ -424,27 +429,26 @@ const en: Dictionary = {
 		eyebrow: "How we work",
 		headline: "We start from what the business already is. Not what's in fashion.",
 		steps: {
-			SEE: "We look at the business as it is.",
-			DEFINE: "We find what makes it different.",
-			SHAPE: "We give that difference a form.",
-			BUILD: "We make it real.",
-			EVOLVE: "We keep it sharp.",
+			SEE: "We understand the business.",
+			DEFINE: "We name the difference.",
+			SHAPE: "We give it a form.",
+			BUILD: "We put it live.",
+			EVOLVE: "We stay with it after.",
 		},
 	},
 	origin: {
 		note: "Hebrew — beauty",
-		copy: "Digital presence is not decoration.",
-		copyLine2: "It is the beauty of a business, made visible.",
+		copy: "It isn't decoration.",
+		copyLine2: "It's being recognized.",
 	},
 	finalCta: {
 		eyebrow: "Next",
-		headline: "Let's make your business seen.",
+		headline: "Stop looking like everyone else.",
 		body: "Tell us what the company is — and what people find today.",
 		cta: "Start a project",
 	},
 	footer: {
-		blurb:
-			"Strategy, content, design and technology. Presence with a point of view.",
+		blurb: "If it looks like anyone's, it isn't yours.",
 		navigate: "Navigate",
 		presence: "Presence",
 		presenceLine: "The beauty of",
@@ -454,11 +458,10 @@ const en: Dictionary = {
 	},
 	work: {
 		metaTitle: "Archive",
-		metaDescription: "Work from YOPHI. Presence with a point of view — content, design, digital.",
+		metaDescription: "Work from YOPHI. What stayed live.",
 		eyebrow: "Archive",
-		headline: "Work that takes a side.",
-		intro:
-			"Not a studio reel. What stayed up when we were done.",
+		headline: "What stayed live.",
+		intro: "Not a studio shop window. What stayed live when the work was done.",
 		disciplines: "What went in",
 		outcomes: "What stayed",
 		cta: "Yours could be next.",
@@ -474,20 +477,29 @@ const en: Dictionary = {
 					"We did the opposite. maxdecoyer.com — black and white, two languages, archive first. The picture leads. Everything else shuts up.",
 				outcomes: ["Site", "PT / EN", "Archive"],
 			},
+			"dra-ana-cardenas": {
+				sector: "Dentistry",
+				disciplines: ["Positioning", "Digital"],
+				problem:
+					"The practice had a face. The site could have belonged to any dentist in Brasília.",
+				solution:
+					"draanacardenas.com — her first, the practice at its own pace. No stock photos, no shop-window clinic.",
+				outcomes: ["Site", "Positioning", "Brasília"],
+			},
 			"atelier-luz": {
 				sector: "Fashion",
 				disciplines: ["Content", "Art direction", "Digital"],
 				problem:
-					"In the room the brand had weight. Online, it was another clothing label.",
+					"On the street the brand had weight. On the site, it was another clothing label.",
 				solution:
-					"A language the collection recognizes — and a lookbook that doesn't look like e-commerce with better posture.",
+					"A language the collection recognizes — and a lookbook that doesn't look like a store with better posture.",
 				outcomes: ["Identity", "Editorial", "Lookbook"],
 			},
 			"orbit-systems": {
-				sector: "B2B Technology",
+				sector: "Technology",
 				disciplines: ["Positioning", "Digital", "Technology"],
 				problem:
-					"A good product behind a site that could have been anyone's. The difference died in the hero.",
+					"A good product behind a site that could have been anyone's. The difference stopped on the first screen.",
 				solution:
 					"We rewrote until the screen sold itself. Sales stopped explaining and started pointing.",
 				outcomes: ["Site", "Interface", "Automation"],
@@ -496,7 +508,7 @@ const en: Dictionary = {
 	},
 	studio: {
 		metaTitle: "Studio",
-		metaDescription: "How YOPHI thinks — and what the name means.",
+		metaDescription: "What YOPHI is — and where the name comes from.",
 		eyebrow: "Studio",
 		headline: "Creative direction and digital. Same roof.",
 		intro:
@@ -504,36 +516,33 @@ const en: Dictionary = {
 		how: "How we think",
 		howHeadline: "What people find is the work.",
 		p1: "A logo, a post, a site — on their own, they're pieces.",
-		p2: "What holds is the whole: voice, image, system. That's what people actually meet.",
+		p2: "The whole is voice, image, system. That's what people find.",
 		p3: "Creative makes it noticed. Digital makes it work.",
 		team: "Team",
-		teamHeadline: "Two crafts. One roof.",
+		teamHeadline: "Two sides. One roof.",
 		creative: "Creative",
 		creativeTags: "Content · Direction · Narrative",
-		creativeCopy:
-			"Voice, image and a way of publishing a brand recognizes as its own.",
+		creativeCopy: "Voice and image the brand recognizes as its own.",
 		digital: "Digital",
-		digitalTags: "Product · Web · Systems",
-		digitalCopy:
-			"Sites, products and systems people can actually use.",
-		workWithUs: "Talk to us",
+		digitalTags: "Product · Sites · Systems",
+		digitalCopy: "Site, product, system. What people use.",
+		workWithUs: "Start a project",
 	},
 	contact: {
 		metaTitle: "Contact",
 		metaDescription: "Tell YOPHI about the project.",
 		eyebrow: "Contact",
 		headline: "Tell us about the project.",
-		intro:
-			"Who it is, what's broken, what people find today. No pitch.",
+		intro: "Who it is, what's wrong, what people find today.",
 		email: "hello@yophi.studio",
 		tag: "Creative × Technology",
 		name: "Name",
 		emailLabel: "Email",
 		company: "Company",
-		message: "What should people see?",
+		message: "What do people find today?",
 		submit: "Send",
 		successTitle: "We got it.",
-		successBody: "Someone from the studio will write back soon.",
+		successBody: "We'll write back soon.",
 	},
 };
 

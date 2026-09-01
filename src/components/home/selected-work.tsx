@@ -48,24 +48,28 @@ export function SelectedWork() {
               >
                 <LocaleLink
                   href={`/work#${study.slug}`}
-                  className="group relative block min-h-[52vw] md:min-h-[560px]"
+                  className={
+                    study.cover === "wide"
+                      ? "group relative block aspect-[40/21] w-full"
+                      : "group relative block aspect-[3/4] w-full"
+                  }
                 >
                   <CaseStudyCover
                     src={study.image}
-                    url={study.url}
                     alt={study.client}
                     sizes="(max-width: 768px) 100vw, 58vw"
                     priority={index === 0}
                     className="absolute inset-0"
                   >
-                    <div className="absolute inset-8 border border-paper/20 md:inset-12" />
-                    <div className="absolute right-10 bottom-10 left-10 flex items-end justify-between text-paper md:right-14 md:bottom-14 md:left-14">
-                      <span className="font-serif text-[clamp(2.5rem,6vw,5rem)] leading-none tracking-[0.04em]">
-                        {study.client}
-                      </span>
-                      <span className="editorial-num text-[0.7rem] tracking-[0.24em] text-paper/70">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
+                    <div className="absolute inset-6 z-10 flex flex-col justify-end border border-paper/20 px-6 pb-8 md:inset-10 md:px-8 md:pb-10">
+                      <div className="flex items-end justify-between gap-4 text-paper">
+                        <span className="font-serif text-[clamp(2.2rem,5vw,4.5rem)] leading-[0.88] tracking-[0.04em]">
+                          {study.client}
+                        </span>
+                        <span className="editorial-num pb-[0.2em] text-[0.65rem] leading-none tracking-[0.24em] text-paper/70">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                      </div>
                     </div>
                   </CaseStudyCover>
                 </LocaleLink>

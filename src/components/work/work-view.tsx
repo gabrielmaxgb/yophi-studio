@@ -42,24 +42,25 @@ export function WorkView() {
             >
               <CaseStudyCover
                 src={study.image}
-                url={study.url}
                 alt={study.client}
                 sizes="(max-width: 768px) 100vw, 1400px"
                 priority={index === 0}
-                eager={index === 0}
-                className="min-h-[68vw] w-full md:min-h-[72vh]"
+                className={
+                  study.cover === "wide"
+                    ? "aspect-[40/21] w-full"
+                    : "aspect-[3/4] w-full"
+                }
               >
-                <div className="absolute inset-6 border border-paper/20 md:inset-12" />
-                <div className="absolute inset-0 flex flex-col justify-between p-8 text-paper md:p-14">
-                  <div className="flex items-start justify-between gap-4">
-                    <p className="text-[0.65rem] tracking-[0.24em] uppercase text-paper/70">
+                <div className="absolute inset-6 z-10 flex flex-col justify-between border border-paper/20 px-6 pt-5 pb-8 text-paper md:inset-10 md:px-8 md:pt-6 md:pb-10">
+                  <div className="flex items-center justify-between gap-4">
+                    <p className="text-[0.65rem] leading-none tracking-[0.24em] uppercase text-paper/70">
                       {copy.sector}
                     </p>
-                    <p className="editorial-num text-[0.7rem] tracking-[0.24em] text-paper/70">
+                    <p className="editorial-num text-[0.65rem] leading-none tracking-[0.24em] text-paper/70">
                       {String(index + 1).padStart(2, "0")}
                     </p>
                   </div>
-                  <h2 className="font-serif text-[clamp(3rem,10vw,7rem)] leading-none tracking-[0.04em]">
+                  <h2 className="font-serif text-[clamp(2.4rem,7vw,5.5rem)] leading-[0.88] tracking-[0.04em]">
                     {study.client}
                   </h2>
                 </div>
