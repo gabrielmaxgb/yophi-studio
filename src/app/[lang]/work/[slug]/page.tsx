@@ -27,6 +27,23 @@ export async function generateMetadata({
   return {
     title: study.client,
     description: copy.problem,
+    openGraph: {
+      title: study.client,
+      description: copy.problem,
+      type: "article",
+      images: [
+        {
+          url: study.image,
+          alt: study.client,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: study.client,
+      description: copy.problem,
+      images: [study.image],
+    },
     alternates: {
       canonical: `${prefix}/work/${slug}`,
       languages: {

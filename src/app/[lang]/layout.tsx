@@ -8,6 +8,7 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { StudioCursor } from "@/components/motion/studio-cursor";
 import { getDictionary } from "@/lib/dictionary";
 import { htmlLang, isLocale, locales } from "@/lib/i18n";
+import { defaultOgImage, siteName, siteUrl } from "@/lib/site";
 import "../globals.css";
 
 const sans = DM_Sans({
@@ -37,16 +38,21 @@ export async function generateMetadata({
   const prefix = isLocale(lang) ? `/${lang}` : "/pt";
 
   return {
+    metadataBase: new URL(siteUrl),
     title: {
       default: dict.meta.title,
       template: "%s · YOPHI",
     },
     description: dict.meta.description,
     openGraph: {
-      title: dict.meta.title,
-      description: dict.meta.ogDescription,
       type: "website",
       locale: isLocale(lang) ? htmlLang[lang] : "pt-BR",
+      siteName,
+      images: [defaultOgImage],
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: [defaultOgImage],
     },
     alternates: {
       canonical: prefix,

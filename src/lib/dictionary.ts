@@ -206,7 +206,7 @@ const pt: Dictionary = {
 		meetCopy: "Os dois no mesmo teto. É o que a maioria separa — e perde.",
 	},
 	selectedWork: {
-		eyebrow: "Arquivo",
+		eyebrow: "Projetos",
 		headline: "Isso a gente assina.",
 		invite:
 			"Dois no ar. O resto mostra o tipo. Entra — e vê se é isso que o seu precisa.",
@@ -274,13 +274,11 @@ const pt: Dictionary = {
 		tag: "Criativo × Tecnologia",
 	},
 	work: {
-		metaTitle: "Arquivo",
-		metaDescription:
-			"Trabalhos da YOPHI. O que ficou no ar — e o tipo que a gente faz.",
-		eyebrow: "Arquivo",
-		headline: "O que ficou no ar.",
-		intro:
-			"Não é vitrine de estúdio. É o que já está no ar. Entra e vê se o seu precisa disso.",
+		metaTitle: "Portfólio",
+		metaDescription: "Trabalho da YOPHI. Sites que não servem pra qualquer um.",
+		eyebrow: "Projetos",
+		headline: "Alguns de nossos projetos.",
+		intro: "",
 		disciplines: "O que entrou",
 		challenge: "O problema",
 		intervention: "O que entrou no ar",
@@ -289,9 +287,9 @@ const pt: Dictionary = {
 		cta: "Quero um assim",
 		ctaLink: "Começar o seu projeto",
 		visit: "Abrir o site",
-		back: "Arquivo",
+		back: "Projetos",
 		open: "Abrir",
-		loading: "Arquivo",
+		loading: "Portfólio",
 		studies: {
 			maxdecoyer: {
 				sector: "Fotografia",
@@ -488,7 +486,7 @@ const en: Dictionary = {
 		meetCopy: "Both under one roof. What most people split — and lose.",
 	},
 	selectedWork: {
-		eyebrow: "Archive",
+		eyebrow: "Work",
 		headline: "Work we put our name on.",
 		invite:
 			"Two live. The rest shows the kind. Come in — and see if that's what yours needs.",
@@ -556,13 +554,12 @@ const en: Dictionary = {
 		tag: "Creative × Technology",
 	},
 	work: {
-		metaTitle: "Archive",
+		metaTitle: "Portfolio",
 		metaDescription:
-			"Work from YOPHI. What stayed live — and the kind we make.",
-		eyebrow: "Archive",
-		headline: "What stayed live.",
-		intro:
-			"Not a studio shop window. What's already live. Come in and see if that's what yours needs.",
+			"Work from YOPHI. Sites that couldn't belong to anyone else.",
+		eyebrow: "Work",
+		headline: "Some of the work.",
+		intro: "",
 		disciplines: "What went in",
 		challenge: "The problem",
 		intervention: "What went live",
@@ -571,9 +568,9 @@ const en: Dictionary = {
 		cta: "I want one like this",
 		ctaLink: "Start your project",
 		visit: "Open the site",
-		back: "Archive",
+		back: "Work",
 		open: "Open",
-		loading: "Archive",
+		loading: "Portfolio",
 		studies: {
 			maxdecoyer: {
 				sector: "Photography",

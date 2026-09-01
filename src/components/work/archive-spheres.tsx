@@ -131,10 +131,51 @@ function facingOf(rotateX: number, rotateY: number, pose: Pose) {
   );
 }
 
+function clamp01(value: number) {
+  return Math.max(0, Math.min(1, value));
+}
+
+function smoothstep(edge0: number, edge1: number, value: number) {
+  const t = clamp01((value - edge0) / (edge1 - edge0));
+  return t * t * (3 - 2 * t);
+}
+
 function scaleFromFacing(facing: number) {
-  const t = Math.max(0, Math.min(1, facing));
+  const t = clamp01(facing);
   const eased = t * t * (3 - 2 * t);
   return 0.56 + eased * 0.62;
+}
+
+const SLICE_HIDE = -0.08;
+const SLICE_FULL = 0.02;
+
+function syncCardFacing(
+  core: HTMLElement,
+  rotateX: number,
+  rotateY: number
+) {
+  core.querySelectorAll<HTMLElement>("[data-card]").forEach((card) => {
+    const pose = {
+      lon: Number(card.dataset.lon),
+      lat: Number(card.dataset.lat),
+    };
+    const facing = facingOf(rotateX, rotateY, pose);
+    card.style.setProperty("--card-scale", String(scaleFromFacing(facing)));
+    card.style.zIndex = String(Math.round(40 + facing * 60));
+    card.style.pointerEvents = facing > 0.2 ? "auto" : "none";
+
+    card.querySelectorAll<HTMLElement>("[data-slice]").forEach((slice) => {
+      const sliceFacing = facingOf(rotateX, rotateY, {
+        lon: pose.lon + Number(slice.dataset.delta),
+        lat: pose.lat,
+      });
+      const show = sliceFacing > SLICE_HIDE;
+      slice.style.opacity = show
+        ? String(smoothstep(SLICE_HIDE, SLICE_FULL, sliceFacing))
+        : "0";
+      slice.style.visibility = show ? "visible" : "hidden";
+    });
+  });
 }
 
 function applySpin(core: HTMLElement, index: number, pixels: number) {
@@ -143,6 +184,7 @@ function applySpin(core: HTMLElement, index: number, pixels: number) {
   const rotateX =
     spin.offsetX + Math.sin(pixels * 0.0018) * 9 * spin.nod;
   core.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  syncCardFacing(core, rotateX, rotateY);
   return { rotateX, rotateY };
 }
 
@@ -178,7 +220,7 @@ function CurvedProjectCard({
         className="absolute top-1/2 left-1/2"
         style={{
           transformStyle: "preserve-3d",
-          transform: `rotateY(${pose.lon}deg) rotateX(${pose.lat}deg) translateZ(calc(var(--sphere-r) + 2px))`,
+          transform: `rotateY(${pose.lon}deg) rotateX(${pose.lat}deg) translateZ(var(--sphere-r))`,
         }}
       >
         <span
@@ -195,7 +237,9 @@ function CurvedProjectCard({
             return (
               <span
                 key={col}
-                className="absolute overflow-hidden backface-hidden"
+                data-slice=""
+                data-delta={String(delta)}
+                className="absolute overflow-hidden [backface-visibility:hidden]"
                 style={{
                   width: "calc(var(--cell-w) + 0.7px)",
                   height: "var(--cell-h)",
@@ -208,10 +252,12 @@ function CurvedProjectCard({
                         ? "0 var(--card-r) var(--card-r) 0"
                         : undefined,
                   transform: `translate3d(calc(var(--sphere-r) * ${Math.sin(deltaRad)}), 0, calc(var(--sphere-r) * ${Math.cos(deltaRad) - 1})) rotateY(${delta}deg)`,
+                  opacity: 0,
+                  visibility: "hidden",
                 }}
               >
                 <span
-                  className="absolute top-0 left-0 block bg-deep bg-cover bg-center"
+                  className="absolute top-0 left-0 block bg-deep bg-cover bg-center [backface-visibility:hidden]"
                   style={{
                     width: `calc(var(--cell-w) * ${COLS})`,
                     height: "var(--cell-h)",
@@ -341,6 +387,7 @@ export function ArchiveSpheres() {
       Array.from({ length: SLOTS_PER_SPHERE }, () => false)
     )
   );
+  const pixelsRef = useRef(0);
   const [slots, setSlots] = useState(() =>
     seedSlots(caseStudyBase.map((study) => study.slug))
   );
@@ -352,6 +399,14 @@ export function ArchiveSpheres() {
     html.classList.add("archive-lock");
     return () => html.classList.remove("archive-lock");
   }, []);
+
+  useLayoutEffect(() => {
+    const stage = stageRef.current;
+    if (!stage) return;
+    stage.querySelectorAll<HTMLElement>("[data-sphere-core]").forEach((core, index) => {
+      applySpin(core, index, pixelsRef.current);
+    });
+  }, [slots]);
 
   useEffect(() => {
     const stage = stageRef.current;
@@ -372,19 +427,17 @@ export function ArchiveSpheres() {
     let touchY = 0;
 
     const recycle = (pixels: number) => {
+      pixelsRef.current = pixels;
       const next = slotsRef.current.map((row) => [...row]);
       let changed = false;
 
       cores.forEach((core, index) => {
         const { rotateX, rotateY } = applySpin(core, index, pixels);
         core.querySelectorAll<HTMLElement>("[data-card]").forEach((card, slot) => {
-          const pose = {
+          const facing = facingOf(rotateX, rotateY, {
             lon: Number(card.dataset.lon),
             lat: Number(card.dataset.lat),
-          };
-          const facing = facingOf(rotateX, rotateY, pose);
-          card.style.setProperty("--card-scale", String(scaleFromFacing(facing)));
-          card.style.pointerEvents = facing > 0.2 ? "auto" : "none";
+          });
 
           if (facing < -0.14 && !hiddenRef.current[index][slot]) {
             hiddenRef.current[index][slot] = true;
@@ -474,10 +527,7 @@ export function ArchiveSpheres() {
       className="flex h-dvh flex-col overflow-hidden bg-paper text-ink overscroll-none [--card-r:1.5rem] [--cell-h:calc(var(--sphere-r)*2*tan(26deg))] [--cell-w:calc(var(--sphere-r)*2*tan(1.5deg))] [--sphere-r:6.25rem] sm:[--sphere-r:8rem] md:[--card-r:1.75rem] md:[--sphere-r:12.5rem] lg:[--sphere-r:15rem] xl:[--sphere-r:16.5rem]"
     >
       <div className="pointer-events-none relative z-10 flex flex-col items-center px-5 pt-24 text-center md:pt-28">
-        <p className="text-[0.65rem] tracking-[0.28em] text-stone uppercase">
-          {dict.work.eyebrow}
-        </p>
-        <h1 className="mt-3 max-w-sm font-serif text-[clamp(1.7rem,3.4vw,2.6rem)] leading-[0.95]">
+        <h1 className="font-serif text-[clamp(1.7rem,3.4vw,2.6rem)] leading-none">
           {dict.work.headline}
         </h1>
       </div>
