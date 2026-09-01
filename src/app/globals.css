@@ -106,6 +106,14 @@
     @apply scroll-smooth antialiased;
   }
 
+  html.archive-lock,
+  html.archive-lock body {
+    overflow: hidden;
+    height: 100%;
+    overscroll-behavior: none;
+    scroll-behavior: auto;
+  }
+
   body {
     @apply bg-background text-foreground font-sans;
     font-feature-settings: "ss01" on, "cv11" on;

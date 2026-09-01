@@ -1,11 +1,16 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { YophiLogo } from "@/components/brand/yophi-logo";
 import { LocaleLink } from "@/components/i18n/locale-link";
 import { useI18n } from "@/components/i18n/locale-provider";
+import { stripLocale } from "@/lib/i18n";
 
 export function SiteFooter() {
   const { dict } = useI18n();
+  const pathname = usePathname();
+
+  if (stripLocale(pathname) === "/work") return null;
 
   return (
     <footer className="border-line border-t bg-deep text-paper">

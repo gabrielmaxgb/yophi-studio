@@ -53,6 +53,7 @@ export type Dictionary = {
 	selectedWork: {
 		eyebrow: string;
 		headline: string;
+		invite: string;
 		all: string;
 	};
 	services: {
@@ -98,6 +99,8 @@ export type Dictionary = {
 		cta: string;
 		ctaLink: string;
 		visit: string;
+		back: string;
+		open: string;
 		studies: Record<CaseStudySlug, CaseStudyCopy>;
 	};
 	studio: {
@@ -191,7 +194,8 @@ const pt: Dictionary = {
 	selectedWork: {
 		eyebrow: "Arquivo",
 		headline: "Isso a gente assina.",
-		all: "Ver o arquivo",
+		invite: "Quatro trabalhos. Entra no arquivo.",
+		all: "Entrar no arquivo",
 	},
 	services: {
 		eyebrow: "O que fazemos",
@@ -264,6 +268,8 @@ const pt: Dictionary = {
 		cta: "O próximo pode ser o seu.",
 		ctaLink: "Fala com o estúdio",
 		visit: "Abrir o site",
+		back: "Arquivo",
+		open: "Abrir",
 		studies: {
 			maxdecoyer: {
 				sector: "Fotografia",
@@ -300,6 +306,60 @@ const pt: Dictionary = {
 				solution:
 					"Reescrevemos até a tela vender sozinha. O comercial parou de explicar e passou a apontar.",
 				outcomes: ["Site", "Interface", "Automação"],
+			},
+			"casa-vera": {
+				sector: "Arquitetura",
+				disciplines: ["Direção de arte", "Digital"],
+				problem:
+					"A obra falava. O site era um PDF de projetos com outra fonte.",
+				solution:
+					"casavera.com — a casa na frente. A planta entra depois, se a pessoa quiser.",
+				outcomes: ["Site", "Arquivo", "Brasília"],
+			},
+			"norte-vinhos": {
+				sector: "Vinho",
+				disciplines: ["Identidade", "Digital"],
+				problem:
+					"A adega tinha nome. A loja online podia ser de qualquer importadora.",
+				solution:
+					"O rótulo manda. A loja cala o bastante pra deixar escolher.",
+				outcomes: ["Loja", "Catálogo", "Identidade"],
+			},
+			"lima-advocacia": {
+				sector: "Direito",
+				disciplines: ["Posicionamento", "Digital"],
+				problem:
+					"Escritório sério atrás de um site de advogado de template.",
+				solution:
+					"Nome, casos, o resto fora. Sem coluna grega na capa.",
+				outcomes: ["Site", "Texto", "Posicionamento"],
+			},
+			"horizonte-cafe": {
+				sector: "Café",
+				disciplines: ["Conteúdo", "Digital"],
+				problem:
+					"O balcão tinha fila. O Instagram fazia as vezes de site — e sumia no outro dia.",
+				solution:
+					"Um lugar fixo. Cardápio, origem, horário. Sem post no lugar da vitrine.",
+				outcomes: ["Site", "Conteúdo", "Brasília"],
+			},
+			"estudio-rio": {
+				sector: "Música",
+				disciplines: ["Identidade", "Digital"],
+				problem:
+					"O som existia. Online, era bio do Instagram e um Linktree.",
+				solution:
+					"Discografia na frente. Press kit depois. O player não pede licença pra aparecer.",
+				outcomes: ["Site", "Arquivo", "Identidade"],
+			},
+			"marina-costa": {
+				sector: "Cerâmica",
+				disciplines: ["Conteúdo", "Direção de arte", "Digital"],
+				problem:
+					"A peça na mesa tinha peso. No feed, era artesanato de marketplace.",
+				solution:
+					"Cada peça com nome. Sem fundo infinito de crochê.",
+				outcomes: ["Site", "Editorial", "Lookbook"],
 			},
 		},
 	},
@@ -395,7 +455,8 @@ const en: Dictionary = {
 	selectedWork: {
 		eyebrow: "Archive",
 		headline: "Work we put our name on.",
-		all: "See the archive",
+		invite: "Four pieces. Come into the archive.",
+		all: "Enter the archive",
 	},
 	services: {
 		eyebrow: "What we do",
@@ -467,6 +528,8 @@ const en: Dictionary = {
 		cta: "Yours could be next.",
 		ctaLink: "Talk to the studio",
 		visit: "Open the site",
+		back: "Archive",
+		open: "Open",
 		studies: {
 			maxdecoyer: {
 				sector: "Photography",
@@ -503,6 +566,60 @@ const en: Dictionary = {
 				solution:
 					"We rewrote until the screen sold itself. Sales stopped explaining and started pointing.",
 				outcomes: ["Site", "Interface", "Automation"],
+			},
+			"casa-vera": {
+				sector: "Architecture",
+				disciplines: ["Art direction", "Digital"],
+				problem:
+					"The building spoke. The site was a PDF of projects in someone else's typeface.",
+				solution:
+					"casavera.com — the house first. Plans later, if you want them.",
+				outcomes: ["Site", "Archive", "Brasília"],
+			},
+			"norte-vinhos": {
+				sector: "Wine",
+				disciplines: ["Identity", "Digital"],
+				problem:
+					"The cellar had a name. The shop could have belonged to any importer.",
+				solution:
+					"The label leads. The shop stays quiet enough to let you choose.",
+				outcomes: ["Shop", "Catalogue", "Identity"],
+			},
+			"lima-advocacia": {
+				sector: "Law",
+				disciplines: ["Positioning", "Digital"],
+				problem:
+					"A serious firm behind a lawyer-template site.",
+				solution:
+					"The name, the cases, everything else out. No Greek column on the cover.",
+				outcomes: ["Site", "Copy", "Positioning"],
+			},
+			"horizonte-cafe": {
+				sector: "Coffee",
+				disciplines: ["Content", "Digital"],
+				problem:
+					"The counter had a line. Instagram did the job of a site — and vanished the next day.",
+				solution:
+					"A fixed place. Menu, origin, hours. No post standing in for the window.",
+				outcomes: ["Site", "Content", "Brasília"],
+			},
+			"estudio-rio": {
+				sector: "Music",
+				disciplines: ["Identity", "Digital"],
+				problem:
+					"The sound was there. Online, it was an Instagram bio and a Linktree.",
+				solution:
+					"Discography first. Press kit later. The player doesn't ask permission to show up.",
+				outcomes: ["Site", "Archive", "Identity"],
+			},
+			"marina-costa": {
+				sector: "Ceramics",
+				disciplines: ["Content", "Art direction", "Digital"],
+				problem:
+					"The piece on the table had weight. In the feed, it was marketplace craft.",
+				solution:
+					"Each piece with a name. No endless crochet backdrop.",
+				outcomes: ["Site", "Editorial", "Lookbook"],
 			},
 		},
 	},

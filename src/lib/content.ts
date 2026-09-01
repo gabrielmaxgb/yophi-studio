@@ -36,10 +36,58 @@ export const caseStudyBase = [
     client: "Orbit Systems",
     tone: "signal",
     image: "/work/orbit-systems.jpg",
+    cover: "wide",
+  },
+  {
+    slug: "casa-vera",
+    client: "Casa Vera",
+    tone: "paper",
+    image: "/work/casa-vera.jpg",
+  },
+  {
+    slug: "norte-vinhos",
+    client: "Norte",
+    tone: "deep",
+    image: "/work/norte-vinhos.jpg",
+    cover: "wide",
+  },
+  {
+    slug: "lima-advocacia",
+    client: "Lima",
+    tone: "signal",
+    image: "/work/lima-advocacia.jpg",
+  },
+  {
+    slug: "horizonte-cafe",
+    client: "Horizonte",
+    tone: "paper",
+    image: "/work/horizonte-cafe.jpg",
+    cover: "wide",
+  },
+  {
+    slug: "estudio-rio",
+    client: "Estúdio Rio",
+    tone: "deep",
+    image: "/work/estudio-rio.jpg",
+  },
+  {
+    slug: "marina-costa",
+    client: "Marina Costa",
+    tone: "paper",
+    image: "/work/marina-costa.jpg",
+    cover: "wide",
   },
 ] as const satisfies readonly CaseStudyMeta[];
 
 export type CaseStudySlug = (typeof caseStudyBase)[number]["slug"];
+
+export function isCaseStudySlug(slug: string): slug is CaseStudySlug {
+  return caseStudyBase.some((study) => study.slug === slug);
+}
+
+export function getCaseStudy(slug: CaseStudySlug): CaseStudyMeta {
+  return caseStudyBase.find((study) => study.slug === slug)!;
+}
 
 export const processKeys = [
   "SEE",
