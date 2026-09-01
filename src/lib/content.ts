@@ -13,6 +13,7 @@ export const caseStudyBase = [
     slug: "maxdecoyer",
     client: "maxdecoyer",
     tone: "deep",
+    image: undefined,
     url: "https://www.maxdecoyer.com",
   },
   {
@@ -20,12 +21,14 @@ export const caseStudyBase = [
     client: "Atelier Luz",
     tone: "paper",
     image: "/work/atelier-luz.jpg",
+    url: undefined,
   },
   {
     slug: "orbit-systems",
     client: "Orbit Systems",
     tone: "signal",
     image: "/work/orbit-systems.jpg",
+    url: undefined,
   },
 ] as const satisfies readonly CaseStudyMeta[];
 

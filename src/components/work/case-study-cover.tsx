@@ -53,7 +53,9 @@ export function CaseStudyCover({
       }),
     });
 
-    return () => animation.revert();
+    return () => {
+      animation.revert();
+    };
   }, [src, url]);
 
   return (
