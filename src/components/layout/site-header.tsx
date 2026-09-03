@@ -1,11 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { animate, stagger } from "animejs";
 import { prefersReducedMotion } from "@/lib/motion";
-import { LanguageSwitchInk } from "@/components/i18n/language-switch";
-import { LocaleLink } from "@/components/i18n/locale-link";
 import { ArchiveLink } from "@/components/work/archive-gate";
 import { useI18n } from "@/components/i18n/locale-provider";
 import {
@@ -16,7 +15,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { YophiLogo } from "@/components/brand/yophi-logo";
-import { stripLocale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 const plate =
@@ -25,7 +23,6 @@ const plate =
 export function SiteHeader() {
   const { dict } = useI18n();
   const pathname = usePathname();
-  const current = stripLocale(pathname);
   const [open, setOpen] = useState(false);
   const headerRef = useRef<HTMLElement | null>(null);
 
@@ -57,7 +54,7 @@ export function SiteHeader() {
       ref={headerRef}
       className="pointer-events-none fixed inset-x-0 top-0 z-50 flex items-start justify-between gap-3 p-4 md:p-6 lg:px-10 lg:pt-7"
     >
-      <LocaleLink
+      <Link
         href="/"
         aria-label="YOPHI Studio"
         data-nav-plate
@@ -69,7 +66,7 @@ export function SiteHeader() {
           markClassName="h-6 md:h-7"
           wordmarkClassName="text-[1.05rem] tracking-[0.2em] md:text-lg"
         />
-      </LocaleLink>
+      </Link>
 
       <div className="flex items-start gap-2 md:gap-3">
         <nav
@@ -77,10 +74,9 @@ export function SiteHeader() {
           className={cn(plate, "hidden h-14 items-stretch md:flex")}
         >
           {links.map((link) => {
-            const active = current === link.href;
+            const active = pathname === link.href;
             const isContact = link.href === "/contact";
-
-            const LinkTag = link.href === "/work" ? ArchiveLink : LocaleLink;
+            const LinkTag = link.href === "/work" ? ArchiveLink : Link;
 
             return (
               <LinkTag
@@ -112,16 +108,8 @@ export function SiteHeader() {
 
         <div
           data-nav-plate
-          className={cn(plate, "hidden h-14 items-center px-4 md:flex")}
+          className={cn(plate, "flex h-12 items-center px-3 md:hidden")}
         >
-          <LanguageSwitchInk />
-        </div>
-
-        <div
-          data-nav-plate
-          className={cn(plate, "flex h-12 items-center gap-3 px-3 md:hidden")}
-        >
-          <LanguageSwitchInk />
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger
               className="text-[0.65rem] tracking-[0.22em] uppercase"
@@ -145,16 +133,16 @@ export function SiteHeader() {
                 </SheetTitle>
               </SheetHeader>
               <nav className="flex flex-col gap-1 px-4 py-8">
-                <LocaleLink
+                <Link
                   href="/"
                   onClick={() => setOpen(false)}
                   className="px-2 py-3 font-serif text-3xl"
                 >
                   {dict.nav.home}
-                </LocaleLink>
+                </Link>
                 {links.map((link) => {
                   const LinkTag =
-                    link.href === "/work" ? ArchiveLink : LocaleLink;
+                    link.href === "/work" ? ArchiveLink : Link;
                   return (
                     <LinkTag
                       key={link.href}
@@ -170,9 +158,6 @@ export function SiteHeader() {
                   );
                 })}
               </nav>
-              <div className="border-line border-t px-6 py-5">
-                <LanguageSwitchInk />
-              </div>
             </SheetContent>
           </Sheet>
         </div>

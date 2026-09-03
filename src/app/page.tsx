@@ -7,35 +7,25 @@ import { Process } from "@/components/home/process";
 import { SelectedWork } from "@/components/home/selected-work";
 import { Services } from "@/components/home/services";
 import { Worlds } from "@/components/home/worlds";
-import { getDictionary } from "@/lib/dictionary";
-import { htmlLang, isLocale } from "@/lib/i18n";
+import { dict } from "@/lib/dictionary";
 import { defaultOgImage, siteName } from "@/lib/site";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ lang: string }>;
-}): Promise<Metadata> {
-  const { lang } = await params;
-  const dict = getDictionary(lang);
-
-  return {
-    openGraph: {
-      title: dict.meta.title,
-      description: dict.meta.ogDescription,
-      type: "website",
-      locale: isLocale(lang) ? htmlLang[lang] : "pt-BR",
-      siteName,
-      images: [defaultOgImage],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: dict.meta.title,
-      description: dict.meta.ogDescription,
-      images: [defaultOgImage],
-    },
-  };
-}
+export const metadata: Metadata = {
+  openGraph: {
+    title: dict.meta.title,
+    description: dict.meta.ogDescription,
+    type: "website",
+    locale: "pt-BR",
+    siteName,
+    images: [defaultOgImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: dict.meta.title,
+    description: dict.meta.ogDescription,
+    images: [defaultOgImage],
+  },
+};
 
 export default function HomePage() {
   return (

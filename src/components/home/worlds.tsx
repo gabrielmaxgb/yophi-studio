@@ -6,7 +6,7 @@ import { useI18n } from "@/components/i18n/locale-provider";
 import { Reveal } from "@/components/motion/reveal";
 
 export function Worlds() {
-  const { locale, dict } = useI18n();
+  const { dict } = useI18n();
   const meetRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export function Worlds() {
 
     observer.observe(root);
     return () => observer.disconnect();
-  }, [locale]);
+  }, []);
 
   return (
     <section className="border-y border-line bg-[#dfddd7] text-ink">

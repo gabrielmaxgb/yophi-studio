@@ -9,7 +9,7 @@ import {
   scrambleText,
   stagger,
 } from "animejs";
-import { LocaleLink } from "@/components/i18n/locale-link";
+import Link from "next/link";
 import { ArchiveLink } from "@/components/work/archive-gate";
 import { useI18n } from "@/components/i18n/locale-provider";
 import { isFinePointer, prefersReducedMotion } from "@/lib/motion";
@@ -47,7 +47,7 @@ const formPanels = [
 ] as const;
 
 export function Hero() {
-  const { locale, dict } = useI18n();
+  const { dict } = useI18n();
   const { stages } = dict.hero;
   const rootRef = useRef<HTMLElement | null>(null);
   const stageRef = useRef<HTMLParagraphElement | null>(null);
@@ -231,7 +231,7 @@ export function Hero() {
       if (intervalId) window.clearInterval(intervalId);
       tl.revert();
     };
-  }, [locale, stages]);
+  }, [stages]);
 
   return (
     <section
@@ -311,7 +311,7 @@ export function Hero() {
 
           <div data-hero-meta className="flex flex-col gap-3 opacity-0">
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-              <LocaleLink
+              <Link
                 href="/contact"
                 className="group inline-flex min-h-12 items-center gap-3 bg-paper px-6 py-3.5 text-[0.7rem] tracking-[0.22em] text-deep uppercase transition-colors hover:bg-paper/90"
               >
@@ -319,7 +319,7 @@ export function Hero() {
                 <span className="transition-transform group-hover:translate-x-1">
                   →
                 </span>
-              </LocaleLink>
+              </Link>
               <ArchiveLink
                 href="/work"
                 className="inline-flex min-h-12 items-center text-[0.7rem] tracking-[0.22em] text-paper/80 uppercase transition-colors hover:text-paper"

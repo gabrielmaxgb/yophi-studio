@@ -1,6 +1,6 @@
 "use client";
 
-import { LocaleLink } from "@/components/i18n/locale-link";
+import Link from "next/link";
 import { useI18n } from "@/components/i18n/locale-provider";
 import { Origin } from "@/components/home/origin";
 import { Reveal } from "@/components/motion/reveal";
@@ -88,7 +88,7 @@ export function StudioView() {
           </div>
 
           <Reveal delay={160} className="mt-16">
-            <LocaleLink
+            <Link
               href="/contact"
               className="group inline-flex min-h-12 w-fit items-center gap-3 bg-deep px-6 py-4 text-[0.7rem] tracking-[0.22em] text-paper uppercase transition-colors hover:bg-deep/90"
             >
@@ -96,7 +96,7 @@ export function StudioView() {
               <span className="transition-transform group-hover:translate-x-1">
                 →
               </span>
-            </LocaleLink>
+            </Link>
           </Reveal>
         </div>
       </section>

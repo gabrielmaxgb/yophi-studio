@@ -1,7 +1,7 @@
 "use client";
 
 import { startTransition, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { LocaleLink } from "@/components/i18n/locale-link";
+import Link from "next/link";
 import { useI18n } from "@/components/i18n/locale-provider";
 import { caseStudyBase, type CaseStudySlug } from "@/lib/content";
 import { prefersReducedMotion } from "@/lib/motion";
@@ -207,7 +207,7 @@ function CurvedProjectCard({
   ).padStart(2, "0");
 
   return (
-    <LocaleLink
+    <Link
       href={`/work/${study.slug}`}
       aria-label={`${study.client} — ${openLabel}`}
       data-card=""
@@ -285,7 +285,7 @@ function CurvedProjectCard({
           })}
         </span>
       </span>
-    </LocaleLink>
+    </Link>
   );
 }
 
@@ -379,7 +379,7 @@ function SphereShell({
 }
 
 export function ArchiveSpheres() {
-  const { dict, locale } = useI18n();
+  const { dict } = useI18n();
   const stageRef = useRef<HTMLElement | null>(null);
   const slotsRef = useRef<string[][]>([]);
   const hiddenRef = useRef(
@@ -519,7 +519,7 @@ export function ArchiveSpheres() {
       stage.removeEventListener("touchend", onTouchEnd);
       window.removeEventListener("keydown", onKey);
     };
-  }, [locale]);
+  }, []);
 
   return (
     <section

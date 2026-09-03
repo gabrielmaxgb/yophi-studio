@@ -2,29 +2,26 @@
 
 import { createContext, useContext } from "react";
 import type { Dictionary } from "@/lib/dictionary";
-import type { Locale } from "@/lib/i18n";
 
-type LocaleContextValue = {
-  locale: Locale;
+type DictionaryContextValue = {
   dict: Dictionary;
 };
 
-const LocaleContext = createContext<LocaleContextValue | null>(null);
+const DictionaryContext = createContext<DictionaryContextValue | null>(null);
 
 export function LocaleProvider({
-  locale,
   dict,
   children,
-}: LocaleContextValue & { children: React.ReactNode }) {
+}: DictionaryContextValue & { children: React.ReactNode }) {
   return (
-    <LocaleContext.Provider value={{ locale, dict }}>
+    <DictionaryContext.Provider value={{ dict }}>
       {children}
-    </LocaleContext.Provider>
+    </DictionaryContext.Provider>
   );
 }
 
 export function useI18n() {
-  const context = useContext(LocaleContext);
+  const context = useContext(DictionaryContext);
   if (!context) {
     throw new Error("useI18n must be used within LocaleProvider");
   }

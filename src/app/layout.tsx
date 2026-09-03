@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { DM_Sans, Instrument_Serif } from "next/font/google";
 import { ArchiveGate } from "@/components/work/archive-gate";
 import { LocaleProvider } from "@/components/i18n/locale-provider";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { StudioCursor } from "@/components/motion/studio-cursor";
-import { getDictionary } from "@/lib/dictionary";
-import { htmlLang, isLocale, locales } from "@/lib/i18n";
+import { dict } from "@/lib/dictionary";
 import { defaultOgImage, siteName, siteUrl } from "@/lib/site";
-import "../globals.css";
+import "./globals.css";
 
 const sans = DM_Sans({
   subsets: ["latin", "latin-ext"],
@@ -24,67 +22,41 @@ const serif = Instrument_Serif({
   display: "swap",
 });
 
-export function generateStaticParams() {
-  return locales.map((lang) => ({ lang }));
-}
+export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: dict.meta.title,
+    template: "%s · YOPHI",
+  },
+  description: dict.meta.description,
+  openGraph: {
+    type: "website",
+    locale: "pt-BR",
+    siteName,
+    images: [defaultOgImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [defaultOgImage],
+  },
+  alternates: {
+    canonical: "/",
+  },
+};
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ lang: string }>;
-}): Promise<Metadata> {
-  const { lang } = await params;
-  const dict = getDictionary(lang);
-  const prefix = isLocale(lang) ? `/${lang}` : "/pt";
-
-  return {
-    metadataBase: new URL(siteUrl),
-    title: {
-      default: dict.meta.title,
-      template: "%s · YOPHI",
-    },
-    description: dict.meta.description,
-    openGraph: {
-      type: "website",
-      locale: isLocale(lang) ? htmlLang[lang] : "pt-BR",
-      siteName,
-      images: [defaultOgImage],
-    },
-    twitter: {
-      card: "summary_large_image",
-      images: [defaultOgImage],
-    },
-    alternates: {
-      canonical: prefix,
-      languages: {
-        "pt-BR": "/pt",
-        en: "/en",
-        "x-default": "/pt",
-      },
-    },
-  };
-}
-
-export default async function LangLayout({
+export default function RootLayout({
   children,
-  params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ lang: string }>;
 }) {
-  const { lang } = await params;
-  if (!isLocale(lang)) notFound();
-
-  const dict = getDictionary(lang);
-
   return (
     <html
-      lang={htmlLang[lang]}
+      lang="pt-BR"
       data-scroll-behavior="smooth"
       className={`${sans.variable} ${serif.variable}`}
     >
       <body className="min-h-dvh flex flex-col" suppressHydrationWarning>
-        <LocaleProvider locale={lang} dict={dict}>
+        <LocaleProvider dict={dict}>
           <ArchiveGate>
             <a href="#conteudo" className="skip-link">
               {dict.nav.skip}

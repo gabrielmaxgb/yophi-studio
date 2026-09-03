@@ -1,7 +1,7 @@
 "use client";
 
 import { YophiSignature } from "@/components/brand/yophi-logo";
-import { LocaleLink } from "@/components/i18n/locale-link";
+import Link from "next/link";
 import { useI18n } from "@/components/i18n/locale-provider";
 import { Reveal } from "@/components/motion/reveal";
 import { CaseStudyCover } from "@/components/work/case-study-cover";
@@ -18,7 +18,7 @@ export function WorkStudy({ slug }: { slug: CaseStudySlug }) {
     <div className="bg-paper text-ink">
       <article className="mx-auto max-w-[1400px] px-5 pt-28 pb-28 md:px-10 md:pt-36">
         <Reveal>
-          <LocaleLink
+          <Link
             href="/work"
             className="group inline-flex min-h-11 items-center gap-3 text-[0.65rem] tracking-[0.22em] uppercase"
           >
@@ -26,7 +26,7 @@ export function WorkStudy({ slug }: { slug: CaseStudySlug }) {
               ←
             </span>
             {dict.work.back}
-          </LocaleLink>
+          </Link>
         </Reveal>
 
         <Reveal delay={80} className="mt-10">
@@ -130,7 +130,7 @@ export function WorkStudy({ slug }: { slug: CaseStudySlug }) {
                 </p>
               </div>
 
-              <LocaleLink
+              <Link
                 href="/contact"
                 className="group inline-flex w-fit min-h-12 items-center gap-3 bg-deep px-6 py-4 text-[0.7rem] tracking-[0.22em] text-paper uppercase transition-colors hover:bg-deep/90"
               >
@@ -138,7 +138,7 @@ export function WorkStudy({ slug }: { slug: CaseStudySlug }) {
                 <span className="transition-transform group-hover:translate-x-1">
                   →
                 </span>
-              </LocaleLink>
+              </Link>
             </div>
           </Reveal>
         </div>

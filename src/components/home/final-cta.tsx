@@ -1,6 +1,6 @@
 "use client";
 
-import { LocaleLink } from "@/components/i18n/locale-link";
+import Link from "next/link";
 import { useI18n } from "@/components/i18n/locale-provider";
 import { Reveal } from "@/components/motion/reveal";
 import { SplitHeadline } from "@/components/motion/split-headline";
@@ -28,7 +28,7 @@ export function FinalCta() {
           <p className="max-w-sm text-sm leading-relaxed text-paper/75">
             {dict.finalCta.body}
           </p>
-          <LocaleLink
+          <Link
             href="/contact"
             className="group inline-flex min-h-12 w-fit items-center gap-3 bg-paper px-6 py-4 text-[0.7rem] tracking-[0.22em] text-deep uppercase transition-colors hover:bg-paper/90"
           >
@@ -36,7 +36,7 @@ export function FinalCta() {
             <span className="transition-transform group-hover:translate-x-1">
               →
             </span>
-          </LocaleLink>
+          </Link>
         </Reveal>
       </div>
     </section>

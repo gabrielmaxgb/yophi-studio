@@ -13,14 +13,13 @@ import {
 } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { animate, createTimeline, scrambleText, stagger } from "animejs";
-import { LocaleLink } from "@/components/i18n/locale-link";
+import Link from "next/link";
 import { useI18n } from "@/components/i18n/locale-provider";
 import {
   preloadArchiveImages,
   wait,
   waitForPath,
 } from "@/lib/archive-images";
-import { localizedPath, stripLocale } from "@/lib/i18n";
 import { prefersReducedMotion } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
@@ -40,7 +39,7 @@ export function useArchiveGate() {
 }
 
 export function ArchiveGate({ children }: { children: ReactNode }) {
-  const { locale, dict } = useI18n();
+  const { dict } = useI18n();
   const router = useRouter();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -49,16 +48,14 @@ export function ArchiveGate({ children }: { children: ReactNode }) {
   const busy = useRef(false);
   const overlayRef = useRef<HTMLDivElement | null>(null);
   const labelRef = useRef<HTMLParagraphElement | null>(null);
-  const localeRef = useRef(locale);
   const routerRef = useRef(router);
   const labelCopy = dict.work.loading;
 
-  localeRef.current = locale;
   routerRef.current = router;
 
   const enter = useCallback(() => {
     if (busy.current) return;
-    if (stripLocale(pathname) === "/work") return;
+    if (pathname === "/work") return;
     busy.current = true;
     setLoaded(0);
     setTotal(10);
@@ -79,7 +76,7 @@ export function ArchiveGate({ children }: { children: ReactNode }) {
     if (!overlay) return;
 
     const reduced = prefersReducedMotion();
-    const href = localizedPath(localeRef.current, "/work");
+    const href = "/work";
     const shells = overlay.querySelectorAll<HTMLElement>("[data-cover-shell]");
     const marks = overlay.querySelectorAll<HTMLElement>("[data-cover-mark]");
     let cancelled = false;
@@ -253,7 +250,7 @@ export function ArchiveGate({ children }: { children: ReactNode }) {
   );
 }
 
-type ArchiveLinkProps = Omit<ComponentProps<typeof LocaleLink>, "href"> & {
+type ArchiveLinkProps = Omit<ComponentProps<typeof Link>, "href"> & {
   href?: string;
 };
 
@@ -269,7 +266,7 @@ export function ArchiveLink({
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
     onClick?.(event);
     if (event.defaultPrevented) return;
-    if (stripLocale(pathname) === "/work") return;
+    if (pathname === "/work") return;
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     if (event.button !== 0) return;
     event.preventDefault();
@@ -277,7 +274,7 @@ export function ArchiveLink({
   };
 
   return (
-    <LocaleLink
+    <Link
       href={href}
       onClick={handleClick}
       aria-busy={busy || undefined}

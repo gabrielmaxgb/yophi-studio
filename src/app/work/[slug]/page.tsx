@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { WorkStudy } from "@/components/work/work-study";
 import { caseStudyBase, getCaseStudy, isCaseStudySlug } from "@/lib/content";
-import { getDictionary } from "@/lib/dictionary";
-import { isLocale } from "@/lib/i18n";
+import { dict } from "@/lib/dictionary";
 
 export const dynamicParams = false;
 
@@ -14,15 +13,13 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ lang: string; slug: string }>;
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const { lang, slug } = await params;
+  const { slug } = await params;
   if (!isCaseStudySlug(slug)) return {};
 
-  const dict = getDictionary(lang);
   const study = getCaseStudy(slug);
   const copy = dict.work.studies[slug];
-  const prefix = isLocale(lang) ? `/${lang}` : "/pt";
 
   return {
     title: study.client,
@@ -45,12 +42,7 @@ export async function generateMetadata({
       images: [study.image],
     },
     alternates: {
-      canonical: `${prefix}/work/${slug}`,
-      languages: {
-        "pt-BR": `/pt/work/${slug}`,
-        en: `/en/work/${slug}`,
-        "x-default": `/pt/work/${slug}`,
-      },
+      canonical: `/work/${slug}`,
     },
   };
 }
@@ -58,7 +50,7 @@ export async function generateMetadata({
 export default async function WorkStudyPage({
   params,
 }: {
-  params: Promise<{ lang: string; slug: string }>;
+  params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
   if (!isCaseStudySlug(slug)) notFound();

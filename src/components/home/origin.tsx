@@ -8,7 +8,7 @@ import { prefersReducedMotion } from "@/lib/motion";
 const glyphs = ["יֹ", "פ", "י"] as const;
 
 export function Origin() {
-  const { locale, dict } = useI18n();
+  const { dict } = useI18n();
   const rootRef = useRef<HTMLElement | null>(null);
   const latinRef = useRef<HTMLParagraphElement | null>(null);
 
@@ -81,7 +81,7 @@ export function Origin() {
 
     observer.observe(root);
     return () => observer.disconnect();
-  }, [locale]);
+  }, []);
 
   return (
     <section ref={rootRef} className="bg-[#d7d4cd] text-ink">

@@ -8,7 +8,7 @@ import { processKeys } from "@/lib/content";
 import { prefersReducedMotion } from "@/lib/motion";
 
 export function Process() {
-  const { locale, dict } = useI18n();
+  const { dict } = useI18n();
   const listRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -75,7 +75,7 @@ export function Process() {
     return () => {
       observers.forEach((item) => item.revert());
     };
-  }, [locale]);
+  }, []);
 
   return (
     <section className="bg-paper text-ink">
