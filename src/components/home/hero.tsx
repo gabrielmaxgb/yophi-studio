@@ -146,8 +146,8 @@ export function Hero() {
         </svg>
       </div>
 
-      <div className="relative mx-auto grid h-full max-w-[1400px] grid-cols-1 items-end gap-4 px-5 pb-8 pt-24 md:grid-cols-[0.8fr_1.2fr] md:items-center md:gap-6 md:px-10 md:pb-12 md:pt-20">
-        <div className="flex min-h-0 flex-col gap-5 md:gap-7">
+      <div className="relative mx-auto grid h-full max-w-[1400px] grid-cols-1 px-5 pb-8 pt-24 md:grid-cols-[0.8fr_1.2fr] md:items-center md:gap-6 md:px-10 md:pb-12 md:pt-20">
+        <div className="relative z-10 flex min-h-0 flex-col justify-end gap-5 md:col-start-1 md:row-start-1 md:justify-center md:gap-7">
           <div className="flex flex-col">
             <p
               className="font-serif text-[clamp(2.8rem,9vw,6.5rem)] leading-[0.9] tracking-[0.08em] uppercase"
@@ -221,8 +221,8 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="relative flex min-h-0 max-h-full flex-col justify-end md:h-full md:justify-center">
-          <figure className="relative mx-auto -mr-2 flex w-full max-w-[20rem] flex-1 items-center justify-center sm:max-w-[24rem] md:-mr-6 md:max-w-none lg:-mr-10">
+        <div className="hidden min-h-0 flex-col justify-center md:col-start-2 md:row-start-1 md:flex md:h-full">
+          <figure className="relative mx-auto flex w-full flex-1 items-center justify-center md:-mr-6 lg:-mr-10">
             <div
               aria-hidden
               data-hero-glow
@@ -233,7 +233,7 @@ export function Hero() {
               data-hero-glow
               className="pointer-events-none absolute top-[12%] right-[-8%] h-[75%] w-[75%] rounded-full bg-[radial-gradient(circle,rgba(201,106,62,0.55)_0%,transparent_70%)] blur-3xl"
             />
-            <div data-hero-head className="relative z-10 w-full max-h-[52vh] md:max-h-[78vh]">
+            <div data-hero-head className="relative w-full max-h-[78vh]">
               <Image
                 src="/philosophy/head.webp"
                 alt={dict.philosophy.imageAlt}
@@ -241,15 +241,15 @@ export function Hero() {
                 height={1825}
                 quality={90}
                 priority
-                sizes="(max-width: 768px) 20rem, 42vw"
-                className="h-auto max-h-[52vh] w-full scale-[1.06] object-contain select-none drop-shadow-[0_40px_80px_rgba(0,0,0,0.55)] md:max-h-[78vh] md:scale-[1.12]"
+                sizes="42vw"
+                className="h-auto max-h-[78vh] w-full scale-[1.12] object-contain select-none drop-shadow-[0_40px_80px_rgba(0,0,0,0.55)]"
               />
             </div>
           </figure>
 
           <div
             data-form-meta
-            className="relative z-10 mt-3 flex shrink-0 items-end justify-between gap-4 border-t border-ink/15 pt-3 md:mt-5 md:pt-4"
+            className="relative z-10 mt-5 flex shrink-0 items-end justify-between gap-4 border-t border-ink/15 pt-4"
           >
             <div>
               <p className="text-[0.6rem] tracking-[0.28em] text-ink/60 uppercase">

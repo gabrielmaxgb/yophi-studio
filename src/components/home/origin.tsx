@@ -50,10 +50,10 @@ export function Origin() {
   );
 
   return (
-    <section ref={rootRef} className="border-t border-line bg-mist text-ink">
-      <div className="mx-auto flex max-w-[1400px] flex-col items-center px-5 py-16 text-center md:px-10 md:py-20">
+    <section ref={rootRef} className="bg-mist text-ink">
+      <div className="mx-auto flex max-w-[1400px] flex-col items-center px-5 py-20 text-center md:px-10 md:py-28">
         <p
-          className="text-[clamp(3rem,10vw,6rem)] leading-none tracking-[0.2em]"
+          className="text-[clamp(4rem,14vw,9rem)] leading-none tracking-[0.2em]"
           lang="he"
           dir="rtl"
         >
@@ -68,16 +68,16 @@ export function Origin() {
           ))}
         </p>
 
-        <div className="mt-6 flex flex-col gap-2">
+        <div className="mt-8 flex flex-col gap-3">
           <p
             data-origin-latin
-            className="font-serif text-2xl tracking-[0.16em] uppercase md:text-3xl"
+            className="font-serif text-3xl tracking-[0.16em] uppercase md:text-4xl"
           >
             YOPHI
           </p>
           <p
             data-origin-rest
-            className="max-w-xs text-[0.8rem] leading-relaxed text-ink/65"
+            className="text-[0.7rem] tracking-[0.28em] text-ink/70 uppercase"
           >
             {dict.origin.note}
           </p>

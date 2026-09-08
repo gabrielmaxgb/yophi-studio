@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { FinalCta } from "@/components/home/final-cta";
 import { Hero } from "@/components/home/hero";
+import { Origin } from "@/components/home/origin";
 import { Philosophy } from "@/components/home/philosophy";
 import { SelectedWork } from "@/components/home/selected-work";
 import { Worlds } from "@/components/home/worlds";
@@ -31,6 +32,7 @@ export default function HomePage() {
       <Philosophy />
       <Worlds />
       <SelectedWork />
+      <Origin />
       <FinalCta />
     </>
   );

@@ -14,11 +14,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { YophiLogo } from "@/components/brand/yophi-logo";
+import { YophiMark } from "@/components/brand/yophi-logo";
 import { cn } from "@/lib/utils";
-
-const plate =
-  "pointer-events-auto border border-ink/8 bg-mist/80 text-ink shadow-[0_22px_56px_-22px_rgba(0,0,0,0.7)] backdrop-blur-md";
 
 export function SiteHeader() {
   const { dict } = useI18n();
@@ -29,139 +26,146 @@ export function SiteHeader() {
   useEffect(() => {
     const header = headerRef.current;
     if (!header || prefersReducedMotion()) return;
-    const plates = header.querySelectorAll<HTMLElement>("[data-nav-plate]");
-    plates.forEach((plate) => {
-      plate.style.opacity = "0";
-      plate.style.transform = "translateY(-18px)";
+    const parts = header.querySelectorAll<HTMLElement>("[data-nav-in]");
+    parts.forEach((el) => {
+      el.style.opacity = "0";
     });
-    animate(plates, {
+    animate(parts, {
       opacity: [0, 1],
-      y: [-18, 0],
-      duration: 900,
-      delay: stagger(70, { start: 180 }),
-      ease: "out(4)",
+      duration: 1100,
+      delay: stagger(120, { start: 200 }),
+      ease: "out(3)",
     });
   }, []);
 
   const links = [
-    { href: "/work", label: dict.nav.work, index: "01" },
-    { href: "/studio", label: dict.nav.studio, index: "02" },
-    { href: "/contact", label: dict.nav.contact, index: "03" },
+    { href: "/work", label: dict.nav.work },
+    { href: "/studio", label: dict.nav.studio },
+    { href: "/contact", label: dict.nav.contact },
   ];
 
   return (
-    <header
-      ref={headerRef}
-      className="pointer-events-none fixed inset-x-0 top-0 z-50 flex items-start justify-between gap-3 p-4 md:p-6 lg:px-10 lg:pt-7"
-    >
-      <Link
-        href="/"
-        aria-label="YOPHI"
-        data-nav-plate
-        className={cn(plate, "flex h-12 items-center px-3.5 md:h-14 md:px-4")}
+    <>
+      {/* Soft top fade so type reads over any scene without a bar */}
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-x-0 top-0 z-40 h-36 bg-[linear-gradient(to_bottom,rgba(5,5,5,0.72)_0%,rgba(5,5,5,0.28)_55%,transparent_100%)]"
+      />
+
+      <header
+        ref={headerRef}
+        className="pointer-events-none fixed inset-0 z-50"
       >
-        <YophiLogo
-          className="gap-2"
-          markClassName="h-6 md:h-7"
-          wordmarkClassName="text-[1.05rem] tracking-[0.2em] md:text-lg"
-          studioClassName="text-[0.55rem] tracking-[0.2em] text-ink/55"
-        />
-      </Link>
-
-      <div className="flex items-start gap-2 md:gap-3">
-        <nav
-          data-nav-plate
-          className={cn(plate, "hidden h-14 items-stretch md:flex")}
+        {/* Studio bug — title-card corner */}
+        <Link
+          href="/"
+          aria-label="YOPHI"
+          data-nav-in
+          className="pointer-events-auto absolute top-5 left-5 flex flex-col gap-2 md:top-8 md:left-8 lg:left-10"
         >
-          {links.map((link) => {
-            const active = pathname === link.href;
-            const isContact = link.href === "/contact";
-            const LinkTag = link.href === "/work" ? ArchiveLink : Link;
+          <YophiMark className="h-9 w-auto text-ink md:h-11" />
+          <span className="font-serif text-[0.7rem] leading-none tracking-[0.32em] text-ink/70 uppercase md:text-[0.75rem]">
+            Yophi
+          </span>
+        </Link>
 
-            return (
-              <LinkTag
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  "group flex items-center gap-2.5 px-5 text-[0.65rem] tracking-[0.2em] uppercase transition-colors",
-                  isContact && "border-l border-ink/10",
-                  active ? "text-ink" : "text-ink/70 hover:text-ink"
-                )}
-              >
-                <span className="editorial-num text-[0.58rem] text-ink/35">
-                  {link.index}
-                </span>
-                <span
-                  className={cn(
-                    "border-b pb-0.5",
-                    active
-                      ? "border-ink"
-                      : "border-transparent group-hover:border-ink/30"
-                  )}
-                >
-                  {link.label}
-                </span>
-              </LinkTag>
-            );
-          })}
+        {/* Film-credit rail — vertical type on the right edge */}
+        <nav
+          data-nav-in
+          aria-label="Principal"
+          className="pointer-events-auto absolute top-1/2 right-2 hidden -translate-y-1/2 md:right-4 md:block lg:right-6"
+        >
+          <ul className="relative flex flex-col items-end gap-9 pr-1">
+            {links.map((link) => {
+              const active = pathname === link.href;
+              const LinkTag = link.href === "/work" ? ArchiveLink : Link;
+              const isContact = link.href === "/contact";
+
+              return (
+                <li key={link.href}>
+                  <LinkTag
+                    href={link.href}
+                    className={cn(
+                      "group relative block [writing-mode:vertical-rl] rotate-180 text-[0.78rem] tracking-[0.28em] uppercase transition-colors duration-300 md:text-[0.82rem]",
+                      isContact
+                        ? active
+                          ? "text-foam"
+                          : "text-ember/90 hover:text-foam"
+                        : active
+                          ? "text-ink"
+                          : "text-ink/65 hover:text-ink"
+                    )}
+                  >
+                    <span
+                      aria-hidden
+                      className={cn(
+                        "absolute top-0 left-1/2 h-full w-px -translate-x-1/2 bg-ember/70 transition-opacity duration-300",
+                        active
+                          ? "opacity-100"
+                          : "opacity-0 group-hover:opacity-40"
+                      )}
+                    />
+                    {link.label}
+                  </LinkTag>
+                </li>
+              );
+            })}
+          </ul>
         </nav>
 
+        {/* Mobile — raw cue, no plate */}
         <div
-          data-nav-plate
-          className={cn(plate, "flex h-12 items-center px-3 md:hidden")}
+          data-nav-in
+          className="pointer-events-auto absolute top-5 right-5 md:hidden"
         >
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger
-              className="text-[0.65rem] tracking-[0.22em] uppercase"
+              className="text-[0.7rem] tracking-[0.28em] text-ink/80 uppercase"
               aria-label={dict.nav.openMenu}
             >
               Menu
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="border-line bg-mist w-[min(100%,22rem)] p-0"
+              className="border-0 bg-deep/95 p-0 backdrop-blur-xl"
             >
-              <SheetHeader className="border-line border-b px-6 py-5">
-                <SheetTitle className="text-left font-normal text-ink">
-                  <YophiLogo
-                    layout="stack"
-                    className="items-start text-left"
-                    markClassName="h-9"
-                    wordmarkClassName="text-2xl tracking-[0.16em]"
-                    studioClassName="text-[0.55rem] tracking-[0.22em] text-ink/55"
-                  />
-                </SheetTitle>
+              <SheetHeader className="sr-only">
+                <SheetTitle>{dict.nav.openMenu}</SheetTitle>
               </SheetHeader>
-              <nav className="flex flex-col gap-1 px-4 py-8">
-                <Link
-                  href="/"
-                  onClick={() => setOpen(false)}
-                  className="px-2 py-3 font-serif text-3xl"
-                >
-                  {dict.nav.home}
-                </Link>
-                {links.map((link) => {
-                  const LinkTag =
-                    link.href === "/work" ? ArchiveLink : Link;
-                  return (
-                    <LinkTag
-                      key={link.href}
-                      href={link.href}
-                      onClick={() => setOpen(false)}
-                      className="flex items-baseline gap-4 px-2 py-3"
-                    >
-                      <span className="editorial-num text-[0.7rem] tracking-[0.18em] text-stone">
-                        {link.index}
-                      </span>
-                      <span className="font-serif text-3xl">{link.label}</span>
-                    </LinkTag>
-                  );
-                })}
-              </nav>
+              <div className="flex h-full flex-col justify-between px-8 pt-20 pb-12">
+                <nav className="flex flex-col gap-8">
+                  <Link
+                    href="/"
+                    onClick={() => setOpen(false)}
+                    className="font-serif text-4xl tracking-[0.08em] uppercase"
+                  >
+                    {dict.nav.home}
+                  </Link>
+                  {links.map((link) => {
+                    const LinkTag =
+                      link.href === "/work" ? ArchiveLink : Link;
+                    const active = pathname === link.href;
+                    return (
+                      <LinkTag
+                        key={link.href}
+                        href={link.href}
+                        onClick={() => setOpen(false)}
+                        className={cn(
+                          "font-serif text-4xl tracking-[0.08em] uppercase transition-colors",
+                          active ? "text-ember" : "text-ink/70"
+                        )}
+                      >
+                        {link.label}
+                      </LinkTag>
+                    );
+                  })}
+                </nav>
+                <YophiMark className="h-10 w-auto text-ink/40" />
+              </div>
             </SheetContent>
           </Sheet>
         </div>
-      </div>
-    </header>
+      </header>
+    </>
   );
 }
