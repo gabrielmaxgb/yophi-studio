@@ -38,7 +38,7 @@ export function YophiLogo({
   markClassName,
   wordmarkClassName,
   studioClassName,
-  showStudio = true,
+  showStudio = false,
   layout = "row",
 }: LogoProps) {
   const stacked = layout === "stack";
@@ -76,11 +76,11 @@ export function YophiLogo({
         {showStudio ? (
           <span
             className={cn(
-              "mt-[0.45em] font-sans text-[0.52em] tracking-[0.46em] uppercase",
+              "mt-[0.4em] font-serif text-[0.48em] italic tracking-[0.22em] lowercase",
               studioClassName
             )}
           >
-            Studio
+            digital studio
           </span>
         ) : null}
       </span>

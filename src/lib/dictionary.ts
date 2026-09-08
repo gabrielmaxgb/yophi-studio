@@ -37,17 +37,19 @@ export type Dictionary = {
 	philosophy: {
 		eyebrow: string;
 		headline: string;
+		imageAlt: string;
 		lines: string[];
 		label: string;
 		closing: string;
 	};
 	worlds: {
 		eyebrow: string;
+		intro: string;
 		creative: string;
-		creativeTags: string;
+		creativeLead: string;
 		creativeCopy: string;
 		digital: string;
-		digitalTags: string;
+		digitalLead: string;
 		digitalCopy: string;
 		meet: string;
 		meetCopy: string;
@@ -63,17 +65,16 @@ export type Dictionary = {
 		headline: string;
 		headlineBreak: string;
 		aside: string;
-		items: { number: string; title: string; items: string[] }[];
+		items: { number: string; title: string; items: string[]; copy: string }[];
 	};
 	process: {
 		eyebrow: string;
 		headline: string;
+		body: string;
 		steps: Record<ProcessKey, string>;
 	};
 	origin: {
 		note: string;
-		copy: string;
-		copyLine2: string;
 	};
 	finalCta: {
 		eyebrow: string;
@@ -122,6 +123,7 @@ export type Dictionary = {
 		p3: string;
 		team: string;
 		teamHeadline: string;
+		teamIntro: string;
 		creative: string;
 		creativeTags: string;
 		creativeCopy: string;
@@ -150,11 +152,11 @@ export type Dictionary = {
 
 export const dict: Dictionary = {
 	meta: {
-		title: "YOPHI — Se parece de qualquer um, não é o seu",
+		title: "YOPHI digital studio — A presença digital que a sua empresa merece",
 		description:
 			"Estúdio de conteúdo, design e tecnologia. Se o site serve pra qualquer um, o cliente também vai.",
 		ogDescription:
-			"YOPHI. Se parece de qualquer um, não é o seu. A gente faz o outro.",
+			"YOPHI digital studio. A presença digital que a sua empresa merece.",
 	},
 	nav: {
 		home: "Início",
@@ -165,109 +167,119 @@ export const dict: Dictionary = {
 		skip: "Ir para o conteúdo",
 	},
 	hero: {
-		headline: "Se parece de qualquer um, não é o seu.",
-		body: "Posicionamento, conteúdo, site e sistema. Pra o cliente achar você — e não o do lado.",
-		audience:
-			"Pra quem já vende. E ainda perde gente no primeiro clique porque o site parece de todo mundo.",
+		headline: "A presença digital que a sua empresa merece",
+		body: "Posicionamento, conteúdo, sites e sistemas para quem já entrega bem — e ainda some quando alguém encontra a marca.",
+		audience: "",
 		cta: "Começar o seu projeto",
 		ctaSecondary: "Ver o trabalho",
-		ctaHint:
-			"Manda três frases. A gente responde se entra — e o que faria no ar.",
 		formLabel: "Forma",
-		formAside: "Do que você é ao que o cliente encontra.",
+		formAside:
+			"Do que o seu negócio é ao que o cliente entende, lembra e escolhe.",
 		stages: ["YOPHI", "POSIÇÃO", "CONTEÚDO", "DIGITAL", "USO"],
 	},
 	philosophy: {
 		eyebrow: "Filosofia",
-		headline: "Logo não basta.",
+		headline: "Sua empresa não é feita de peças soltas.",
+		imageAlt:
+			"Cabeça rachada com uma borboleta pousada, iluminada em roxo e laranja.",
 		lines: [
-			"É como o negócio aparece.",
-			"Como ele soa.",
-			"O que fica na cabeça.",
-			"E o que a pessoa consegue fazer.",
+			"Um logo, um post ou um site não contam a história inteira.",
+			"Quando cada ponto fala de um jeito, quem chega até a marca entende menos do que deveria.",
+			"A presença digital precisa parecer uma empresa: clara, coerente e fácil de escolher.",
 		],
 		label: "O conjunto",
-		closing: "Peça sozinha não segura cliente. O conjunto segura.",
+		closing:
+			"Quando tudo fala a mesma língua, a confiança aparece antes da conversa.",
 	},
 	worlds: {
 		eyebrow: "Dois lados · um estúdio",
+		intro:
+			"Um time multidisciplinar de fotografia, vídeo, conteúdo e engenharia reunido para dar à sua empresa o que ela precisa no digital — do que as pessoas veem ao que elas usam.",
 		creative: "Criativo",
-		creativeTags: "Conteúdo · Social · Vídeo · Direção de arte",
+		creativeLead: "Marca que dá vontade de conhecer.",
 		creativeCopy:
-			"Voz e imagem que a marca reconhece. Que o cliente também — sem parecer campanha.",
+			"Estratégia, linguagem e imagem para tornar sua empresa reconhecível — sem depender de campanha o tempo todo.",
 		digital: "Digital",
-		digitalTags: "Sites · Produtos · Sistemas · Tecnologia",
+		digitalLead: "Experiências que fazem o negócio acontecer.",
 		digitalCopy:
-			"Site, produto, sistema. O que a pessoa usa pra comprar, marcar, voltar.",
+			"Sites, produtos e sistemas que facilitam entender, escolher, comprar e voltar.",
 		meet: "Criativo × Tecnologia",
-		meetCopy: "Os dois no mesmo teto. É o que a maioria separa — e perde.",
+		meetCopy:
+			"Quando criação e tecnologia trabalham juntas, sua empresa não só chama atenção. Ela funciona melhor no digital.",
 	},
 	selectedWork: {
 		eyebrow: "Projetos",
-		headline: "Isso a gente assina.",
+		headline: "O que muda quando tudo passa a fazer sentido.",
 		invite:
-			"Dois no ar. O resto mostra o tipo. Entra — e vê se é isso que o seu precisa.",
-		all: "Ver o trabalho",
+			"Cada projeto parte de uma empresa real e de um desafio específico. Veja como estratégia, identidade e tecnologia se conectaram para tornar cada marca mais clara, presente e fácil de escolher.",
+		all: "Ver projetos",
 	},
 	services: {
 		eyebrow: "O que fazemos",
-		headline: "Da cara",
-		headlineBreak: "ao que entra no ar.",
+		headline: "Tudo que a sua empresa precisa para existir bem no digital.",
+		headlineBreak: "",
 		aside:
-			"Não tem pacote. Tem o que falta pra o seu parar de parecer de qualquer um.",
+			"Da estratégia que dá direção à experiência que as pessoas veem, usam e escolhem. Posicionamento, conteúdo, design e tecnologia trabalhando como uma presença só.",
 		items: [
 			{
 				number: "01",
 				title: "Posicionamento",
 				items: ["Estratégia", "Identidade", "Direção"],
+				copy: "Deixamos claro o que torna sua empresa diferente — e por que ela deve ser escolhida.",
 			},
 			{
 				number: "02",
 				title: "Conteúdo",
 				items: ["Social", "Fotografia", "Vídeo", "Editorial"],
+				copy: "Criamos uma presença que mantém sua marca ativa, reconhecível e relevante todos os dias.",
 			},
 			{
 				number: "03",
 				title: "Digital",
 				items: ["Sites", "Páginas", "Loja"],
+				copy: "Criamos sites e experiências que explicam melhor, orientam escolhas e transformam interesse em ação.",
 			},
 			{
 				number: "04",
 				title: "Tecnologia",
 				items: ["Sistemas", "Automação", "Integrações"],
+				copy: "Criamos sistemas e automações que tiram peso da operação e fazem o negócio funcionar melhor.",
 			},
 		],
 	},
 	process: {
 		eyebrow: "Como trabalhamos",
-		headline: "Partimos do que o negócio já é. Não do que está na moda.",
+		headline: "Começamos pelo que a sua empresa já tem de único.",
+		body: "Depois, transformamos isso em uma presença que as pessoas entendem, escolhem e usam.",
 		steps: {
-			SEE: "Entendemos o negócio.",
-			DEFINE: "Nomeamos a diferença.",
-			SHAPE: "Damos forma a isso.",
-			BUILD: "Colocamos no ar. O cliente encontra.",
-			EVOLVE: "Acompanhamos depois.",
+			SEE: "Olhamos o negócio por dentro e a presença por fora: o que existe, o que falta e o que as pessoas percebem hoje.",
+			DEFINE:
+				"Encontramos a direção: o que torna sua empresa diferente, para quem isso importa e como deixar claro.",
+			SHAPE:
+				"Transformamos essa direção em identidade, conteúdo e experiências com uma linguagem própria.",
+			BUILD:
+				"Projetamos, desenvolvemos e colocamos no ar o que a empresa precisa para funcionar melhor no digital.",
+			EVOLVE:
+				"Acompanhamos o que acontece, aprendemos com o uso e ajustamos o que precisa continuar evoluindo.",
 		},
 	},
 	origin: {
 		note: "Do hebraico — beleza",
-		copy: "Não é enfeite.",
-		copyLine2: "É o nome que a gente escolheu.",
 	},
 	finalCta: {
 		eyebrow: "Agora",
-		headline: "O seu ainda parece de qualquer um?",
-		body: "Manda o que as pessoas encontram hoje. A gente responde com o próximo passo — ou com o que não faria.",
+		headline: "Seu digital está à altura do que a sua empresa entrega?",
+		body: "Envie o que existe hoje — site, perfil, apresentação ou uma breve descrição. A gente entende o momento, identifica o que está travando sua presença e indica um próximo passo claro.",
 		cta: "Começar o seu projeto",
 	},
 	footer: {
 		blurb:
-			"Se o site parece de qualquer um, o cliente também vai. A gente faz o outro.",
+			"Se a presença parece igual, a escolha também fica fácil. A gente constrói o que faz a diferença aparecer.",
 		navigate: "Navegar",
 		presence: "Estúdio",
 		presenceLine: "Conteúdo, design",
 		presenceLine2: "e tecnologia.",
-		copyright: "YOPHI Studio",
+		copyright: "YOPHI digital studio",
 		tag: "Criativo × Tecnologia",
 	},
 	work: {
@@ -399,6 +411,8 @@ export const dict: Dictionary = {
 		p3: "O criativo faz notar. O digital faz funcionar.",
 		team: "Time",
 		teamHeadline: "Dois lados. Um teto.",
+		teamIntro:
+			"Um time multidisciplinar de fotografia, vídeo, conteúdo e engenharia reunido para dar à sua empresa o que ela precisa no digital — do que as pessoas veem ao que elas usam.",
 		creative: "Criativo",
 		creativeTags: "Conteúdo · Direção · Narrativa",
 		creativeCopy: "Voz e imagem que a marca reconhece como suas.",
@@ -426,4 +440,3 @@ export const dict: Dictionary = {
 			"A gente lê e responde com o que faria — ou com o que não faria.",
 	},
 };
-

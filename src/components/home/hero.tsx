@@ -237,10 +237,10 @@ export function Hero() {
     <section
       ref={rootRef}
       aria-labelledby="hero-headline"
-      className="relative min-h-dvh overflow-hidden bg-deep text-paper"
+      className="relative min-h-dvh overflow-hidden bg-deep text-ink"
     >
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_20%,rgba(42,74,107,0.45),transparent_55%),radial-gradient(ellipse_at_80%_70%,rgba(18,20,26,0.9),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_78%_28%,rgba(201,106,62,0.2),transparent_48%),radial-gradient(ellipse_at_18%_72%,rgba(61,74,86,0.16),transparent_50%),radial-gradient(ellipse_at_50%_100%,rgba(0,0,0,0.92),transparent_55%)]" />
         <svg
           className="absolute top-[18%] right-[8%] h-[38vh] w-auto opacity-[0.14] md:top-[14%] md:right-[12%] md:h-[48vh]"
           viewBox="0 0 72 92"
@@ -272,48 +272,57 @@ export function Hero() {
 
       <div className="relative mx-auto grid min-h-dvh max-w-[1400px] grid-cols-1 items-end gap-10 px-5 pb-16 pt-28 md:grid-cols-[1.1fr_0.9fr] md:items-center md:px-10 md:pb-20 md:pt-24">
         <div className="flex flex-col gap-8 md:gap-10">
-          <p
-            className="font-serif text-[clamp(3.5rem,12vw,8.5rem)] leading-[0.9] tracking-[0.08em] uppercase"
-            aria-hidden
-          >
-            {letters.map((letter) => (
-              <span
-                key={letter}
-                data-hero-glyph
-                className="inline-block will-change-transform"
-              >
-                {letter}
-              </span>
-            ))}
-          </p>
+          <div className="flex flex-col">
+            <p
+              className="font-serif text-[clamp(3.5rem,12vw,8.5rem)] leading-[0.9] tracking-[0.08em] uppercase"
+              aria-hidden
+            >
+              {letters.map((letter) => (
+                <span
+                  key={letter}
+                  data-hero-glyph
+                  className="inline-block will-change-transform"
+                >
+                  {letter}
+                </span>
+              ))}
+            </p>
+            <p
+              className="mt-1.5 font-serif text-[0.85rem] italic leading-none tracking-[0.22em] text-ink/70 md:mt-2 md:text-[1.05rem]"
+            >
+              digital studio
+            </p>
+          </div>
 
           <div className="flex flex-col gap-4">
             <h1
               id="hero-headline"
               data-hero-line
-              className="font-serif text-[clamp(1.6rem,4vw,2.75rem)] leading-[1.15] text-paper opacity-0"
+              className="font-serif text-[clamp(1.6rem,4vw,2.75rem)] leading-[1.15] text-ink opacity-0"
             >
               {dict.hero.headline}
             </h1>
             <p
               data-hero-copy
-              className="max-w-md text-base leading-relaxed text-paper/80 opacity-0 md:text-[1.05rem]"
+              className="max-w-md text-base leading-relaxed text-ink/80 opacity-0 md:text-[1.05rem]"
             >
               {dict.hero.body}
             </p>
-            <p
-              data-hero-copy
-              className="max-w-md text-[0.95rem] leading-relaxed text-paper/72 opacity-0"
-            >
-              {dict.hero.audience}
-            </p>
+            {dict.hero.audience ? (
+              <p
+                data-hero-copy
+                className="max-w-md text-[0.95rem] leading-relaxed text-ink/72 opacity-0"
+              >
+                {dict.hero.audience}
+              </p>
+            ) : null}
           </div>
 
           <div data-hero-meta className="flex flex-col gap-3 opacity-0">
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
               <Link
                 href="/contact"
-                className="group inline-flex min-h-12 items-center gap-3 bg-paper px-6 py-3.5 text-[0.7rem] tracking-[0.22em] text-deep uppercase transition-colors hover:bg-paper/90"
+                className="group inline-flex min-h-12 items-center gap-3 bg-foam px-6 py-3.5 text-[0.7rem] tracking-[0.22em] text-deep uppercase transition-colors hover:bg-foam/90"
               >
                 {dict.hero.cta}
                 <span className="transition-transform group-hover:translate-x-1">
@@ -322,12 +331,12 @@ export function Hero() {
               </Link>
               <ArchiveLink
                 href="/work"
-                className="inline-flex min-h-12 items-center text-[0.7rem] tracking-[0.22em] text-paper/80 uppercase transition-colors hover:text-paper"
+                className="inline-flex min-h-12 items-center text-[0.7rem] tracking-[0.22em] text-ink/80 uppercase transition-colors hover:text-ink"
               >
                 {dict.hero.ctaSecondary}
               </ArchiveLink>
             </div>
-            <p className="max-w-sm text-[0.8rem] leading-relaxed text-paper/65">
+            <p className="max-w-sm text-[0.8rem] leading-relaxed text-ink/65">
               {dict.hero.ctaHint}
             </p>
           </div>
@@ -360,9 +369,9 @@ export function Hero() {
             ))}
           </div>
 
-          <div className="mt-6 flex items-end justify-between gap-4 border-t border-paper/15 pt-4">
+          <div className="mt-6 flex items-end justify-between gap-4 border-t border-ink/15 pt-4">
             <div>
-              <p className="text-[0.6rem] tracking-[0.28em] text-paper/60 uppercase">
+              <p className="text-[0.6rem] tracking-[0.28em] text-ink/60 uppercase">
                 {dict.hero.formLabel}
               </p>
               <p
@@ -372,7 +381,7 @@ export function Hero() {
                 Yophi
               </p>
             </div>
-            <p className="max-w-[10rem] text-right text-[0.7rem] leading-relaxed tracking-[0.06em] text-paper/65">
+            <p className="max-w-[10rem] text-right text-[0.7rem] leading-relaxed tracking-[0.06em] text-ink/65">
               {dict.hero.formAside}
             </p>
           </div>

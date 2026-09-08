@@ -23,13 +23,13 @@ function resolveSiteUrl() {
 
 export const siteUrl = resolveSiteUrl();
 
-export const siteName = "YOPHI";
+export const siteName = "YOPHI digital studio";
 
 /** Absolute URL so crawlers don't resolve against a domain that isn't live. */
 export const defaultOgImage = {
   url: `${siteUrl}/og.png`,
   width: 1200,
   height: 630,
-  alt: "YOPHI",
+  alt: "YOPHI digital studio",
   type: "image/png",
 } as const;

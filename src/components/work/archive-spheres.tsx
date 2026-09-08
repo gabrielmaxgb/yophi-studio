@@ -266,16 +266,16 @@ function CurvedProjectCard({
                   }}
                 >
                   <span className="absolute inset-0 bg-linear-to-t from-deep/75 via-deep/5 to-deep/10" />
-                  <span className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 px-[8%] pb-[8%] text-paper">
+                  <span className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 px-[8%] pb-[8%] text-ink">
                     <span className="min-w-0">
                       <span className="block font-serif text-[1.35rem] leading-[0.88] tracking-[0.04em] md:text-[1.7rem]">
                         {study.client}
                       </span>
-                      <span className="mt-1 block text-[0.5rem] tracking-[0.18em] text-paper/70 uppercase">
+                      <span className="mt-1 block text-[0.5rem] tracking-[0.18em] text-ink/70 uppercase">
                         {copy.sector}
                       </span>
                     </span>
-                    <span className="editorial-num pb-0.5 text-[0.5rem] tracking-[0.2em] text-paper/55">
+                    <span className="editorial-num pb-0.5 text-[0.5rem] tracking-[0.2em] text-ink/55">
                       {number}
                     </span>
                   </span>
@@ -331,7 +331,7 @@ function SphereShell({
         style={{
           zIndex: 0,
           background:
-            "radial-gradient(ellipse at 50% 62%, rgba(18,20,26,0.1) 0%, transparent 62%)",
+            "radial-gradient(ellipse at 50% 62%, rgba(8,7,11,0.55) 0%, transparent 62%)",
         }}
       />
       <div
@@ -340,9 +340,9 @@ function SphereShell({
         style={{
           zIndex: 0,
           background:
-            "radial-gradient(circle at 32% 28%, #f4f2ec 0%, #e8e6e1 34%, #c9c5bc 68%, #9e9a91 100%)",
+            "radial-gradient(circle at 32% 28%, #2a2a2a 0%, #161616 34%, #0f0f10 68%, #050505 100%)",
           boxShadow:
-            "inset 0 0 0 1px rgba(18,20,26,0.1), 0 36px 50px -32px rgba(18,20,26,0.28)",
+            "inset 0 0 0 1px rgba(214,210,204,0.07), 0 36px 50px -32px rgba(0,0,0,0.6)",
         }}
       />
       <div
@@ -351,7 +351,7 @@ function SphereShell({
         style={{
           zIndex: 0,
           background:
-            "radial-gradient(circle at 30% 24%, rgba(255,255,255,0.55) 0%, transparent 32%), radial-gradient(circle at 70% 76%, rgba(18,20,26,0.18) 0%, transparent 42%)",
+            "radial-gradient(circle at 30% 24%, rgba(232,228,223,0.14) 0%, transparent 32%), radial-gradient(circle at 70% 76%, rgba(8,7,11,0.5) 0%, transparent 42%)",
         }}
       />
 

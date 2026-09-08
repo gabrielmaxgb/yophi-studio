@@ -87,6 +87,9 @@ export function Process() {
           <SplitHeadline className="font-serif text-[clamp(2.2rem,5vw,4rem)] leading-none max-w-3xl">
             {dict.process.headline}
           </SplitHeadline>
+          <p className="max-w-2xl text-base leading-relaxed text-ink/70">
+            {dict.process.body}
+          </p>
         </div>
 
         <div ref={listRef} className="relative mt-16 md:mt-24">

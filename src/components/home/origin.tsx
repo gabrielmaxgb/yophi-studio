@@ -84,8 +84,8 @@ export function Origin() {
   }, []);
 
   return (
-    <section ref={rootRef} className="bg-[#d7d4cd] text-ink">
-      <div className="mx-auto flex min-h-[70vh] max-w-[1400px] flex-col items-center justify-center px-5 py-28 text-center md:px-10 md:py-36">
+    <section ref={rootRef} className="bg-mist text-ink">
+      <div className="mx-auto flex max-w-[1400px] flex-col items-center px-5 py-20 text-center md:px-10 md:py-24">
         <p
           className="text-[clamp(4rem,14vw,9rem)] leading-none tracking-[0.2em]"
           lang="he"
@@ -102,7 +102,7 @@ export function Origin() {
           ))}
         </p>
 
-        <div className="mt-10 flex flex-col gap-3">
+        <div className="mt-8 flex flex-col gap-3">
           <p
             ref={latinRef}
             className="font-serif text-3xl tracking-[0.16em] uppercase md:text-4xl"
@@ -114,14 +114,6 @@ export function Origin() {
             className="text-[0.7rem] tracking-[0.28em] text-ink/70 uppercase"
           >
             {dict.origin.note}
-          </p>
-        </div>
-
-        <div data-origin-rest className="mt-14 max-w-lg">
-            <p className="font-serif text-[clamp(1.35rem,2.8vw,1.85rem)] leading-snug text-ink">
-            {dict.origin.copy}
-            <br />
-            {dict.origin.copyLine2}
           </p>
         </div>
       </div>

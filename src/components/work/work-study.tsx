@@ -41,12 +41,12 @@ export function WorkStudy({ slug }: { slug: CaseStudySlug }) {
                 : "aspect-[3/4] w-full"
             }
           >
-            <div className="absolute inset-6 z-10 flex flex-col justify-between border border-paper/20 px-6 pt-5 pb-8 text-paper md:inset-10 md:px-8 md:pt-6 md:pb-10">
+            <div className="absolute inset-6 z-10 flex flex-col justify-between border border-ink/20 px-6 pt-5 pb-8 text-ink md:inset-10 md:px-8 md:pt-6 md:pb-10">
               <div className="flex items-center justify-between gap-4">
-                <p className="text-[0.65rem] leading-none tracking-[0.24em] text-paper/80 uppercase">
+                <p className="text-[0.65rem] leading-none tracking-[0.24em] text-ink/80 uppercase">
                   {copy.sector}
                 </p>
-                <p className="editorial-num text-[0.65rem] leading-none tracking-[0.24em] text-paper/80">
+                <p className="editorial-num text-[0.65rem] leading-none tracking-[0.24em] text-ink/80">
                   {String(index + 1).padStart(2, "0")}
                 </p>
               </div>
@@ -132,7 +132,7 @@ export function WorkStudy({ slug }: { slug: CaseStudySlug }) {
 
               <Link
                 href="/contact"
-                className="group inline-flex w-fit min-h-12 items-center gap-3 bg-deep px-6 py-4 text-[0.7rem] tracking-[0.22em] text-paper uppercase transition-colors hover:bg-deep/90"
+                className="group inline-flex w-fit min-h-12 items-center gap-3 bg-foam px-6 py-4 text-[0.7rem] tracking-[0.22em] text-deep uppercase transition-colors hover:bg-foam/90"
               >
                 {dict.work.cta}
                 <span className="transition-transform group-hover:translate-x-1">

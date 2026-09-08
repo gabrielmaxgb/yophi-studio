@@ -18,7 +18,7 @@ import { YophiLogo } from "@/components/brand/yophi-logo";
 import { cn } from "@/lib/utils";
 
 const plate =
-  "pointer-events-auto border border-ink/14 bg-[#f4f2ec]/90 text-ink shadow-[0_22px_56px_-22px_rgba(13,31,51,0.5)] backdrop-blur-md";
+  "pointer-events-auto border border-ink/8 bg-mist/80 text-ink shadow-[0_22px_56px_-22px_rgba(0,0,0,0.7)] backdrop-blur-md";
 
 export function SiteHeader() {
   const { dict } = useI18n();
@@ -56,15 +56,15 @@ export function SiteHeader() {
     >
       <Link
         href="/"
-        aria-label="YOPHI Studio"
+        aria-label="YOPHI"
         data-nav-plate
         className={cn(plate, "flex h-12 items-center px-3.5 md:h-14 md:px-4")}
       >
         <YophiLogo
-          showStudio={false}
           className="gap-2"
           markClassName="h-6 md:h-7"
           wordmarkClassName="text-[1.05rem] tracking-[0.2em] md:text-lg"
+          studioClassName="text-[0.55rem] tracking-[0.2em] text-ink/55"
         />
       </Link>
 
@@ -119,7 +119,7 @@ export function SiteHeader() {
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="border-line bg-paper w-[min(100%,22rem)] p-0"
+              className="border-line bg-mist w-[min(100%,22rem)] p-0"
             >
               <SheetHeader className="border-line border-b px-6 py-5">
                 <SheetTitle className="text-left font-normal text-ink">
@@ -128,7 +128,7 @@ export function SiteHeader() {
                     className="items-start text-left"
                     markClassName="h-9"
                     wordmarkClassName="text-2xl tracking-[0.16em]"
-                    studioClassName="text-[0.55rem] tracking-[0.46em]"
+                    studioClassName="text-[0.55rem] tracking-[0.22em] text-ink/55"
                   />
                 </SheetTitle>
               </SheetHeader>

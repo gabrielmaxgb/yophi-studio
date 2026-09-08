@@ -19,7 +19,7 @@ export const caseStudyBase = [
   },
   {
     slug: "dra-ana-cardenas",
-    client: "Ana Cárdenas",
+    client: "Dra. Ana Cárdenas",
     tone: "deep",
     image: "/work/dra-ana-cardenas-og.jpg",
     url: "https://www.draanacardenas.com",

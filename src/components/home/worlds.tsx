@@ -39,11 +39,14 @@ export function Worlds() {
   }, []);
 
   return (
-    <section className="border-y border-line bg-[#dfddd7] text-ink">
+    <section className="border-y border-line bg-mist text-ink">
       <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-28">
         <Reveal>
           <p className="text-[0.65rem] tracking-[0.28em] text-stone uppercase">
             {dict.worlds.eyebrow}
+          </p>
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink/70">
+            {dict.worlds.intro}
           </p>
         </Reveal>
 
@@ -56,10 +59,10 @@ export function Worlds() {
             <p className="font-serif text-4xl tracking-[0.08em] uppercase md:text-5xl">
               {dict.worlds.creative}
             </p>
-            <p className="mt-4 text-[0.7rem] tracking-[0.18em] text-stone uppercase">
-              {dict.worlds.creativeTags}
+            <p className="mt-4 font-serif text-xl leading-snug text-ink md:text-2xl">
+              {dict.worlds.creativeLead}
             </p>
-            <p className="mt-8 max-w-sm text-base leading-relaxed text-ink/70">
+            <p className="mt-6 max-w-sm text-base leading-relaxed text-ink/70">
               {dict.worlds.creativeCopy}
             </p>
           </Reveal>
@@ -68,10 +71,10 @@ export function Worlds() {
             <p className="font-serif text-4xl tracking-[0.08em] uppercase md:text-5xl">
               {dict.worlds.digital}
             </p>
-            <p className="mt-4 text-[0.7rem] tracking-[0.18em] text-stone uppercase">
-              {dict.worlds.digitalTags}
+            <p className="mt-4 font-serif text-xl leading-snug text-ink md:text-2xl">
+              {dict.worlds.digitalLead}
             </p>
-            <p className="mt-8 max-w-sm text-base leading-relaxed text-ink/70">
+            <p className="mt-6 max-w-sm text-base leading-relaxed text-ink/70">
               {dict.worlds.digitalCopy}
             </p>
           </Reveal>

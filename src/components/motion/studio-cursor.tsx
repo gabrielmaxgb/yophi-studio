@@ -146,7 +146,7 @@ export function StudioCursor() {
       <span
         data-cursor-mark
         data-tone="dark"
-        className="absolute top-0 left-0 text-ink opacity-0 transition-colors duration-200 ease-out data-[tone=dark]:text-paper"
+        className="absolute top-0 left-0 text-ink opacity-0 transition-colors duration-200 ease-out data-[tone=dark]:text-ink"
       >
         <YophiMark className="h-7 w-auto" />
       </span>

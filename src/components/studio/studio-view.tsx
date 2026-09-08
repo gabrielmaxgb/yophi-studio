@@ -28,7 +28,7 @@ export function StudioView() {
         </Reveal>
       </section>
 
-      <section className="border-y border-line bg-[#dfddd7]">
+      <section className="border-y border-line bg-mist">
         <div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-20 md:grid-cols-2 md:gap-20 md:px-10 md:py-28">
           <Reveal>
             <p className="text-[0.65rem] tracking-[0.28em] text-stone uppercase">
@@ -60,6 +60,9 @@ export function StudioView() {
             <h2 className="mt-5 font-serif text-4xl md:text-5xl">
               {dict.studio.teamHeadline}
             </h2>
+            <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink/65">
+              {dict.studio.teamIntro}
+            </p>
           </Reveal>
 
           <div className="mt-14 grid gap-10 md:grid-cols-2 md:gap-16">
@@ -90,7 +93,7 @@ export function StudioView() {
           <Reveal delay={160} className="mt-16">
             <Link
               href="/contact"
-              className="group inline-flex min-h-12 w-fit items-center gap-3 bg-deep px-6 py-4 text-[0.7rem] tracking-[0.22em] text-paper uppercase transition-colors hover:bg-deep/90"
+              className="group inline-flex min-h-12 w-fit items-center gap-3 bg-foam px-6 py-4 text-[0.7rem] tracking-[0.22em] text-deep uppercase transition-colors hover:bg-foam/90"
             >
               {dict.studio.workWithUs}
               <span className="transition-transform group-hover:translate-x-1">

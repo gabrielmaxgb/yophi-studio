@@ -45,6 +45,10 @@
   --color-line: var(--line);
   --color-deep: var(--deep);
   --color-signal: var(--signal);
+  --color-mist: var(--mist);
+  --color-ember: var(--ember);
+  --color-steel: var(--steel);
+  --color-foam: var(--foam);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -55,46 +59,54 @@
 }
 
 :root {
-  /* Cool stone paper — not warm cream */
-  --paper: #e8e6e1;
-  --ink: #12141a;
-  --stone: #6a6862;
-  --line: #c4c0b8;
-  --deep: #0d1f33;
-  --signal: #2a4a6b;
+  /*
+    Cinematic black — head-led.
+    Near-black stage, muted ember, cool steel.
+    Purple stays out of the room.
+  */
+  --paper: #0f0f10;
+  --ink: #d6d2cc;
+  --stone: #7a7772;
+  --line: #2a2a2a;
+  --deep: #050505;
+  --signal: #b55c38;
+  --mist: #161616;
+  --ember: #c96a3e;
+  --steel: #3d4a56;
+  --foam: #e4e0db;
 
-  --background: #e8e6e1;
-  --foreground: #12141a;
-  --card: #f2f0eb;
-  --card-foreground: #12141a;
-  --popover: #f2f0eb;
-  --popover-foreground: #12141a;
-  --primary: #0d1f33;
-  --primary-foreground: #e8e6e1;
-  --secondary: #d9d6cf;
-  --secondary-foreground: #12141a;
-  --muted: #d9d6cf;
-  --muted-foreground: #6a6862;
-  --accent: #d9d6cf;
-  --accent-foreground: #12141a;
+  --background: #0f0f10;
+  --foreground: #d6d2cc;
+  --card: #161616;
+  --card-foreground: #d6d2cc;
+  --popover: #161616;
+  --popover-foreground: #d6d2cc;
+  --primary: #d6d2cc;
+  --primary-foreground: #050505;
+  --secondary: #161616;
+  --secondary-foreground: #d6d2cc;
+  --muted: #161616;
+  --muted-foreground: #7a7772;
+  --accent: #161616;
+  --accent-foreground: #d6d2cc;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: #c4c0b8;
-  --input: #c4c0b8;
-  --ring: #2a4a6b;
-  --chart-1: #0d1f33;
-  --chart-2: #2a4a6b;
-  --chart-3: #6a6862;
-  --chart-4: #c4c0b8;
-  --chart-5: #12141a;
+  --border: #2a2a2a;
+  --input: #2a2a2a;
+  --ring: #b55c38;
+  --chart-1: #d6d2cc;
+  --chart-2: #c96a3e;
+  --chart-3: #3d4a56;
+  --chart-4: #2a2a2a;
+  --chart-5: #050505;
   --radius: 0.25rem;
-  --sidebar: #f2f0eb;
-  --sidebar-foreground: #12141a;
-  --sidebar-primary: #0d1f33;
-  --sidebar-primary-foreground: #e8e6e1;
-  --sidebar-accent: #d9d6cf;
-  --sidebar-accent-foreground: #12141a;
-  --sidebar-border: #c4c0b8;
-  --sidebar-ring: #2a4a6b;
+  --sidebar: #161616;
+  --sidebar-foreground: #d6d2cc;
+  --sidebar-primary: #d6d2cc;
+  --sidebar-primary-foreground: #050505;
+  --sidebar-accent: #0f0f10;
+  --sidebar-accent-foreground: #d6d2cc;
+  --sidebar-border: #2a2a2a;
+  --sidebar-ring: #b55c38;
 }
 
 @layer base {
@@ -122,8 +134,8 @@
   }
 
   ::selection {
-    background: color-mix(in srgb, var(--deep) 85%, transparent);
-    color: var(--paper);
+    background: color-mix(in srgb, var(--ember) 70%, var(--deep));
+    color: var(--foam);
   }
 
   a:focus-visible {
@@ -137,7 +149,7 @@
     top: 1rem;
     z-index: 100;
     transform: translateY(-160%);
-    background: var(--paper);
+    background: var(--mist);
     color: var(--ink);
     padding: 0.65rem 1rem;
     font-size: 0.75rem;

@@ -204,7 +204,7 @@ export function ArchiveGate({ children }: { children: ReactNode }) {
           role="status"
           aria-live="polite"
           aria-busy="true"
-          className="pointer-events-auto fixed inset-0 z-90 flex flex-col items-center justify-center bg-deep text-paper"
+          className="pointer-events-auto fixed inset-0 z-90 flex flex-col items-center justify-center bg-deep text-ink"
         >
           <div
             className="relative h-48 w-80 md:h-56 md:w-96"
@@ -214,19 +214,19 @@ export function ArchiveGate({ children }: { children: ReactNode }) {
               data-cover-shell
               className="absolute top-1/2 left-[18%] size-40 -translate-y-1/2 md:size-48"
             >
-              <span className="block size-full rounded-full border border-paper/25 motion-safe:animate-[cover-spin_16s_linear_infinite]" />
+              <span className="block size-full rounded-full border border-ink/25 motion-safe:animate-[cover-spin_16s_linear_infinite]" />
             </span>
             <span
               data-cover-shell
               className="absolute top-1/2 right-[18%] size-40 -translate-y-1/2 md:size-48"
             >
-              <span className="block size-full rounded-full border border-paper/50 motion-safe:animate-[cover-spin_12s_linear_infinite_reverse]" />
+              <span className="block size-full rounded-full border border-ink/50 motion-safe:animate-[cover-spin_12s_linear_infinite_reverse]" />
             </span>
             <span
               data-cover-shell
               className="absolute top-1/2 left-1/2 size-24 -translate-x-1/2 -translate-y-1/2 md:size-28"
             >
-              <span className="block size-full rounded-full border border-dashed border-paper/35 motion-safe:animate-[cover-spin_7s_linear_infinite]" />
+              <span className="block size-full rounded-full border border-dashed border-ink/35 motion-safe:animate-[cover-spin_7s_linear_infinite]" />
             </span>
           </div>
           <p
@@ -238,10 +238,10 @@ export function ArchiveGate({ children }: { children: ReactNode }) {
           </p>
           <p
             data-cover-mark
-            className="editorial-num mt-4 text-[0.7rem] tracking-[0.28em] text-paper/70 uppercase"
+            className="editorial-num mt-4 text-[0.7rem] tracking-[0.28em] text-ink/70 uppercase"
           >
             {String(loaded).padStart(2, "0")}
-            <span className="text-paper/35"> / </span>
+            <span className="text-ink/35"> / </span>
             {String(total).padStart(2, "0")}
           </p>
         </div>

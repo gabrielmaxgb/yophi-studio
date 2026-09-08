@@ -65,47 +65,54 @@ export function Services() {
   }, [dict.services.items]);
 
   return (
-    <section className="bg-deep text-paper">
+    <section className="bg-deep text-ink">
       <div className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32">
         <Reveal>
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div className="flex flex-col gap-4">
-              <p className="text-[0.65rem] tracking-[0.28em] text-paper/70 uppercase">
+              <p className="text-[0.65rem] tracking-[0.28em] text-ink/70 uppercase">
                 {dict.services.eyebrow}
               </p>
-              <SplitHeadline className="font-serif text-[clamp(2.2rem,5vw,4rem)] leading-none">
-                {`${dict.services.headline} ${dict.services.headlineBreak}`}
+              <SplitHeadline className="max-w-3xl font-serif text-[clamp(2.2rem,5vw,4rem)] leading-none">
+                {[dict.services.headline, dict.services.headlineBreak]
+                  .filter(Boolean)
+                  .join(" ")}
               </SplitHeadline>
             </div>
-            <p className="max-w-xs text-sm leading-relaxed text-paper/75">
+            <p className="max-w-sm text-sm leading-relaxed text-ink/75">
               {dict.services.aside}
             </p>
           </div>
         </Reveal>
 
-        <StaggerReveal className="mt-16 grid gap-0 border-t border-paper/15 md:mt-24">
+        <StaggerReveal className="mt-16 grid gap-0 border-t border-ink/15 md:mt-24">
           <div ref={listRef}>
             {dict.services.items.map((service) => (
               <div
                 key={service.number}
                 data-reveal-item
                 data-service
-                className="relative grid gap-4 border-b border-paper/15 py-8 md:grid-cols-[7rem_1fr_1.2fr] md:items-baseline md:gap-8 md:py-10"
+                className="relative grid gap-4 border-b border-ink/15 py-8 md:grid-cols-[7rem_1fr_1.2fr] md:items-baseline md:gap-8 md:py-10"
               >
                 <span
                   data-service-rule
-                  className="bg-paper/35 absolute inset-x-0 bottom-0 h-px origin-left scale-x-0"
+                  className="bg-ink/35 absolute inset-x-0 bottom-0 h-px origin-left scale-x-0"
                 />
                 <p
                   data-service-num
-                  className="editorial-num text-[0.75rem] tracking-[0.2em] text-paper/65"
+                  className="editorial-num text-[0.75rem] tracking-[0.2em] text-ink/65"
                 >
                   {service.number}
                 </p>
-                <p className="font-serif text-3xl tracking-[0.04em] uppercase md:text-4xl">
-                  {service.title}
-                </p>
-                <p className="text-sm tracking-[0.08em] text-paper/75 uppercase md:text-right">
+                <div className="flex flex-col gap-3">
+                  <p className="font-serif text-3xl tracking-[0.04em] uppercase md:text-4xl">
+                    {service.title}
+                  </p>
+                  <p className="max-w-md text-sm leading-relaxed text-ink/70">
+                    {service.copy}
+                  </p>
+                </div>
+                <p className="text-sm tracking-[0.08em] text-ink/75 uppercase md:text-right">
                   {service.items.join(" / ")}
                 </p>
               </div>

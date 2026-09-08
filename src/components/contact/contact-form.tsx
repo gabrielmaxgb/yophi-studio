@@ -46,7 +46,7 @@ export function ContactForm() {
 
       <Reveal delay={120}>
         {sent ? (
-          <div className="border border-line bg-[#dfddd7] p-10 md:p-14">
+          <div className="border border-line bg-mist p-10 md:p-14">
             <p className="font-serif text-3xl leading-snug md:text-4xl">
               {dict.contact.successTitle}
             </p>
@@ -57,7 +57,7 @@ export function ContactForm() {
         ) : (
           <form
             onSubmit={onSubmit}
-            className="flex flex-col gap-7 border border-line bg-[#f2f0eb] p-7 md:p-10"
+            className="flex flex-col gap-7 border border-line bg-card p-7 md:p-10"
           >
             <div className="grid gap-7 md:grid-cols-2">
               <div className="flex flex-col gap-2">
@@ -124,7 +124,7 @@ export function ContactForm() {
             <Button
               type="submit"
               size="lg"
-              className="h-12 w-fit rounded-none bg-deep px-8 text-[0.7rem] tracking-[0.22em] uppercase hover:bg-deep/90"
+              className="h-12 w-fit rounded-none bg-foam px-8 text-[0.7rem] tracking-[0.22em] text-deep uppercase hover:bg-foam/90"
             >
               {dict.contact.submit} →
             </Button>
