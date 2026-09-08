@@ -172,6 +172,8 @@ export const dict: Dictionary = {
 		audience: "",
 		cta: "Começar o seu projeto",
 		ctaSecondary: "Ver o trabalho",
+		ctaHint:
+			"Conte o que sua empresa faz, o que existe hoje e o que precisa mudar. A gente responde com um próximo passo claro.",
 		formLabel: "Forma",
 		formAside:
 			"Do que o seu negócio é ao que o cliente entende, lembra e escolhe.",
