@@ -13,6 +13,7 @@ export function WorkStudy({ slug }: { slug: CaseStudySlug }) {
   const copy = dict.work.studies[slug];
   const index = caseStudyBase.findIndex((item) => item.slug === slug);
   const impactIsPlaceholder = copy.impact.startsWith("[");
+  const showImpact = Boolean(copy.impact) && !impactIsPlaceholder;
 
   return (
     <div className="bg-paper text-ink">
@@ -115,20 +116,14 @@ export function WorkStudy({ slug }: { slug: CaseStudySlug }) {
                 </p>
               </div>
 
-              <div className="flex flex-col gap-3 border-t border-line pt-8">
-                <p className="text-[0.65rem] tracking-[0.22em] text-stone uppercase">
-                  {dict.work.impact}
-                </p>
-                <p
-                  className={
-                    impactIsPlaceholder
-                      ? "font-serif text-xl text-stone md:text-2xl"
-                      : "font-serif text-xl md:text-2xl"
-                  }
-                >
-                  {copy.impact}
-                </p>
-              </div>
+              {showImpact ? (
+                <div className="flex flex-col gap-3 border-t border-line pt-8">
+                  <p className="text-[0.65rem] tracking-[0.22em] text-stone uppercase">
+                    {dict.work.impact}
+                  </p>
+                  <p className="font-serif text-xl md:text-2xl">{copy.impact}</p>
+                </div>
+              ) : null}
 
               <Link
                 href="/contact"

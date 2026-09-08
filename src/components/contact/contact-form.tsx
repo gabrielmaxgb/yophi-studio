@@ -18,26 +18,28 @@ export function ContactForm() {
   }
 
   return (
-    <section className="mx-auto grid max-w-[1400px] gap-16 px-5 pt-28 pb-24 md:grid-cols-[1fr_1.05fr] md:gap-20 md:px-10 md:pt-36 md:pb-32">
+    <section className="mx-auto grid max-w-[1400px] gap-14 px-5 pt-28 pb-24 md:grid-cols-[1fr_1.05fr] md:gap-20 md:px-10 md:pt-36 md:pb-32">
       <div>
-        <Reveal>
-          <p className="text-[0.65rem] tracking-[0.28em] text-stone uppercase">
-            {dict.contact.eyebrow}
-          </p>
-        </Reveal>
-        <Reveal delay={80} className="mt-6">
-          <h1 className="font-serif text-[clamp(2.6rem,6vw,4.8rem)] leading-[0.95] text-balance">
+        {dict.contact.eyebrow ? (
+          <Reveal>
+            <p className="text-[0.65rem] tracking-[0.28em] text-stone uppercase">
+              {dict.contact.eyebrow}
+            </p>
+          </Reveal>
+        ) : null}
+        <Reveal delay={80} className={dict.contact.eyebrow ? "mt-6" : undefined}>
+          <h1 className="font-serif text-[clamp(2.4rem,5.5vw,4.2rem)] leading-[0.95] text-balance">
             {dict.contact.headline}
           </h1>
         </Reveal>
-        <Reveal delay={140} className="mt-8 max-w-md">
-          <p className="text-base leading-relaxed text-ink/80">
+        <Reveal delay={140} className="mt-6 max-w-sm">
+          <p className="text-base leading-relaxed text-ink/70">
             {dict.contact.intro}
           </p>
         </Reveal>
         <Reveal
           delay={200}
-          className="mt-12 flex flex-col gap-2 text-sm text-stone"
+          className="mt-10 flex flex-col gap-2 text-sm text-stone"
         >
           <p className="tracking-[0.16em] uppercase">{dict.contact.email}</p>
           <p>{dict.contact.tag}</p>

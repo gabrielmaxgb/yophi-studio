@@ -1,4 +1,4 @@
-import type { CaseStudySlug, ProcessKey } from "@/lib/content";
+import type { CaseStudySlug } from "@/lib/content";
 
 export type CaseStudyCopy = {
 	sector: string;
@@ -38,40 +38,23 @@ export type Dictionary = {
 		eyebrow: string;
 		headline: string;
 		imageAlt: string;
-		lines: string[];
-		label: string;
+		body: string;
 		closing: string;
 	};
 	worlds: {
 		eyebrow: string;
-		intro: string;
 		creative: string;
-		creativeLead: string;
 		creativeCopy: string;
 		digital: string;
-		digitalLead: string;
 		digitalCopy: string;
 		meet: string;
-		meetCopy: string;
 	};
 	selectedWork: {
 		eyebrow: string;
 		headline: string;
 		invite: string;
 		all: string;
-	};
-	services: {
-		eyebrow: string;
-		headline: string;
-		headlineBreak: string;
-		aside: string;
-		items: { number: string; title: string; items: string[]; copy: string }[];
-	};
-	process: {
-		eyebrow: string;
-		headline: string;
-		body: string;
-		steps: Record<ProcessKey, string>;
+		proofs: { name: string; domain: string }[];
 	};
 	origin: {
 		note: string;
@@ -116,19 +99,9 @@ export type Dictionary = {
 		eyebrow: string;
 		headline: string;
 		intro: string;
-		how: string;
-		howHeadline: string;
-		p1: string;
-		p2: string;
-		p3: string;
-		team: string;
-		teamHeadline: string;
-		teamIntro: string;
 		creative: string;
-		creativeTags: string;
 		creativeCopy: string;
 		digital: string;
-		digitalTags: string;
 		digitalCopy: string;
 		workWithUs: string;
 	};
@@ -184,30 +157,19 @@ export const dict: Dictionary = {
 		headline: "Sua empresa não é feita de peças soltas.",
 		imageAlt:
 			"Cabeça rachada com uma borboleta pousada, iluminada em roxo e laranja.",
-		lines: [
-			"Um logo, um post ou um site não contam a história inteira.",
-			"Quando cada ponto fala de um jeito, quem chega até a marca entende menos do que deveria.",
-			"A presença digital precisa parecer uma empresa: clara, coerente e fácil de escolher.",
-		],
-		label: "O conjunto",
+		body: "Um logo, um post ou um site não contam a história inteira. Quando cada ponto fala de um jeito, quem chega até a marca entende menos do que deveria. A presença digital precisa parecer uma empresa: clara, coerente e fácil de escolher.",
 		closing:
 			"Quando tudo fala a mesma língua, a confiança aparece antes da conversa.",
 	},
 	worlds: {
 		eyebrow: "Dois lados · um estúdio",
-		intro:
-			"Um time multidisciplinar de fotografia, vídeo, conteúdo e engenharia reunido para dar à sua empresa o que ela precisa no digital — do que as pessoas veem ao que elas usam.",
 		creative: "Criativo",
-		creativeLead: "Marca que dá vontade de conhecer.",
 		creativeCopy:
 			"Estratégia, linguagem e imagem para tornar sua empresa reconhecível — sem depender de campanha o tempo todo.",
 		digital: "Digital",
-		digitalLead: "Experiências que fazem o negócio acontecer.",
 		digitalCopy:
 			"Sites, produtos e sistemas que facilitam entender, escolher, comprar e voltar.",
 		meet: "Criativo × Tecnologia",
-		meetCopy:
-			"Quando criação e tecnologia trabalham juntas, sua empresa não só chama atenção. Ela funciona melhor no digital.",
 	},
 	selectedWork: {
 		eyebrow: "Projetos",
@@ -215,55 +177,10 @@ export const dict: Dictionary = {
 		invite:
 			"Cada projeto parte de uma empresa real e de um desafio específico. Veja como estratégia, identidade e tecnologia se conectaram para tornar cada marca mais clara, presente e fácil de escolher.",
 		all: "Ver projetos",
-	},
-	services: {
-		eyebrow: "O que fazemos",
-		headline: "Tudo que a sua empresa precisa para existir bem no digital.",
-		headlineBreak: "",
-		aside:
-			"Da estratégia que dá direção à experiência que as pessoas veem, usam e escolhem. Posicionamento, conteúdo, design e tecnologia trabalhando como uma presença só.",
-		items: [
-			{
-				number: "01",
-				title: "Posicionamento",
-				items: ["Estratégia", "Identidade", "Direção"],
-				copy: "Deixamos claro o que torna sua empresa diferente — e por que ela deve ser escolhida.",
-			},
-			{
-				number: "02",
-				title: "Conteúdo",
-				items: ["Social", "Fotografia", "Vídeo", "Editorial"],
-				copy: "Criamos uma presença que mantém sua marca ativa, reconhecível e relevante todos os dias.",
-			},
-			{
-				number: "03",
-				title: "Digital",
-				items: ["Sites", "Páginas", "Loja"],
-				copy: "Criamos sites e experiências que explicam melhor, orientam escolhas e transformam interesse em ação.",
-			},
-			{
-				number: "04",
-				title: "Tecnologia",
-				items: ["Sistemas", "Automação", "Integrações"],
-				copy: "Criamos sistemas e automações que tiram peso da operação e fazem o negócio funcionar melhor.",
-			},
+		proofs: [
+			{ name: "maxdecoyer", domain: "maxdecoyer.com" },
+			{ name: "Dra. Ana Cárdenas", domain: "draanacardenas.com" },
 		],
-	},
-	process: {
-		eyebrow: "Como trabalhamos",
-		headline: "Começamos pelo que a sua empresa já tem de único.",
-		body: "Depois, transformamos isso em uma presença que as pessoas entendem, escolhem e usam.",
-		steps: {
-			SEE: "Olhamos o negócio por dentro e a presença por fora: o que existe, o que falta e o que as pessoas percebem hoje.",
-			DEFINE:
-				"Encontramos a direção: o que torna sua empresa diferente, para quem isso importa e como deixar claro.",
-			SHAPE:
-				"Transformamos essa direção em identidade, conteúdo e experiências com uma linguagem própria.",
-			BUILD:
-				"Projetamos, desenvolvemos e colocamos no ar o que a empresa precisa para funcionar melhor no digital.",
-			EVOLVE:
-				"Acompanhamos o que acontece, aprendemos com o uso e ajustamos o que precisa continuar evoluindo.",
-		},
 	},
 	origin: {
 		note: "Do hebraico — beleza",
@@ -406,20 +323,9 @@ export const dict: Dictionary = {
 		headline: "Direção criativa e digital. No mesmo teto.",
 		intro:
 			"Não vendemos post. Não vendemos site. Fazemos o que a pessoa encontra — pra o negócio parar de parecer de qualquer um.",
-		how: "Como pensamos",
-		howHeadline: "O que a pessoa encontra é o trabalho.",
-		p1: "Logo, post e site sozinhos são peça.",
-		p2: "O conjunto é voz, imagem, sistema. É o que a pessoa encontra.",
-		p3: "O criativo faz notar. O digital faz funcionar.",
-		team: "Time",
-		teamHeadline: "Dois lados. Um teto.",
-		teamIntro:
-			"Um time multidisciplinar de fotografia, vídeo, conteúdo e engenharia reunido para dar à sua empresa o que ela precisa no digital — do que as pessoas veem ao que elas usam.",
 		creative: "Criativo",
-		creativeTags: "Conteúdo · Direção · Narrativa",
 		creativeCopy: "Voz e imagem que a marca reconhece como suas.",
 		digital: "Digital",
-		digitalTags: "Produto · Sites · Sistemas",
 		digitalCopy: "Site, produto, sistema. O que a pessoa usa.",
 		workWithUs: "Começar o seu projeto",
 	},

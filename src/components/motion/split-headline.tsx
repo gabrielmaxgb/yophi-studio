@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { animate, onScroll, splitText, stagger } from "animejs";
+import { useRef } from "react";
+import { gsap, useGSAP } from "@/lib/gsap";
 import { prefersReducedMotion } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
@@ -20,53 +20,58 @@ export function SplitHeadline({
 }: SplitHeadlineProps) {
   const ref = useRef<HTMLElement | null>(null);
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    if (prefersReducedMotion()) return;
+  useGSAP(
+    () => {
+      const el = ref.current;
+      if (!el) return;
+      if (prefersReducedMotion()) return;
 
-    const splitter = splitText(el, {
-      chars: mode === "chars",
-      words: mode === "words",
-      accessible: true,
-    });
+      el.setAttribute("aria-label", children);
+      el.textContent = "";
 
-    const units = mode === "chars" ? splitter.chars : splitter.words;
-    units.forEach((unit: HTMLElement) => {
-      unit.style.display = "inline-block";
-      unit.style.overflow = "hidden";
-      const inner = unit.firstElementChild as HTMLElement | null;
-      if (inner) {
+      const units =
+        mode === "chars"
+          ? [...children]
+          : children.split(/\s+/).filter(Boolean);
+
+      const inners: HTMLElement[] = [];
+
+      units.forEach((unit, index) => {
+        const outer = document.createElement("span");
+        outer.style.display = "inline-block";
+        outer.style.overflow = "hidden";
+        outer.style.verticalAlign = "bottom";
+        if (mode === "words" && index < units.length - 1) {
+          outer.style.marginRight = "0.22em";
+        }
+
+        const inner = document.createElement("span");
         inner.style.display = "inline-block";
-        inner.style.transform = "translateY(110%)";
-      } else {
-        const wrap = document.createElement("span");
-        wrap.style.display = "inline-block";
-        wrap.style.transform = "translateY(110%)";
-        while (unit.firstChild) wrap.appendChild(unit.firstChild);
-        unit.appendChild(wrap);
-      }
-    });
+        inner.style.willChange = "transform";
+        inner.setAttribute("aria-hidden", "true");
+        inner.textContent = unit;
 
-    const inners = units.map((unit: HTMLElement) => unit.firstElementChild);
+        outer.appendChild(inner);
+        el.appendChild(outer);
+        inners.push(inner);
+      });
 
-    const animation = animate(inners, {
-      translateY: ["110%", "0%"],
-      duration: 1100,
-      delay: stagger(mode === "chars" ? 38 : 55, { from: "first" }),
-      ease: "out(3)",
-      autoplay: onScroll({
-        target: el,
-        enter: "bottom-=12% top",
-        repeat: false,
-      }),
-    });
+      gsap.set(inners, { yPercent: 110 });
 
-    return () => {
-      animation.revert();
-      splitter.revert();
-    };
-  }, [children, mode]);
+      gsap.to(inners, {
+        yPercent: 0,
+        duration: 1.05,
+        stagger: mode === "chars" ? 0.028 : 0.055,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 88%",
+          once: true,
+        },
+      });
+    },
+    { dependencies: [children, mode], revertOnUpdate: true }
+  );
 
   return (
     <Tag ref={ref as never} className={cn(className)}>

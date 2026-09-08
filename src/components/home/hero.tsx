@@ -1,280 +1,156 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import {
-  animate,
-  createAnimatable,
-  createDrawable,
-  createTimeline,
-  scrambleText,
-  stagger,
-} from "animejs";
+import { useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArchiveLink } from "@/components/work/archive-gate";
 import { useI18n } from "@/components/i18n/locale-provider";
-import { isFinePointer, prefersReducedMotion } from "@/lib/motion";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
+import { gsap, useGSAP } from "@/lib/gsap";
+import { prefersReducedMotion } from "@/lib/motion";
 
 const letters = ["Y", "O", "P", "H", "I"] as const;
 
-const formPanels = [
-  {
-    src: "/hero/01.jpg",
-    className: "col-span-4 row-span-4",
-    sizes: "(max-width: 768px) 70vw, 32vw",
-  },
-  {
-    src: "/hero/02.jpg",
-    className: "col-span-2 row-span-3 col-start-5",
-    sizes: "(max-width: 768px) 35vw, 16vw",
-  },
-  {
-    src: "/hero/03.jpg",
-    className: "col-span-2 row-span-3 col-start-5 row-start-4",
-    sizes: "(max-width: 768px) 35vw, 16vw",
-  },
-  {
-    src: "/hero/04.jpg",
-    className: "col-span-2 row-span-2 row-start-5",
-    sizes: "(max-width: 768px) 35vw, 16vw",
-  },
-  {
-    src: "/hero/05.jpg",
-    className: "col-span-2 row-span-2 col-start-3 row-start-5",
-    sizes: "(max-width: 768px) 35vw, 16vw",
-  },
-] as const;
-
 export function Hero() {
   const { dict } = useI18n();
-  const { stages } = dict.hero;
   const rootRef = useRef<HTMLElement | null>(null);
-  const stageRef = useRef<HTMLParagraphElement | null>(null);
-  const formsRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
+  useGSAP(
+    () => {
+      const root = rootRef.current;
+      if (!root) return;
 
-    const glyphs = root.querySelectorAll<HTMLElement>("[data-hero-glyph]");
-    const line = root.querySelectorAll("[data-hero-line]");
-    const copy = root.querySelectorAll("[data-hero-copy]");
-    const meta = root.querySelectorAll("[data-hero-meta]");
-    const panels = formsRef.current?.querySelectorAll<HTMLElement>(
-      "[data-form-panel]"
-    );
-    const marks = root.querySelectorAll<SVGElement>("[data-hero-draw]");
-    const reduced = prefersReducedMotion();
+      const wash = root.querySelector("[data-hero-wash]");
+      const glyphs = root.querySelectorAll<HTMLElement>("[data-hero-glyph]");
+      const mark = root.querySelector("[data-hero-mark]");
+      const tagline = root.querySelector("[data-hero-tag]");
+      const line = root.querySelectorAll("[data-hero-line]");
+      const copy = root.querySelectorAll("[data-hero-copy]");
+      const meta = root.querySelectorAll("[data-hero-meta]");
+      const head = root.querySelector("[data-hero-head]");
+      const glows = root.querySelectorAll("[data-hero-glow]");
+      const formMeta = root.querySelector("[data-form-meta]");
 
-    if (reduced) {
-      glyphs.forEach((g) => {
-        g.style.opacity = "1";
-        g.style.transform = "none";
-      });
-      [...line, ...copy, ...meta].forEach((el) => {
-        (el as HTMLElement).style.opacity = "1";
-      });
-      panels?.forEach((p) => {
-        p.style.opacity = "1";
-      });
-      return;
-    }
-
-    glyphs.forEach((g, i) => {
-      const fromX = i < 2 ? -28 : i > 2 ? 28 : 0;
-      const fromY = i === 2 ? 40 : 18;
-      g.style.opacity = "0";
-      g.style.transform = `translate(${fromX}px, ${fromY}px) rotate(${i === 2 ? 8 : 0}deg)`;
-    });
-
-    const tl = createTimeline({ defaults: { ease: "out(3)" } });
-
-    tl.add(glyphs, {
-      opacity: [0, 1],
-      x: 0,
-      y: 0,
-      rotate: 0,
-      duration: 1400,
-      delay: stagger(90, { from: "center" }),
-    })
-      .add(
-        line,
-        {
-          opacity: [0, 1],
-          y: [28, 0],
-          duration: 1000,
-        },
-        "-=900"
-      )
-      .add(
-        copy,
-        {
-          opacity: [0, 1],
-          y: [16, 0],
-          duration: 900,
-        },
-        "-=700"
-      )
-      .add(
-        meta,
-        {
-          opacity: [0, 1],
-          duration: 800,
-        },
-        "-=550"
-      );
-
-    if (marks.length) {
-      createDrawable(marks);
-      animate(marks, {
-        draw: ["0 0", "0 1"],
-        duration: 1800,
-        ease: "inOut(3)",
-        delay: stagger(180, { start: 200 }),
-      });
-    }
-
-    if (panels?.length) {
-      animate(panels, {
-        opacity: [0, 1],
-        scale: [0.88, 1],
-        duration: 1500,
-        delay: stagger(100, { start: 280, from: "first" }),
-        ease: "out(4)",
-      });
-    }
-
-    let index = 0;
-    const stageEl = stageRef.current;
-    let intervalId: number | undefined;
-    const animatables: ReturnType<typeof createAnimatable>[] = [];
-
-    if (stageEl) {
-      intervalId = window.setInterval(() => {
-        index = (index + 1) % stages.length;
-        const next = stages[index] ?? "YOPHI";
-        animate(stageEl, {
-          text: scrambleText({
-            text: next,
-            chars: "uppercase",
-            from: "center",
-          }),
-          duration: 900,
-          ease: "out(2)",
-        });
-
-        if (panels?.length) {
-          panels.forEach((panel, i) => {
-            const active = i === index % panels.length;
-            animate(panel, {
-              opacity: active ? 1 : 0.38,
-              scale: active ? 1.02 : 0.97,
-              duration: 780,
-              ease: "out(3)",
-            });
-          });
-        }
-      }, 2800);
-    }
-
-    if (panels?.length && isFinePointer()) {
-      const field = formsRef.current;
-      panels.forEach((panel, i) => {
-        const lag = 140 + i * 55;
-        animatables.push(
-          createAnimatable(panel, {
-            rotateX: lag,
-            rotateY: lag,
-            x: lag,
-            y: lag,
-          })
+      if (prefersReducedMotion()) {
+        gsap.set(
+          [wash, glyphs, mark, tagline, line, copy, meta, head, glows, formMeta],
+          { clearProps: "all" }
         );
+        return;
+      }
+
+      gsap.set(glyphs, {
+        autoAlpha: 0,
+        y: (i) => (i === 2 ? 40 : 20),
+        x: (i) => (i < 2 ? -24 : i > 2 ? 24 : 0),
       });
+      gsap.set(tagline, { autoAlpha: 0, y: 10 });
+      gsap.set(line, { autoAlpha: 0, y: 24 });
+      gsap.set(copy, { autoAlpha: 0, y: 16 });
+      gsap.set(meta, { autoAlpha: 0, y: 14 });
+      gsap.set(head, {
+        autoAlpha: 0,
+        scale: 0.9,
+        filter: "blur(10px) brightness(0.55)",
+        transformOrigin: "50% 55%",
+      });
+      gsap.set(glows, { autoAlpha: 0, scale: 0.7 });
+      gsap.set(formMeta, { autoAlpha: 0, y: 12 });
+      gsap.set(mark, { autoAlpha: 0 });
+      gsap.set(wash, { autoAlpha: 0.7 });
 
-      const onMove = (event: PointerEvent) => {
-        if (!field) return;
-        const rect = field.getBoundingClientRect();
-        const nx = (event.clientX - rect.left) / rect.width - 0.5;
-        const ny = (event.clientY - rect.top) / rect.height - 0.5;
-        animatables.forEach((item, i) => {
-          const depth = (i + 1) * 6;
-          item.rotateY(nx * depth);
-          item.rotateX(-ny * depth);
-          item.x(nx * depth * 1.4);
-          item.y(ny * depth * 1.4);
-        });
-      };
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-      const onLeave = () => {
-        animatables.forEach((item) => {
-          item.rotateX(0);
-          item.rotateY(0);
-          item.x(0);
-          item.y(0);
-        });
-      };
+      tl.to(wash, { autoAlpha: 1, duration: 1.2, ease: "power2.out" }, 0)
+        .to(mark, { autoAlpha: 0.14, duration: 1 }, 0.05)
+        .to(
+          glyphs,
+          {
+            autoAlpha: 1,
+            x: 0,
+            y: 0,
+            duration: 1.2,
+            stagger: { each: 0.07, from: "center" },
+          },
+          0.08
+        )
+        .to(tagline, { autoAlpha: 1, y: 0, duration: 0.8 }, 0.45)
+        .to(glows, { autoAlpha: 1, scale: 1, duration: 1.1, stagger: 0.08 }, 0.2)
+        .to(
+          head,
+          {
+            autoAlpha: 1,
+            scale: 1,
+            filter: "blur(0px) brightness(1)",
+            duration: 1.35,
+            ease: "expo.out",
+          },
+          0.22
+        )
+        .to(line, { autoAlpha: 1, y: 0, duration: 0.95 }, 0.55)
+        .to(copy, { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.06 }, 0.7)
+        .to(meta, { autoAlpha: 1, y: 0, duration: 0.75 }, 0.85)
+        .to(formMeta, { autoAlpha: 1, y: 0, duration: 0.7 }, 0.9);
 
-      field?.addEventListener("pointermove", onMove);
-      field?.addEventListener("pointerleave", onLeave);
-
-      return () => {
-        if (intervalId) window.clearInterval(intervalId);
-        field?.removeEventListener("pointermove", onMove);
-        field?.removeEventListener("pointerleave", onLeave);
-        animatables.forEach((item) => item.revert());
-        tl.revert();
-      };
-    }
-
-    return () => {
-      if (intervalId) window.clearInterval(intervalId);
-      tl.revert();
-    };
-  }, [stages]);
+      gsap.to(wash, {
+        yPercent: 12,
+        ease: "none",
+        scrollTrigger: {
+          trigger: root,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1.2,
+        },
+      });
+    },
+    { scope: rootRef }
+  );
 
   return (
     <section
       ref={rootRef}
       aria-labelledby="hero-headline"
-      className="relative min-h-dvh overflow-hidden bg-deep text-ink"
+      className="relative h-dvh overflow-hidden bg-deep text-ink"
     >
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_78%_28%,rgba(201,106,62,0.2),transparent_48%),radial-gradient(ellipse_at_18%_72%,rgba(61,74,86,0.16),transparent_50%),radial-gradient(ellipse_at_50%_100%,rgba(0,0,0,0.92),transparent_55%)]" />
+        <Image
+          src="/hero/atmosphere.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-[0.58] brightness-[0.42] contrast-[1.05] saturate-[0.65]"
+        />
+        <div className="absolute inset-0 bg-deep/55" />
+        <div
+          data-hero-wash
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_78%_28%,rgba(201,106,62,0.14),transparent_48%),radial-gradient(ellipse_at_18%_72%,rgba(61,74,86,0.12),transparent_50%),radial-gradient(ellipse_at_50%_100%,rgba(0,0,0,0.75),transparent_55%)] will-change-transform"
+        />
         <svg
+          data-hero-mark
           className="absolute top-[18%] right-[8%] h-[38vh] w-auto opacity-[0.14] md:top-[14%] md:right-[12%] md:h-[48vh]"
           viewBox="0 0 72 92"
           fill="none"
           aria-hidden
         >
           <path
-            data-hero-draw
             d="M10 12 L40 20 L40 74 L10 82 Z"
             stroke="currentColor"
             strokeWidth="1.25"
             fill="none"
           />
           <path
-            data-hero-draw
             d="M40 18 L64 14 L64 80 L40 76 Z"
             stroke="currentColor"
             strokeWidth="1.25"
           />
         </svg>
-        <div
-          className="absolute inset-0 opacity-[0.07]"
-          style={{
-            backgroundImage:
-              "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
-          }}
-        />
       </div>
 
-      <div className="relative mx-auto grid min-h-dvh max-w-[1400px] grid-cols-1 items-end gap-10 px-5 pb-16 pt-28 md:grid-cols-[1.1fr_0.9fr] md:items-center md:px-10 md:pb-20 md:pt-24">
-        <div className="flex flex-col gap-8 md:gap-10">
+      <div className="relative mx-auto grid h-full max-w-[1400px] grid-cols-1 items-end gap-4 px-5 pb-8 pt-24 md:grid-cols-[0.8fr_1.2fr] md:items-center md:gap-6 md:px-10 md:pb-12 md:pt-20">
+        <div className="flex min-h-0 flex-col gap-5 md:gap-7">
           <div className="flex flex-col">
             <p
-              className="font-serif text-[clamp(3.5rem,12vw,8.5rem)] leading-[0.9] tracking-[0.08em] uppercase"
+              className="font-serif text-[clamp(2.8rem,9vw,6.5rem)] leading-[0.9] tracking-[0.08em] uppercase"
               aria-hidden
             >
               {letters.map((letter) => (
@@ -288,6 +164,7 @@ export function Hero() {
               ))}
             </p>
             <p
+              data-hero-tag
               className="mt-1.5 font-serif text-[0.85rem] italic leading-none tracking-[0.22em] text-ink/70 md:mt-2 md:text-[1.05rem]"
             >
               digital studio
@@ -298,27 +175,27 @@ export function Hero() {
             <h1
               id="hero-headline"
               data-hero-line
-              className="font-serif text-[clamp(1.6rem,4vw,2.75rem)] leading-[1.15] text-ink opacity-0"
+              className="font-serif text-[clamp(1.6rem,4vw,2.75rem)] leading-[1.15] text-ink"
             >
               {dict.hero.headline}
             </h1>
             <p
               data-hero-copy
-              className="max-w-md text-base leading-relaxed text-ink/80 opacity-0 md:text-[1.05rem]"
+              className="max-w-md text-base leading-relaxed text-ink/80 md:text-[1.05rem]"
             >
               {dict.hero.body}
             </p>
             {dict.hero.audience ? (
               <p
                 data-hero-copy
-                className="max-w-md text-[0.95rem] leading-relaxed text-ink/72 opacity-0"
+                className="max-w-md text-[0.95rem] leading-relaxed text-ink/72"
               >
                 {dict.hero.audience}
               </p>
             ) : null}
           </div>
 
-          <div data-hero-meta className="flex flex-col gap-3 opacity-0">
+          <div data-hero-meta className="flex flex-col gap-3">
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
               <Link
                 href="/contact"
@@ -336,49 +213,50 @@ export function Hero() {
                 {dict.hero.ctaSecondary}
               </ArchiveLink>
             </div>
-            <p className="max-w-sm text-[0.8rem] leading-relaxed text-ink/65">
-              {dict.hero.ctaHint}
-            </p>
+            {dict.hero.ctaHint ? (
+              <p className="max-w-sm text-[0.8rem] leading-relaxed text-ink/65">
+                {dict.hero.ctaHint}
+              </p>
+            ) : null}
           </div>
         </div>
 
-        <div className="relative flex min-h-[42vh] flex-col justify-end md:min-h-[60vh]">
-          <div
-            ref={formsRef}
-            className="relative grid h-full min-h-[320px] grid-cols-6 grid-rows-6 gap-2 [perspective:1200px] [transform-style:preserve-3d] md:min-h-[480px]"
-            aria-hidden
-          >
-            {formPanels.map((panel) => (
-              <div
-                key={panel.src}
-                data-form-panel
-                className={cn(
-                  panel.className,
-                  "relative origin-center overflow-hidden opacity-0 will-change-transform"
-                )}
-              >
-                <Image
-                  src={panel.src}
-                  alt=""
-                  fill
-                  sizes={panel.sizes}
-                  className="object-cover saturate-[0.45] contrast-[1.08]"
-                />
-                <div className="absolute inset-0 bg-deep/40" />
-              </div>
-            ))}
-          </div>
+        <div className="relative flex min-h-0 max-h-full flex-col justify-end md:h-full md:justify-center">
+          <figure className="relative mx-auto -mr-2 flex w-full max-w-[20rem] flex-1 items-center justify-center sm:max-w-[24rem] md:-mr-6 md:max-w-none lg:-mr-10">
+            <div
+              aria-hidden
+              data-hero-glow
+              className="pointer-events-none absolute top-[8%] left-[-4%] h-[70%] w-[70%] rounded-full bg-[radial-gradient(circle,rgba(61,74,86,0.4)_0%,transparent_68%)] blur-3xl"
+            />
+            <div
+              aria-hidden
+              data-hero-glow
+              className="pointer-events-none absolute top-[12%] right-[-8%] h-[75%] w-[75%] rounded-full bg-[radial-gradient(circle,rgba(201,106,62,0.55)_0%,transparent_70%)] blur-3xl"
+            />
+            <div data-hero-head className="relative z-10 w-full max-h-[52vh] md:max-h-[78vh]">
+              <Image
+                src="/philosophy/head.webp"
+                alt={dict.philosophy.imageAlt}
+                width={1377}
+                height={1825}
+                quality={90}
+                priority
+                sizes="(max-width: 768px) 20rem, 42vw"
+                className="h-auto max-h-[52vh] w-full scale-[1.06] object-contain select-none drop-shadow-[0_40px_80px_rgba(0,0,0,0.55)] md:max-h-[78vh] md:scale-[1.12]"
+              />
+            </div>
+          </figure>
 
-          <div className="mt-6 flex items-end justify-between gap-4 border-t border-ink/15 pt-4">
+          <div
+            data-form-meta
+            className="relative z-10 mt-3 flex shrink-0 items-end justify-between gap-4 border-t border-ink/15 pt-3 md:mt-5 md:pt-4"
+          >
             <div>
               <p className="text-[0.6rem] tracking-[0.28em] text-ink/60 uppercase">
                 {dict.hero.formLabel}
               </p>
-              <p
-                ref={stageRef}
-                className="font-serif text-2xl tracking-[0.12em] uppercase md:text-3xl"
-              >
-                Yophi
+              <p className="font-serif text-2xl tracking-[0.12em] uppercase md:text-3xl">
+                YOPHI
               </p>
             </div>
             <p className="max-w-[10rem] text-right text-[0.7rem] leading-relaxed tracking-[0.06em] text-ink/65">

@@ -1,105 +1,79 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { animate, stagger } from "animejs";
+import { useRef } from "react";
+import { gsap, useGSAP } from "@/lib/gsap";
 import { useI18n } from "@/components/i18n/locale-provider";
-import { Reveal } from "@/components/motion/reveal";
+import { prefersReducedMotion } from "@/lib/motion";
 
 export function Worlds() {
   const { dict } = useI18n();
-  const meetRef = useRef<HTMLDivElement | null>(null);
+  const rootRef = useRef<HTMLElement | null>(null);
 
-  useEffect(() => {
-    const root = meetRef.current;
-    if (!root) return;
+  useGSAP(
+    () => {
+      const root = rootRef.current;
+      if (!root) return;
 
-    const marks = root.querySelectorAll("[data-meet-mark]");
-    marks.forEach((m) => {
-      (m as HTMLElement).style.opacity = "0";
-      (m as HTMLElement).style.transform = "scaleX(0.4)";
-    });
+      const eyebrow = root.querySelector("[data-w-eyebrow]");
+      const creative = root.querySelector("[data-w-creative]");
+      const digital = root.querySelector("[data-w-digital]");
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry?.isIntersecting) return;
-        animate(marks, {
-          opacity: [0, 1],
-          scaleX: [0.4, 1],
-          duration: 900,
-          delay: stagger(140),
-          ease: "out(3)",
-        });
-        observer.disconnect();
-      },
-      { threshold: 0.4 }
-    );
+      if (prefersReducedMotion()) {
+        gsap.set([eyebrow, creative, digital], { clearProps: "all" });
+        return;
+      }
 
-    observer.observe(root);
-    return () => observer.disconnect();
-  }, []);
+      gsap.set(eyebrow, { autoAlpha: 0, y: 12 });
+      gsap.set(creative, { autoAlpha: 0, y: 24 });
+      gsap.set(digital, { autoAlpha: 0, y: 24 });
+
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: root,
+            start: "top 75%",
+            once: true,
+          },
+          defaults: { ease: "power3.out" },
+        })
+        .to(eyebrow, { autoAlpha: 1, y: 0, duration: 0.7 }, 0)
+        .to(creative, { autoAlpha: 1, y: 0, duration: 0.9 }, 0.1)
+        .to(digital, { autoAlpha: 1, y: 0, duration: 0.9 }, 0.22);
+    },
+    { scope: rootRef }
+  );
 
   return (
-    <section className="border-y border-line bg-mist text-ink">
+    <section ref={rootRef} className="border-y border-line bg-mist text-ink">
       <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-28">
-        <Reveal>
-          <p className="text-[0.65rem] tracking-[0.28em] text-stone uppercase">
-            {dict.worlds.eyebrow}
-          </p>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink/70">
-            {dict.worlds.intro}
-          </p>
-        </Reveal>
+        <p
+          data-w-eyebrow
+          className="text-[0.65rem] tracking-[0.28em] text-stone uppercase"
+        >
+          {dict.worlds.eyebrow}
+        </p>
 
-        <div className="mt-12 grid gap-12 md:mt-16 md:grid-cols-2 md:gap-0">
-          <Reveal
-            className="md:border-r md:border-line md:pr-12 lg:pr-16"
-            x={-48}
-            y={0}
-          >
-            <p className="font-serif text-4xl tracking-[0.08em] uppercase md:text-5xl">
+        <div className="mt-12 flex flex-col gap-14 md:mt-16 md:gap-20">
+          <div data-w-creative className="max-w-sm md:max-w-md">
+            <p className="font-serif text-3xl tracking-[0.06em] uppercase md:text-4xl">
               {dict.worlds.creative}
             </p>
-            <p className="mt-4 font-serif text-xl leading-snug text-ink md:text-2xl">
-              {dict.worlds.creativeLead}
-            </p>
-            <p className="mt-6 max-w-sm text-base leading-relaxed text-ink/70">
+            <p className="mt-5 text-base leading-relaxed text-ink/70">
               {dict.worlds.creativeCopy}
             </p>
-          </Reveal>
+          </div>
 
-          <Reveal delay={120} x={48} y={0} className="md:pl-12 lg:pl-16">
-            <p className="font-serif text-4xl tracking-[0.08em] uppercase md:text-5xl">
+          <div
+            data-w-digital
+            className="max-w-md self-end md:max-w-lg md:text-right"
+          >
+            <p className="font-serif text-4xl tracking-[0.06em] uppercase md:text-5xl">
               {dict.worlds.digital}
             </p>
-            <p className="mt-4 font-serif text-xl leading-snug text-ink md:text-2xl">
-              {dict.worlds.digitalLead}
-            </p>
-            <p className="mt-6 max-w-sm text-base leading-relaxed text-ink/70">
+            <p className="mt-5 text-base leading-relaxed text-ink/70 md:ml-auto md:max-w-sm">
               {dict.worlds.digitalCopy}
             </p>
-          </Reveal>
-        </div>
-
-        <div
-          ref={meetRef}
-          className="mt-16 flex flex-col items-center gap-5 md:mt-24"
-        >
-          <div className="flex w-full max-w-md items-center gap-3">
-            <span
-              data-meet-mark
-              className="h-px flex-1 origin-right bg-ink/30"
-            />
-            <p className="font-serif text-xl tracking-[0.18em] uppercase md:text-2xl">
-              {dict.worlds.meet}
-            </p>
-            <span
-              data-meet-mark
-              className="h-px flex-1 origin-left bg-ink/30"
-            />
           </div>
-          <p className="max-w-md text-center text-sm leading-relaxed text-ink/75">
-            {dict.worlds.meetCopy}
-          </p>
         </div>
       </div>
     </section>

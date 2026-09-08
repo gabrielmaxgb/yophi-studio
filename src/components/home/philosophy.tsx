@@ -2,16 +2,39 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap, useGSAP } from "@/lib/gsap";
 import { useI18n } from "@/components/i18n/locale-provider";
 import { SplitHeadline } from "@/components/motion/split-headline";
 import { prefersReducedMotion } from "@/lib/motion";
+import { cn } from "@/lib/utils";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(useGSAP, ScrollTrigger);
-}
+const formPanels = [
+  {
+    src: "/hero/01.jpg",
+    className: "col-span-4 row-span-4",
+    sizes: "(max-width: 768px) 70vw, 32vw",
+  },
+  {
+    src: "/hero/02.jpg",
+    className: "col-span-2 row-span-3 col-start-5",
+    sizes: "(max-width: 768px) 35vw, 16vw",
+  },
+  {
+    src: "/hero/03.jpg",
+    className: "col-span-2 row-span-3 col-start-5 row-start-4",
+    sizes: "(max-width: 768px) 35vw, 16vw",
+  },
+  {
+    src: "/hero/04.jpg",
+    className: "col-span-2 row-span-2 row-start-5",
+    sizes: "(max-width: 768px) 35vw, 16vw",
+  },
+  {
+    src: "/hero/05.jpg",
+    className: "col-span-2 row-span-2 col-start-3 row-start-5",
+    sizes: "(max-width: 768px) 35vw, 16vw",
+  },
+] as const;
 
 export function Philosophy() {
   const { dict } = useI18n();
@@ -24,96 +47,41 @@ export function Philosophy() {
       const frame = frameRef.current;
       if (!root || !frame) return;
 
-      const glowWarm = root.querySelector<HTMLElement>("[data-glow-warm]");
-      const glowCool = root.querySelector<HTMLElement>("[data-glow-cool]");
-      const lines = gsap.utils.toArray<HTMLElement>("[data-line]", root);
+      const body = root.querySelector<HTMLElement>("[data-body]");
       const closing = root.querySelector<HTMLElement>("[data-closing]");
-      const eyebrow = root.querySelector<HTMLElement>("[data-eyebrow]");
-      const rule = root.querySelector<HTMLElement>("[data-rule]");
+      const panels = frame.querySelectorAll<HTMLElement>("[data-form-panel]");
 
       if (prefersReducedMotion()) {
-        gsap.set(
-          [frame, glowWarm, glowCool, lines, closing, eyebrow, rule],
-          { clearProps: "all" }
-        );
+        gsap.set([frame, body, closing, panels], { clearProps: "all" });
         return;
       }
 
-      gsap.set(eyebrow, { autoAlpha: 0, y: 12 });
-      gsap.set(frame, {
-        autoAlpha: 0,
-        scale: 0.72,
-        rotateY: -28,
-        rotateX: 10,
-        filter: "blur(18px) brightness(0.35) saturate(0.4)",
-        transformOrigin: "50% 55%",
-      });
-      gsap.set([glowWarm, glowCool], { autoAlpha: 0, scale: 0.45 });
-      gsap.set(lines, { autoAlpha: 0, y: 36, rotateX: 18 });
-      gsap.set(closing, { autoAlpha: 0, y: 24 });
-      gsap.set(rule, { scaleX: 0, transformOrigin: "left center" });
+      gsap.set(panels, { autoAlpha: 0, y: 24, scale: 0.96 });
+      gsap.set([body, closing], { autoAlpha: 0, y: 20 });
 
       const enter = gsap.timeline({
         scrollTrigger: {
           trigger: root,
-          start: "top 78%",
+          start: "top 76%",
           once: true,
         },
-        defaults: { ease: "power4.out" },
+        defaults: { ease: "power3.out" },
       });
 
       enter
-        .to(eyebrow, { autoAlpha: 1, y: 0, duration: 0.7 }, 0)
         .to(
-          [glowWarm, glowCool],
-          {
-            autoAlpha: 1,
-            scale: 1,
-            duration: 1.4,
-            stagger: 0.12,
-            ease: "power3.out",
-          },
-          0.05
-        )
-        .to(
-          frame,
-          {
-            autoAlpha: 1,
-            scale: 1,
-            rotateY: 0,
-            rotateX: 0,
-            filter: "blur(0px) brightness(1) saturate(1)",
-            duration: 1.7,
-            ease: "expo.out",
-          },
-          0.08
-        )
-        .to(
-          lines,
+          panels,
           {
             autoAlpha: 1,
             y: 0,
-            rotateX: 0,
-            duration: 0.95,
-            stagger: 0.11,
-            ease: "power3.out",
+            scale: 1,
+            duration: 1,
+            stagger: 0.07,
           },
-          0.45
+          0
         )
-        .to(rule, { scaleX: 1, duration: 0.9, ease: "power3.inOut" }, 0.95)
-        .to(
-          closing,
-          { autoAlpha: 1, y: 0, duration: 0.95, ease: "power3.out" },
-          1.05
-        );
-
-      const img = frame.querySelector("img");
-      const onLoad = () => ScrollTrigger.refresh();
-      img?.addEventListener("load", onLoad, { once: true });
-
-      return () => {
-        img?.removeEventListener("load", onLoad);
-      };
+        .to(body, { autoAlpha: 1, y: 0, duration: 0.8 }, 0.25)
+        .to(closing, { autoAlpha: 1, y: 0, duration: 0.75 }, 0.4);
     },
     { scope: rootRef }
   );
@@ -123,75 +91,50 @@ export function Philosophy() {
       ref={rootRef}
       className="relative overflow-x-clip bg-paper text-ink"
     >
-      <div className="mx-auto grid max-w-[1400px] items-center gap-8 px-5 py-24 md:grid-cols-12 md:gap-10 md:px-10 md:py-32 lg:gap-16">
-        <header className="md:col-span-5 md:col-start-1 md:row-start-1">
-          <p
-            data-eyebrow
-            className="text-[0.65rem] tracking-[0.28em] text-stone uppercase"
-          >
-            {dict.philosophy.eyebrow}
-          </p>
-          <SplitHeadline className="mt-8 max-w-xl font-serif text-[clamp(2.4rem,6vw,4.6rem)] leading-[1.05] text-balance">
+      <div className="mx-auto grid max-w-[1400px] items-center gap-10 px-5 py-24 md:grid-cols-12 md:gap-12 md:px-10 md:py-32">
+        <div className="md:col-span-5">
+          <SplitHeadline className="max-w-xl font-serif text-[clamp(2.4rem,6vw,4.4rem)] leading-[1.05] text-balance">
             {dict.philosophy.headline}
           </SplitHeadline>
-        </header>
-
-        <figure
-          ref={frameRef}
-          className="relative mx-auto w-full max-w-[18rem] md:col-span-7 md:col-start-6 md:row-span-2 md:row-start-1 md:max-w-[30rem] lg:max-w-[34rem]"
-        >
-          <div
-            aria-hidden
-            data-glow-cool
-            className="pointer-events-none absolute top-[12%] left-[4%] h-[58%] w-[58%] rounded-full bg-[radial-gradient(circle,rgba(61,74,86,0.28)_0%,transparent_68%)] blur-2xl will-change-transform"
-          />
-          <div
-            aria-hidden
-            data-glow-warm
-            className="pointer-events-none absolute top-[18%] right-[-2%] h-[62%] w-[62%] rounded-full bg-[radial-gradient(circle,rgba(201,106,62,0.48)_0%,transparent_70%)] blur-2xl will-change-transform"
-          />
-
-          <div className="relative">
-            <Image
-              src="/philosophy/head.webp"
-              alt={dict.philosophy.imageAlt}
-              width={1377}
-              height={1825}
-              quality={90}
-              sizes="(max-width: 768px) 18rem, (max-width: 1024px) 30rem, 34rem"
-              className="relative z-10 h-auto w-full select-none drop-shadow-[0_28px_60px_rgba(12,10,16,0.3)]"
-            />
-          </div>
-        </figure>
-
-        <div className="md:col-span-5 md:col-start-1 md:row-start-2 [perspective:800px]">
-          <div className="grid max-w-md gap-4 md:gap-5">
-            {dict.philosophy.lines.map((line) => (
-              <p
-                key={line}
-                data-line
-                className="font-serif text-[clamp(1.35rem,2.4vw,1.85rem)] leading-snug text-ink/80 will-change-transform"
-              >
-                {line}
-              </p>
-            ))}
-          </div>
-
-          <div
-            data-closing
-            className="mt-14 flex max-w-md flex-col gap-4 md:mt-16"
+          <p
+            data-body
+            className="mt-10 max-w-md font-serif text-[clamp(1.25rem,2.2vw,1.7rem)] leading-snug text-ink/75"
           >
-            <div
-              data-rule
-              className="h-px w-full origin-left bg-line"
-              aria-hidden
-            />
-            <p className="pt-8 text-[0.65rem] tracking-[0.28em] text-stone uppercase">
-              {dict.philosophy.label}
-            </p>
-            <p className="font-serif text-[clamp(1.25rem,2.4vw,1.7rem)] leading-snug text-ink">
-              {dict.philosophy.closing}
-            </p>
+            {dict.philosophy.body}
+          </p>
+          <p
+            data-closing
+            className="mt-8 max-w-sm text-[0.7rem] tracking-[0.22em] text-stone uppercase"
+          >
+            {dict.philosophy.closing}
+          </p>
+        </div>
+
+        <div
+          ref={frameRef}
+          className="relative mx-auto w-full md:col-span-7"
+          aria-hidden
+        >
+          <div className="relative grid min-h-[280px] grid-cols-6 grid-rows-6 gap-2 md:min-h-[420px]">
+            {formPanels.map((panel) => (
+              <div
+                key={panel.src}
+                data-form-panel
+                className={cn(
+                  panel.className,
+                  "relative overflow-hidden will-change-transform"
+                )}
+              >
+                <Image
+                  src={panel.src}
+                  alt=""
+                  fill
+                  sizes={panel.sizes}
+                  className="object-cover saturate-[0.45] contrast-[1.08]"
+                />
+                <div className="absolute inset-0 bg-deep/40" />
+              </div>
+            ))}
           </div>
         </div>
       </div>

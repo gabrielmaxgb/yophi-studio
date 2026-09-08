@@ -88,13 +88,3 @@ export function isCaseStudySlug(slug: string): slug is CaseStudySlug {
 export function getCaseStudy(slug: CaseStudySlug): CaseStudyMeta {
   return caseStudyBase.find((study) => study.slug === slug)!;
 }
-
-export const processKeys = [
-  "SEE",
-  "DEFINE",
-  "SHAPE",
-  "BUILD",
-  "EVOLVE",
-] as const;
-
-export type ProcessKey = (typeof processKeys)[number];

@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { animate, stagger } from "animejs";
+import { useRef } from "react";
+import { gsap, useGSAP } from "@/lib/gsap";
+import { prefersReducedMotion } from "@/lib/motion";
+import { cn } from "@/lib/utils";
 
 type RevealProps = {
   children: React.ReactNode;
@@ -9,6 +11,7 @@ type RevealProps = {
   delay?: number;
   y?: number;
   x?: number;
+  scale?: number;
   once?: boolean;
   as?: keyof React.JSX.IntrinsicElements;
 };
@@ -17,49 +20,53 @@ export function Reveal({
   children,
   className,
   delay = 0,
-  y = 36,
+  y = 28,
   x = 0,
+  scale = 1,
   once = true,
   as: Tag = "div",
 }: RevealProps) {
   const ref = useRef<HTMLElement | null>(null);
-  const played = useRef(false);
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+  useGSAP(
+    () => {
+      const el = ref.current;
+      if (!el) return;
 
-    el.style.opacity = "0";
-    el.style.transform = `translate(${x}px, ${y}px)`;
+      if (prefersReducedMotion()) {
+        gsap.set(el, { clearProps: "all" });
+        return;
+      }
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry?.isIntersecting) return;
-        if (once && played.current) return;
-        played.current = true;
+      gsap.set(el, {
+        autoAlpha: 0,
+        x,
+        y,
+        scale,
+      });
 
-        animate(el, {
-          opacity: [0, 1],
-          translateX: [x, 0],
-          translateY: [y, 0],
-          duration: 1100,
-          delay,
-          ease: "out(3)",
-        });
-
-        if (once) observer.disconnect();
-      },
-      { threshold: 0.18, rootMargin: "0px 0px -8% 0px" }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [delay, once, x, y]);
+      gsap.to(el, {
+        autoAlpha: 1,
+        x: 0,
+        y: 0,
+        scale: 1,
+        duration: 0.9,
+        delay: delay / 1000,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 88%",
+          once,
+        },
+      });
+    },
+    { dependencies: [delay, once, x, y, scale], revertOnUpdate: true }
+  );
 
   const Component = Tag as React.ElementType;
 
   return (
-    <Component ref={ref} className={className}>
+    <Component ref={ref} className={cn(className)}>
       {children}
     </Component>
   );
@@ -79,39 +86,38 @@ export function StaggerReveal({
   delay = 0,
 }: StaggerRevealProps) {
   const ref = useRef<HTMLDivElement | null>(null);
-  const played = useRef(false);
 
-  useEffect(() => {
-    const root = ref.current;
-    if (!root) return;
+  useGSAP(
+    () => {
+      const root = ref.current;
+      if (!root) return;
 
-    const items = root.querySelectorAll<HTMLElement>(itemSelector);
-    items.forEach((item) => {
-      item.style.opacity = "0";
-      item.style.transform = "translateY(28px)";
-    });
+      const items = root.querySelectorAll<HTMLElement>(itemSelector);
+      if (!items.length) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry?.isIntersecting || played.current) return;
-        played.current = true;
+      if (prefersReducedMotion()) {
+        gsap.set(items, { clearProps: "all" });
+        return;
+      }
 
-        animate(items, {
-          opacity: [0, 1],
-          translateY: [28, 0],
-          duration: 900,
-          delay: stagger(90, { start: delay }),
-          ease: "out(3)",
-        });
+      gsap.set(items, { autoAlpha: 0, y: 24 });
 
-        observer.disconnect();
-      },
-      { threshold: 0.15 }
-    );
-
-    observer.observe(root);
-    return () => observer.disconnect();
-  }, [delay, itemSelector]);
+      gsap.to(items, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.85,
+        stagger: 0.08,
+        delay: delay / 1000,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: root,
+          start: "top 84%",
+          once: true,
+        },
+      });
+    },
+    { dependencies: [delay, itemSelector], revertOnUpdate: true }
+  );
 
   return (
     <div ref={ref} className={className}>

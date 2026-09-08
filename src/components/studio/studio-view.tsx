@@ -1,108 +1,102 @@
 "use client";
 
+import { useRef } from "react";
 import Link from "next/link";
 import { useI18n } from "@/components/i18n/locale-provider";
 import { Origin } from "@/components/home/origin";
-import { Reveal } from "@/components/motion/reveal";
+import { gsap, useGSAP } from "@/lib/gsap";
+import { prefersReducedMotion } from "@/lib/motion";
 
 export function StudioView() {
   const { dict } = useI18n();
+  const rootRef = useRef<HTMLElement | null>(null);
+
+  useGSAP(
+    () => {
+      const root = rootRef.current;
+      if (!root) return;
+
+      const pieces = root.querySelectorAll("[data-studio-piece]");
+
+      if (prefersReducedMotion()) {
+        gsap.set(pieces, { clearProps: "all" });
+        return;
+      }
+
+      gsap.set(pieces, { autoAlpha: 0, y: 22 });
+
+      gsap.to(pieces, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.9,
+        stagger: 0.08,
+        ease: "power3.out",
+        delay: 0.05,
+      });
+    },
+    { scope: rootRef }
+  );
 
   return (
     <div className="bg-paper text-ink">
-      <section className="mx-auto max-w-[1400px] px-5 pt-28 pb-20 md:px-10 md:pt-36 md:pb-28">
-        <Reveal>
-          <p className="text-[0.65rem] tracking-[0.28em] text-stone uppercase">
+      <section
+        ref={rootRef}
+        className="mx-auto flex min-h-[72vh] max-w-[1400px] flex-col justify-center px-5 py-28 md:px-10 md:py-32"
+      >
+        {dict.studio.eyebrow ? (
+          <p
+            data-studio-piece
+            className="text-[0.65rem] tracking-[0.28em] text-stone uppercase"
+          >
             {dict.studio.eyebrow}
           </p>
-        </Reveal>
-        <Reveal delay={80} className="mt-6 max-w-4xl">
-          <h1 className="font-serif text-[clamp(2.8rem,7vw,5.5rem)] leading-[0.95]">
-            {dict.studio.headline}
-          </h1>
-        </Reveal>
-        <Reveal delay={140} className="mt-8 max-w-xl">
-          <p className="text-base leading-relaxed text-ink/65">
-            {dict.studio.intro}
-          </p>
-        </Reveal>
-      </section>
+        ) : null}
+        <h1
+          data-studio-piece
+          className="mt-6 max-w-3xl font-serif text-[clamp(2.6rem,6.5vw,4.8rem)] leading-[0.95] text-balance"
+        >
+          {dict.studio.headline}
+        </h1>
+        <p
+          data-studio-piece
+          className="mt-8 max-w-md text-base leading-relaxed text-ink/70"
+        >
+          {dict.studio.intro}
+        </p>
 
-      <section className="border-y border-line bg-mist">
-        <div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-20 md:grid-cols-2 md:gap-20 md:px-10 md:py-28">
-          <Reveal>
-            <p className="text-[0.65rem] tracking-[0.28em] text-stone uppercase">
-              {dict.studio.how}
+        <div className="mt-16 flex max-w-3xl flex-col gap-12 md:flex-row md:items-start md:gap-20">
+          <div data-studio-piece className="max-w-xs">
+            <p className="font-serif text-2xl tracking-[0.06em] uppercase md:text-3xl">
+              {dict.studio.creative}
             </p>
-            <h2 className="mt-5 font-serif text-4xl leading-tight md:text-5xl">
-              {dict.studio.howHeadline}
-            </h2>
-          </Reveal>
-          <Reveal
-            delay={100}
-            className="flex flex-col gap-6 text-base leading-relaxed text-ink/70"
+            <p className="mt-4 text-sm leading-relaxed text-ink/65">
+              {dict.studio.creativeCopy}
+            </p>
+          </div>
+          <div data-studio-piece className="max-w-xs md:pt-10">
+            <p className="font-serif text-3xl tracking-[0.06em] uppercase md:text-4xl">
+              {dict.studio.digital}
+            </p>
+            <p className="mt-4 text-sm leading-relaxed text-ink/65">
+              {dict.studio.digitalCopy}
+            </p>
+          </div>
+        </div>
+
+        <div data-studio-piece className="mt-16">
+          <Link
+            href="/contact"
+            className="group inline-flex min-h-12 w-fit items-center gap-3 bg-foam px-6 py-4 text-[0.7rem] tracking-[0.22em] text-deep uppercase transition-colors hover:bg-foam/90"
           >
-            <p>{dict.studio.p1}</p>
-            <p>{dict.studio.p2}</p>
-            <p>{dict.studio.p3}</p>
-          </Reveal>
+            {dict.studio.workWithUs}
+            <span className="transition-transform group-hover:translate-x-1">
+              →
+            </span>
+          </Link>
         </div>
       </section>
 
       <Origin />
-
-      <section className="bg-paper">
-        <div className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32">
-          <Reveal>
-            <p className="text-[0.65rem] tracking-[0.28em] text-stone uppercase">
-              {dict.studio.team}
-            </p>
-            <h2 className="mt-5 font-serif text-4xl md:text-5xl">
-              {dict.studio.teamHeadline}
-            </h2>
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink/65">
-              {dict.studio.teamIntro}
-            </p>
-          </Reveal>
-
-          <div className="mt-14 grid gap-10 md:grid-cols-2 md:gap-16">
-            <Reveal className="border-t border-line pt-8">
-              <p className="font-serif text-3xl tracking-[0.06em] uppercase">
-                {dict.studio.creative}
-              </p>
-              <p className="mt-3 text-[0.7rem] tracking-[0.18em] text-stone uppercase">
-                {dict.studio.creativeTags}
-              </p>
-              <p className="mt-6 max-w-sm text-sm leading-relaxed text-ink/65">
-                {dict.studio.creativeCopy}
-              </p>
-            </Reveal>
-            <Reveal delay={100} className="border-t border-line pt-8">
-              <p className="font-serif text-3xl tracking-[0.06em] uppercase">
-                {dict.studio.digital}
-              </p>
-              <p className="mt-3 text-[0.7rem] tracking-[0.18em] text-stone uppercase">
-                {dict.studio.digitalTags}
-              </p>
-              <p className="mt-6 max-w-sm text-sm leading-relaxed text-ink/65">
-                {dict.studio.digitalCopy}
-              </p>
-            </Reveal>
-          </div>
-
-          <Reveal delay={160} className="mt-16">
-            <Link
-              href="/contact"
-              className="group inline-flex min-h-12 w-fit items-center gap-3 bg-foam px-6 py-4 text-[0.7rem] tracking-[0.22em] text-deep uppercase transition-colors hover:bg-foam/90"
-            >
-              {dict.studio.workWithUs}
-              <span className="transition-transform group-hover:translate-x-1">
-                →
-              </span>
-            </Link>
-          </Reveal>
-        </div>
-      </section>
     </div>
   );
 }

@@ -1,37 +1,87 @@
 "use client";
 
+import { useRef } from "react";
 import { ArchiveLink } from "@/components/work/archive-gate";
+import { gsap, useGSAP } from "@/lib/gsap";
 import { useI18n } from "@/components/i18n/locale-provider";
-import { Reveal } from "@/components/motion/reveal";
+import { prefersReducedMotion } from "@/lib/motion";
 
 export function SelectedWork() {
   const { dict } = useI18n();
+  const rootRef = useRef<HTMLElement | null>(null);
+
+  useGSAP(
+    () => {
+      const root = rootRef.current;
+      if (!root) return;
+
+      const pieces = root.querySelectorAll("[data-sw-piece]");
+
+      if (prefersReducedMotion()) {
+        gsap.set(pieces, { clearProps: "all" });
+        return;
+      }
+
+      gsap.set(pieces, { autoAlpha: 0, y: 22 });
+
+      gsap.to(pieces, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.85,
+        stagger: 0.09,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: root,
+          start: "top 72%",
+          once: true,
+        },
+      });
+    },
+    { scope: rootRef }
+  );
 
   return (
-    <section className="bg-paper text-ink">
-      <div className="mx-auto flex min-h-[70vh] max-w-[1400px] flex-col justify-center px-5 py-24 md:px-10 md:py-32">
-        <Reveal>
-          <p className="text-[0.65rem] tracking-[0.28em] text-stone uppercase">
-            {dict.selectedWork.eyebrow}
-          </p>
-        </Reveal>
-        <Reveal delay={80} className="mt-5 max-w-3xl">
-          <h2 className="font-serif text-[clamp(2.4rem,6vw,5rem)] leading-[0.92]">
-            {dict.selectedWork.headline}
-          </h2>
-        </Reveal>
-        <Reveal delay={140} className="mt-5 max-w-md">
-          <p className="text-base leading-relaxed text-ink/80">
-            {dict.selectedWork.invite}
-          </p>
-        </Reveal>
+    <section ref={rootRef} className="bg-paper text-ink">
+      <div className="mx-auto flex min-h-[58vh] max-w-[1400px] flex-col justify-center px-5 py-20 md:px-10 md:py-24">
+        <h2
+          data-sw-piece
+          className="max-w-3xl font-serif text-[clamp(2.2rem,5.5vw,4.2rem)] leading-[0.95]"
+        >
+          {dict.selectedWork.headline}
+        </h2>
+        <p
+          data-sw-piece
+          className="mt-5 max-w-md text-base leading-relaxed text-ink/75"
+        >
+          {dict.selectedWork.invite}
+        </p>
 
-        <Reveal delay={200} className="mt-14 md:mt-16">
+        <ul
+          data-sw-piece
+          className="mt-10 flex flex-col gap-4 border-t border-line pt-8 md:mt-12"
+        >
+          {dict.selectedWork.proofs.map((proof) => (
+            <li
+              key={proof.domain}
+              className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 max-w-lg"
+            >
+              <span className="font-serif text-xl md:text-2xl">{proof.name}</span>
+              <span className="text-[0.75rem] tracking-[0.12em] text-stone uppercase">
+                {proof.domain}
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        <div data-sw-piece className="mt-14 md:mt-16">
           <ArchiveLink
             href="/work"
             className="group inline-flex min-h-11 flex-col items-start gap-8"
           >
-            <span className="relative flex h-16 w-44 items-center justify-between" aria-hidden>
+            <span
+              className="relative flex h-16 w-44 items-center justify-between"
+              aria-hidden
+            >
               <span className="size-16 rounded-full border border-line transition-colors group-hover:border-ink" />
               <span className="size-16 rounded-full border border-line transition-colors group-hover:border-ink" />
             </span>
@@ -42,7 +92,7 @@ export function SelectedWork() {
               </span>
             </span>
           </ArchiveLink>
-        </Reveal>
+        </div>
       </div>
     </section>
   );
