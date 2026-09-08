@@ -39,7 +39,7 @@ const formPanels = [
 export function Philosophy() {
   const { dict } = useI18n();
   const rootRef = useRef<HTMLElement | null>(null);
-  const frameRef = useRef<HTMLElement | null>(null);
+  const frameRef = useRef<HTMLDivElement | null>(null);
 
   useGSAP(
     () => {
