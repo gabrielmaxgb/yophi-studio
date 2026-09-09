@@ -17,6 +17,7 @@ export type Dictionary = {
 	};
 	nav: {
 		home: string;
+		services: string;
 		work: string;
 		studio: string;
 		contact: string;
@@ -48,6 +49,11 @@ export type Dictionary = {
 		digital: string;
 		digitalCopy: string;
 		meet: string;
+	};
+	services: {
+		eyebrow: string;
+		headline: string;
+		items: { title: string; body: string }[];
 	};
 	selectedWork: {
 		eyebrow: string;
@@ -115,8 +121,8 @@ export type Dictionary = {
 		tag: string;
 		name: string;
 		emailLabel: string;
-		company: string;
-		message: string;
+		presence: string;
+		presenceHint: string;
 		submit: string;
 		successTitle: string;
 		successBody: string;
@@ -133,6 +139,7 @@ export const dict: Dictionary = {
 	},
 	nav: {
 		home: "Início",
+		services: "Serviços",
 		work: "Projetos",
 		studio: "Estúdio",
 		contact: "Contato",
@@ -146,7 +153,7 @@ export const dict: Dictionary = {
 		cta: "Começar o seu projeto",
 		ctaSecondary: "Ver o trabalho",
 		ctaHint:
-			"Conte o que sua empresa faz, o que existe hoje e o que precisa mudar. A gente responde com um próximo passo claro.",
+			"Nome, o que está no ar. A gente marca 20 minutos.",
 		formLabel: "Forma",
 		formAside:
 			"Do que o seu negócio é ao que o cliente entende, lembra e escolhe.",
@@ -171,6 +178,36 @@ export const dict: Dictionary = {
 			"Sites, produtos e sistemas que facilitam entender, escolher, comprar e voltar.",
 		meet: "Criativo × Tecnologia",
 	},
+	services: {
+		eyebrow: "Serviços",
+		headline: "O que a gente faz.",
+		items: [
+			{
+				title: "Identidade visual e design",
+				body: "Logo, paleta, tipo e materiais. A cara da empresa em cartão, site e Instagram.",
+			},
+			{
+				title: "Criação de conteúdo",
+				body: "Texto, foto e vídeo prontos pra site, redes e campanha. Você para de improvisar o que postar.",
+			},
+			{
+				title: "Gestão de redes sociais",
+				body: "Planejamento, publicação e atendimento. Instagram no ritmo do negócio, sem depender de você todo dia.",
+			},
+			{
+				title: "Sites",
+				body: "Institucional, landing ou loja. No seu domínio, feito pra quem chega entender e pedir.",
+			},
+			{
+				title: "Tráfego pago",
+				body: "Google e Meta. Anúncio que aponta pra WhatsApp, site ou agendamento.",
+			},
+			{
+				title: "Sistemas personalizados",
+				body: "Agendamento, área do cliente, catálogo, operação. Feito pro jeito que a empresa trabalha — não planilha e DM.",
+			},
+		],
+	},
 	selectedWork: {
 		eyebrow: "Projetos",
 		headline: "O que muda quando tudo passa a fazer sentido.",
@@ -188,8 +225,8 @@ export const dict: Dictionary = {
 	finalCta: {
 		eyebrow: "Agora",
 		headline: "Seu digital está à altura do que a sua empresa entrega?",
-		body: "Envie o que existe hoje — site, perfil, apresentação ou uma breve descrição. A gente entende o momento, identifica o que está travando sua presença e indica um próximo passo claro.",
-		cta: "Começar o seu projeto",
+		body: "Manda o que está no ar. A gente olha e marca 20 minutos.",
+		cta: "Marcar uma conversa",
 	},
 	footer: {
 		blurb:
@@ -331,20 +368,19 @@ export const dict: Dictionary = {
 	},
 	contact: {
 		metaTitle: "Contato",
-		metaDescription: "Manda o projeto pra YOPHI. Três frases bastam.",
+		metaDescription:
+			"Marca uma conversa com a YOPHI. Manda o que está no ar. Vinte minutos.",
 		eyebrow: "Contato",
-		headline: "Manda o que as pessoas encontram hoje.",
-		intro:
-			"Quem é, o que está errado no ar, o que você quer no lugar. A gente responde em poucos dias.",
+		headline: "Uma conversa. Vinte minutos.",
+		intro: "Quem é, o que está no ar. A gente olha e marca.",
 		email: "hello@yophi.studio",
 		tag: "Criativo × Tecnologia",
 		name: "Nome",
 		emailLabel: "E-mail",
-		company: "Empresa",
-		message: "O que as pessoas encontram hoje?",
-		submit: "Enviar o projeto",
+		presence: "O que está no ar",
+		presenceHint: "Site, Instagram — o endereço.",
+		submit: "Marcar uma conversa",
 		successTitle: "Chegou.",
-		successBody:
-			"A gente lê e responde com o que faria — ou com o que não faria.",
+		successBody: "A gente olha o que está no ar e volta com um horário.",
 	},
 };

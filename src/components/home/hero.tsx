@@ -127,7 +127,7 @@ export function Hero() {
         />
         <svg
           data-hero-mark
-          className="absolute top-[18%] right-[8%] h-[38vh] w-auto opacity-[0.14] md:top-[14%] md:right-[12%] md:h-[48vh]"
+          className="absolute top-[14%] right-[12%] hidden h-[48vh] w-auto opacity-[0.14] md:block"
           viewBox="0 0 72 92"
           fill="none"
           aria-hidden
@@ -147,7 +147,11 @@ export function Hero() {
       </div>
 
       <div className="relative mx-auto grid h-full max-w-[1400px] grid-cols-1 px-5 pb-8 pt-24 md:grid-cols-[0.8fr_1.2fr] md:items-center md:gap-6 md:px-10 md:pb-12 md:pt-20">
-        <div className="relative z-10 flex min-h-0 flex-col justify-end gap-5 md:col-start-1 md:row-start-1 md:justify-center md:gap-7">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-5 h-[52%] bg-[linear-gradient(to_top,rgba(5,5,5,0.92)_0%,rgba(5,5,5,0.5)_36%,transparent_100%)] md:hidden"
+        />
+        <div className="relative z-10 flex min-h-0 flex-col justify-end gap-3.5 md:col-start-1 md:row-start-1 md:justify-center md:gap-7">
           <div className="flex flex-col">
             <p
               className="font-serif text-[clamp(2.8rem,9vw,6.5rem)] leading-[0.9] tracking-[0.08em] uppercase"
@@ -221,8 +225,8 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="hidden min-h-0 flex-col justify-center md:col-start-2 md:row-start-1 md:flex md:h-full">
-          <figure className="relative mx-auto flex w-full flex-1 items-center justify-center md:-mr-6 lg:-mr-10">
+        <div className="pointer-events-none absolute inset-x-0 top-28 z-0 flex h-[min(36dvh,22rem)] justify-center overflow-visible md:pointer-events-auto md:relative md:inset-auto md:top-auto md:col-start-2 md:row-start-1 md:h-full md:flex-col md:justify-center">
+          <figure className="relative mx-auto flex h-full w-[min(88%,20rem)] items-start justify-center md:-mr-6 md:w-full md:flex-1 md:items-center lg:-mr-10">
             <div
               aria-hidden
               data-hero-glow
@@ -233,7 +237,10 @@ export function Hero() {
               data-hero-glow
               className="pointer-events-none absolute top-[12%] right-[-8%] h-[75%] w-[75%] rounded-full bg-[radial-gradient(circle,rgba(201,106,62,0.55)_0%,transparent_70%)] blur-3xl"
             />
-            <div data-hero-head className="relative w-full max-h-[78vh]">
+            <div
+              data-hero-head
+              className="relative h-full w-full mask-[linear-gradient(to_bottom,black_70%,transparent_100%)] md:max-h-[78vh] md:mask-none"
+            >
               <Image
                 src="/philosophy/head.webp"
                 alt={dict.philosophy.imageAlt}
@@ -241,15 +248,15 @@ export function Hero() {
                 height={1825}
                 quality={90}
                 priority
-                sizes="42vw"
-                className="h-auto max-h-[78vh] w-full scale-[1.12] object-contain select-none drop-shadow-[0_40px_80px_rgba(0,0,0,0.55)]"
+                sizes="(max-width: 768px) 88vw, 42vw"
+                className="h-full w-full object-contain object-top select-none drop-shadow-[0_40px_80px_rgba(0,0,0,0.55)] md:h-auto md:max-h-[78vh] md:scale-[1.12]"
               />
             </div>
           </figure>
 
           <div
             data-form-meta
-            className="relative z-10 mt-5 flex shrink-0 items-end justify-between gap-4 border-t border-ink/15 pt-4"
+            className="relative z-10 mt-5 hidden shrink-0 items-end justify-between gap-4 border-t border-ink/15 pt-4 md:flex"
           >
             <div>
               <p className="text-[0.6rem] tracking-[0.28em] text-ink/60 uppercase">

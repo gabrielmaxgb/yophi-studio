@@ -45,9 +45,9 @@ O conjunto. Uma língua.
 
 ### Como começa
 
-1. Você manda o que existe hoje — site, perfil, três linhas.
+1. Você manda o que existe hoje — site, perfil.
 2. A gente olha o que está no ar vs. o que o negócio é.
-3. Resposta com o próximo passo claro — não um deck.
+3. Vinte minutos. Próximo passo claro — não um deck.
 
 ---
 
@@ -74,12 +74,12 @@ Fórmula que serve pra qualquer marca.
 
 ### Próximo passo
 
-**Começar o seu projeto**  
+**Marcar uma conversa**  
 hello@yophi.studio  
 yophi.studio/contact
 
-Manda quem é, o que está no ar, o que precisa mudar.
-A gente lê e responde.
+Manda quem é e o que está no ar.
+A gente olha e marca.
 
 ---
 

@@ -6,7 +6,6 @@ import { Reveal } from "@/components/motion/reveal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 
 export function ContactForm() {
   const { dict } = useI18n();
@@ -41,7 +40,12 @@ export function ContactForm() {
           delay={200}
           className="mt-10 flex flex-col gap-2 text-sm text-stone"
         >
-          <p className="tracking-[0.16em] uppercase">{dict.contact.email}</p>
+          <a
+            href={`mailto:${dict.contact.email}`}
+            className="w-fit tracking-[0.16em] uppercase transition-colors hover:text-ink"
+          >
+            {dict.contact.email}
+          </a>
           <p>{dict.contact.tag}</p>
         </Reveal>
       </div>
@@ -72,6 +76,7 @@ export function ContactForm() {
                 <Input
                   id="name"
                   name="name"
+                  autoComplete="name"
                   required
                   className="border-line bg-transparent"
                 />
@@ -87,6 +92,7 @@ export function ContactForm() {
                   id="email"
                   name="email"
                   type="email"
+                  autoComplete="email"
                   required
                   className="border-line bg-transparent"
                 />
@@ -95,32 +101,21 @@ export function ContactForm() {
 
             <div className="flex flex-col gap-2">
               <Label
-                htmlFor="company"
+                htmlFor="presence"
                 className="text-[0.65rem] tracking-[0.18em] uppercase"
               >
-                {dict.contact.company}
+                {dict.contact.presence}
               </Label>
               <Input
-                id="company"
-                name="company"
+                id="presence"
+                name="presence"
+                autoComplete="url"
+                required
                 className="border-line bg-transparent"
               />
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <Label
-                htmlFor="message"
-                className="text-[0.65rem] tracking-[0.18em] uppercase"
-              >
-                {dict.contact.message}
-              </Label>
-              <Textarea
-                id="message"
-                name="message"
-                required
-                rows={6}
-                className="border-line min-h-36 bg-transparent"
-              />
+              <p className="text-[0.75rem] leading-relaxed text-ink/50">
+                {dict.contact.presenceHint}
+              </p>
             </div>
 
             <Button

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { YophiLogo } from "@/components/brand/yophi-logo";
 import { ArchiveLink } from "@/components/work/archive-gate";
 import { useI18n } from "@/components/i18n/locale-provider";
+import { prefersReducedMotion } from "@/lib/motion";
 
 export function SiteFooter() {
   const { dict } = useI18n();
@@ -33,6 +34,18 @@ export function SiteFooter() {
             {dict.footer.navigate}
           </p>
           <div className="flex flex-col gap-2 text-sm">
+            <Link
+              href="/#servicos"
+              onClick={() => {
+                if (pathname !== "/") return;
+                document.getElementById("servicos")?.scrollIntoView({
+                  behavior: prefersReducedMotion() ? "auto" : "smooth",
+                });
+              }}
+              className="inline-flex min-h-11 items-center text-ink/85 transition-colors hover:text-ink"
+            >
+              {dict.nav.services}
+            </Link>
             <ArchiveLink
               href="/work"
               className="inline-flex min-h-11 items-center text-ink/85 transition-colors hover:text-ink"

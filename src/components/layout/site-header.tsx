@@ -39,10 +39,19 @@ export function SiteHeader() {
   }, []);
 
   const links = [
+    { href: "/#servicos", label: dict.nav.services },
     { href: "/work", label: dict.nav.work },
     { href: "/studio", label: dict.nav.studio },
     { href: "/contact", label: dict.nav.contact },
   ];
+
+  const goToLink = (href: string) => {
+    setOpen(false);
+    if (href !== "/#servicos" || pathname !== "/") return;
+    document.getElementById("servicos")?.scrollIntoView({
+      behavior: prefersReducedMotion() ? "auto" : "smooth",
+    });
+  };
 
   return (
     <>
@@ -75,7 +84,7 @@ export function SiteHeader() {
           aria-label="Principal"
           className="pointer-events-auto absolute top-1/2 right-2 hidden -translate-y-1/2 md:right-4 md:block lg:right-6"
         >
-          <ul className="relative flex flex-col items-end gap-9 pr-1">
+          <ul className="relative flex flex-col items-end gap-7 pr-1 lg:gap-9">
             {links.map((link) => {
               const active = pathname === link.href;
               const LinkTag = link.href === "/work" ? ArchiveLink : Link;
@@ -85,6 +94,7 @@ export function SiteHeader() {
                 <li key={link.href}>
                   <LinkTag
                     href={link.href}
+                    onClick={() => goToLink(link.href)}
                     className={cn(
                       "group relative block [writing-mode:vertical-rl] rotate-180 text-[0.78rem] tracking-[0.28em] uppercase transition-colors duration-300 md:text-[0.82rem]",
                       isContact
@@ -149,7 +159,7 @@ export function SiteHeader() {
                       <LinkTag
                         key={link.href}
                         href={link.href}
-                        onClick={() => setOpen(false)}
+                        onClick={() => goToLink(link.href)}
                         className={cn(
                           "font-serif text-4xl tracking-[0.08em] uppercase transition-colors",
                           active ? "text-ember" : "text-ink/70"
