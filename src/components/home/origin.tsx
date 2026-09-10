@@ -50,8 +50,16 @@ export function Origin() {
   );
 
   return (
-    <section ref={rootRef} className="bg-mist text-ink">
-      <div className="mx-auto flex max-w-[1400px] flex-col items-center px-5 py-20 text-center md:px-10 md:py-28">
+    <section
+      ref={rootRef}
+      className="relative overflow-hidden bg-mist text-ink"
+    >
+      <div aria-hidden className="atmosphere-wash atmosphere-wash-center" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute top-[18%] left-1/2 z-0 h-[22rem] w-[22rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(201,106,62,0.22)_0%,transparent_70%)] blur-3xl"
+      />
+      <div className="relative mx-auto flex max-w-[1400px] flex-col items-center px-5 py-20 text-center md:px-10 md:py-28">
         <p
           className="text-[clamp(4rem,14vw,9rem)] leading-none tracking-[0.2em]"
           lang="he"

@@ -21,6 +21,7 @@ export type Dictionary = {
 		work: string;
 		studio: string;
 		contact: string;
+		client: string;
 		openMenu: string;
 		skip: string;
 	};
@@ -124,8 +125,10 @@ export type Dictionary = {
 		presence: string;
 		presenceHint: string;
 		submit: string;
+		whatsapp: string;
 		successTitle: string;
 		successBody: string;
+		sendError: string;
 	};
 };
 
@@ -143,6 +146,7 @@ export const dict: Dictionary = {
 		work: "Projetos",
 		studio: "Estúdio",
 		contact: "Contato",
+		client: "Sou yopher",
 		openMenu: "Abrir menu",
 		skip: "Ir para o conteúdo",
 	},
@@ -214,10 +218,7 @@ export const dict: Dictionary = {
 		invite:
 			"Cada projeto parte de uma empresa real e de um desafio específico. Veja como estratégia, identidade e tecnologia se conectaram para tornar cada marca mais clara, presente e fácil de escolher.",
 		all: "Ver projetos",
-		proofs: [
-			{ name: "maxdecoyer", domain: "maxdecoyer.com" },
-			{ name: "Dra. Ana Cárdenas", domain: "draanacardenas.com" },
-		],
+		proofs: [],
 	},
 	origin: {
 		note: "Do hebraico — beleza",
@@ -372,15 +373,17 @@ export const dict: Dictionary = {
 			"Marca uma conversa com a YOPHI. Manda o que está no ar. Vinte minutos.",
 		eyebrow: "Contato",
 		headline: "Uma conversa. Vinte minutos.",
-		intro: "Quem é, o que está no ar. A gente olha e marca.",
+		intro: "Quem é, o que está no ar. Escreve aqui ou chama no WhatsApp.",
 		email: "hello@yophi.studio",
 		tag: "Criativo × Tecnologia",
 		name: "Nome",
 		emailLabel: "E-mail",
 		presence: "O que está no ar",
 		presenceHint: "Site, Instagram — o endereço.",
-		submit: "Marcar uma conversa",
+		submit: "Mandar por e-mail",
+		whatsapp: "Chamar no WhatsApp",
 		successTitle: "Chegou.",
 		successBody: "A gente olha o que está no ar e volta com um horário.",
+		sendError: "Não chegou. Tenta de novo ou chama no WhatsApp.",
 	},
 };

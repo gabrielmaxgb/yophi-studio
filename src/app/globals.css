@@ -143,6 +143,37 @@
     outline-offset: 4px;
   }
 
+  a,
+  button,
+  label,
+  summary,
+  select,
+  [role="button"],
+  [role="link"],
+  [role="menuitem"],
+  [role="option"],
+  [role="tab"],
+  [role="switch"],
+  [role="checkbox"],
+  [role="radio"],
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  input[type="checkbox"],
+  input[type="radio"],
+  input[type="file"],
+  input[type="image"] {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [aria-disabled="true"],
+  input:disabled,
+  select:disabled,
+  textarea:disabled {
+    cursor: not-allowed;
+  }
+
   .skip-link {
     position: absolute;
     left: 1rem;
@@ -185,6 +216,60 @@
   .hairline {
     height: 1px;
     background: var(--line);
+  }
+
+  /* Ember + steel atmosphere from the hero, quieter so later rooms stay the same stage. */
+  .atmosphere-wash {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background:
+      radial-gradient(
+        ellipse at var(--wash-ember-x, 82%) var(--wash-ember-y, 10%),
+        color-mix(in srgb, var(--ember) var(--wash-ember, 12%), transparent),
+        transparent 52%
+      ),
+      radial-gradient(
+        ellipse at var(--wash-steel-x, 10%) var(--wash-steel-y, 88%),
+        color-mix(in srgb, var(--steel) var(--wash-steel, 14%), transparent),
+        transparent 55%
+      );
+  }
+
+  .atmosphere-wash-flip {
+    --wash-ember-x: 12%;
+    --wash-ember-y: 24%;
+    --wash-steel-x: 88%;
+    --wash-steel-y: 78%;
+  }
+
+  .atmosphere-wash-center {
+    --wash-ember-x: 50%;
+    --wash-ember-y: 38%;
+    --wash-steel-x: 50%;
+    --wash-steel-y: 100%;
+    --wash-ember: 12%;
+    --wash-steel: 10%;
+  }
+
+  .atmosphere-wash-strong {
+    --wash-ember: 14%;
+    --wash-steel: 16%;
+  }
+
+  .ember-rule {
+    position: relative;
+  }
+
+  .ember-rule::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    height: 1px;
+    width: 2.5rem;
+    background: color-mix(in srgb, var(--ember) 70%, transparent);
   }
 }
 

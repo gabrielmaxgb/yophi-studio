@@ -12,7 +12,8 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="bg-paper text-ink">
+    <div className="relative overflow-hidden bg-paper text-ink">
+      <div aria-hidden className="atmosphere-wash" />
       <ContactForm />
     </div>
   );

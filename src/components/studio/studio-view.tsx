@@ -38,15 +38,16 @@ export function StudioView() {
   );
 
   return (
-    <div className="bg-paper text-ink">
+    <div className="relative overflow-hidden bg-paper text-ink">
+      <div aria-hidden className="atmosphere-wash" />
       <section
         ref={rootRef}
-        className="mx-auto flex min-h-[72vh] max-w-[1400px] flex-col justify-center px-5 py-28 md:px-10 md:py-32"
+        className="relative mx-auto flex min-h-[72vh] max-w-[1400px] flex-col justify-center px-5 py-28 md:px-10 md:py-32"
       >
         {dict.studio.eyebrow ? (
           <p
             data-studio-piece
-            className="text-[0.65rem] tracking-[0.28em] text-stone uppercase"
+            className="text-[0.65rem] tracking-[0.28em] text-ember/75 uppercase"
           >
             {dict.studio.eyebrow}
           </p>
@@ -66,6 +67,7 @@ export function StudioView() {
 
         <div className="mt-16 flex max-w-3xl flex-col gap-12 md:flex-row md:items-start md:gap-20">
           <div data-studio-piece className="max-w-xs">
+            <span aria-hidden className="mb-4 block h-px w-8 bg-ember/70" />
             <p className="font-serif text-2xl tracking-[0.06em] uppercase md:text-3xl">
               {dict.studio.creative}
             </p>
@@ -74,6 +76,7 @@ export function StudioView() {
             </p>
           </div>
           <div data-studio-piece className="max-w-xs md:pt-10">
+            <span aria-hidden className="mb-4 block h-px w-8 bg-ember/70" />
             <p className="font-serif text-3xl tracking-[0.06em] uppercase md:text-4xl">
               {dict.studio.digital}
             </p>

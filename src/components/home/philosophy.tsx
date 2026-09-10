@@ -91,7 +91,8 @@ export function Philosophy() {
       ref={rootRef}
       className="relative overflow-x-clip bg-paper text-ink"
     >
-      <div className="mx-auto grid max-w-[1400px] items-center gap-10 px-5 py-24 md:grid-cols-12 md:gap-12 md:px-10 md:py-32">
+      <div aria-hidden className="atmosphere-wash" />
+      <div className="relative mx-auto grid max-w-[1400px] items-center gap-10 px-5 py-24 md:grid-cols-12 md:gap-12 md:px-10 md:py-32">
         <div className="md:col-span-5">
           <SplitHeadline className="max-w-xl font-serif text-[clamp(2.4rem,6vw,4.4rem)] leading-[1.05] text-balance">
             {dict.philosophy.headline}
@@ -104,7 +105,7 @@ export function Philosophy() {
           </p>
           <p
             data-closing
-            className="mt-8 max-w-sm text-[0.7rem] tracking-[0.22em] text-stone uppercase"
+            className="mt-8 max-w-sm text-[0.7rem] tracking-[0.22em] text-ember/75 uppercase"
           >
             {dict.philosophy.closing}
           </p>
@@ -130,9 +131,10 @@ export function Philosophy() {
                   alt=""
                   fill
                   sizes={panel.sizes}
-                  className="object-cover saturate-[0.45] contrast-[1.08]"
+                  className="object-cover saturate-[0.75] contrast-[1.08]"
                 />
-                <div className="absolute inset-0 bg-deep/40" />
+                <div className="absolute inset-0 bg-deep/22" />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_0%,rgba(201,106,62,0.16),transparent_55%)]" />
               </div>
             ))}
           </div>

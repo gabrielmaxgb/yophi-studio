@@ -1,0 +1,214 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Better Auth ─────────────────────────────────────────────
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  role          String    @default("CLIENT") // STUDIO | CLIENT
+  banned        Boolean   @default(false)
+  sessions      Session[]
+  accounts      Account[]
+  memberships   ProjectMember[]
+  createdProjects Project[] @relation("ProjectCreatedBy")
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  expiresAt DateTime
+  token     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model Account {
+  id                    String    @id @default(cuid())
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+}
+
+model Verification {
+  id         String   @id @default(cuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+}
+
+// ─── YOPHI domain ────────────────────────────────────────────
+
+model Project {
+  id             String   @id @default(cuid())
+  name           String
+  slug           String   @unique
+  /// BRIEF | PRODUCTION | WAITING_CLIENT | LIVE | PAUSED
+  status         String   @default("BRIEF")
+  statusNow      String   @default("")
+  statusWaiting  String   @default("")
+  statusNext     String   @default("")
+  statusDueAt    DateTime?
+  briefAudience  String   @default("")
+  briefTone      String   @default("")
+  briefDo        String   @default("")
+  briefDont      String   @default("")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  createdById    String?
+  createdBy      User?    @relation("ProjectCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+
+  services    ProjectService[]
+  members     ProjectMember[]
+  approvals   Approval[]
+  requests    ClientRequest[]
+  assets      ArchiveAsset[]
+  contentItems ContentItem[]
+  accessMaps  AccessMap[]
+
+  @@index([status])
+}
+
+model ProjectService {
+  id          String   @id @default(cuid())
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  /// Catalog key: identity | content | social | sites | ads | systems
+  serviceKey  String
+  customTitle String?
+  customBody  String?
+  customNotes String   @default("")
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([projectId, serviceKey])
+  @@index([projectId])
+}
+
+model ProjectMember {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  /// CLIENT_CONTACT | STUDIO
+  memberRole String  @default("CLIENT_CONTACT")
+  createdAt DateTime @default(now())
+
+  @@unique([projectId, userId])
+  @@index([userId])
+}
+
+model Approval {
+  id          String   @id @default(cuid())
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title       String
+  /// TEXT | LAYOUT | SITE | OTHER
+  kind        String   @default("OTHER")
+  body        String   @default("")
+  previewUrl  String?
+  /// PENDING | APPROVED | CHANGES
+  status      String   @default("PENDING")
+  clientNote  String   @default("")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([projectId, status])
+}
+
+model ClientRequest {
+  id        String    @id @default(cuid())
+  projectId String
+  project   Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title     String
+  body      String    @default("")
+  /// NORMAL | URGENT
+  priority  String    @default("NORMAL")
+  /// OPEN | DOING | DONE
+  status    String    @default("OPEN")
+  dueAt     DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@index([projectId, status])
+}
+
+model ArchiveAsset {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  label     String
+  url       String
+  /// SITE | DOMAIN | SOCIAL | FILE | OTHER
+  kind      String   @default("OTHER")
+  /// LIVE | DRAFT | APPROVED
+  status    String   @default("LIVE")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([projectId])
+}
+
+model ContentItem {
+  id          String    @id @default(cuid())
+  projectId   String
+  project     Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title       String
+  channel     String    @default("")
+  scheduledAt DateTime?
+  /// DRAFT | WAITING_CLIENT | APPROVED | PUBLISHED | PAUSED
+  status      String    @default("DRAFT")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([projectId, status])
+}
+
+model AccessMap {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  label     String
+  holder    String   @default("")
+  /// OK | MISSING | PENDING
+  status    String   @default("MISSING")
+  notes     String   @default("")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([projectId])
+}

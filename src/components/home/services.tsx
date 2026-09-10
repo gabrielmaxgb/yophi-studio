@@ -50,12 +50,13 @@ export function Services() {
     <section
       ref={rootRef}
       id="servicos"
-      className="scroll-mt-8 border-b border-line bg-paper text-ink"
+      className="relative scroll-mt-8 overflow-hidden border-b border-line bg-paper text-ink"
     >
-      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-28">
+      <div aria-hidden className="atmosphere-wash" />
+      <div className="relative mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-28">
         <p
           data-sv-piece
-          className="text-[0.65rem] tracking-[0.28em] text-stone uppercase"
+          className="text-[0.65rem] tracking-[0.28em] text-ember/75 uppercase"
         >
           {dict.services.eyebrow}
         </p>
@@ -71,11 +72,11 @@ export function Services() {
             <li
               key={item.title}
               data-sv-piece
-              className="border-t border-line pt-6"
+              className="ember-rule border-t border-line pt-6"
             >
               <span
                 aria-hidden
-                className="editorial-num text-[0.65rem] tracking-[0.22em] text-stone"
+                className="editorial-num text-[0.65rem] tracking-[0.22em] text-ember/80"
               >
                 {String(index + 1).padStart(2, "0")}
               </span>

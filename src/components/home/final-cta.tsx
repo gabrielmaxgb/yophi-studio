@@ -46,7 +46,7 @@ export function FinalCta() {
     <section ref={rootRef} className="relative overflow-hidden bg-deep text-ink">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,rgba(201,106,62,0.14),transparent_55%),radial-gradient(ellipse_at_80%_80%,rgba(61,74,86,0.18),transparent_50%)]"
+        className="atmosphere-wash atmosphere-wash-flip atmosphere-wash-strong"
       />
       <div className="relative mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32">
         <SplitHeadline className="max-w-4xl font-serif text-[clamp(2.4rem,6vw,4.8rem)] leading-[0.98] text-balance">

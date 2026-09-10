@@ -14,8 +14,9 @@ export function SiteFooter() {
   if (pathname === "/work") return null;
 
   return (
-    <footer className="border-line border-t bg-deep text-ink">
-      <div className="mx-auto grid max-w-[1400px] gap-12 px-5 py-16 md:grid-cols-[1.4fr_1fr_1fr] md:px-10 md:py-20">
+    <footer className="relative overflow-hidden border-line border-t bg-deep text-ink">
+      <div aria-hidden className="atmosphere-wash atmosphere-wash-flip" />
+      <div className="relative mx-auto grid max-w-[1400px] gap-12 px-5 py-16 md:grid-cols-[1.4fr_1fr_1fr] md:px-10 md:py-20">
         <div className="flex flex-col gap-5">
           <YophiLogo
             layout="stack"
@@ -30,7 +31,7 @@ export function SiteFooter() {
         </div>
 
         <div className="flex flex-col gap-4">
-          <p className="text-[0.65rem] tracking-[0.24em] text-ink/45 uppercase">
+          <p className="text-[0.65rem] tracking-[0.24em] text-ember/70 uppercase">
             {dict.footer.navigate}
           </p>
           <div className="flex flex-col gap-2 text-sm">
@@ -68,7 +69,7 @@ export function SiteFooter() {
         </div>
 
         <div className="flex flex-col gap-4 md:items-end md:text-right">
-          <p className="text-[0.65rem] tracking-[0.24em] text-ink/45 uppercase">
+          <p className="text-[0.65rem] tracking-[0.24em] text-ember/70 uppercase">
             {dict.footer.presence}
           </p>
           <p className="font-serif text-2xl leading-snug text-ink/90">
@@ -79,7 +80,7 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div className="border-ink/10 mx-auto flex max-w-[1400px] flex-col gap-2 border-t px-5 py-6 text-[0.65rem] tracking-[0.16em] text-ink/60 uppercase md:flex-row md:items-center md:justify-between md:px-10">
+      <div className="relative border-ink/10 mx-auto flex max-w-[1400px] flex-col gap-2 border-t px-5 py-6 text-[0.65rem] tracking-[0.16em] text-ink/60 uppercase md:flex-row md:items-center md:justify-between md:px-10">
         <span>
           © {new Date().getFullYear()} {dict.footer.copyright}
         </span>

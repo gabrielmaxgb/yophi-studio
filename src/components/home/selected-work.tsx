@@ -41,8 +41,9 @@ export function SelectedWork() {
   );
 
   return (
-    <section ref={rootRef} className="bg-paper text-ink">
-      <div className="mx-auto flex min-h-[58vh] max-w-[1400px] flex-col justify-center px-5 py-20 md:px-10 md:py-24">
+    <section ref={rootRef} className="relative overflow-hidden bg-paper text-ink">
+      <div aria-hidden className="atmosphere-wash atmosphere-wash-flip" />
+      <div className="relative mx-auto flex min-h-[58vh] max-w-[1400px] flex-col justify-center px-5 py-20 md:px-10 md:py-24">
         <h2
           data-sw-piece
           className="max-w-3xl font-serif text-[clamp(2.2rem,5.5vw,4.2rem)] leading-[0.95]"
@@ -56,22 +57,26 @@ export function SelectedWork() {
           {dict.selectedWork.invite}
         </p>
 
-        <ul
-          data-sw-piece
-          className="mt-10 flex flex-col gap-4 border-t border-line pt-8 md:mt-12"
-        >
-          {dict.selectedWork.proofs.map((proof) => (
-            <li
-              key={proof.domain}
-              className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 max-w-lg"
-            >
-              <span className="font-serif text-xl md:text-2xl">{proof.name}</span>
-              <span className="text-[0.75rem] tracking-[0.12em] text-stone uppercase">
-                {proof.domain}
-              </span>
-            </li>
-          ))}
-        </ul>
+        {dict.selectedWork.proofs.length > 0 ? (
+          <ul
+            data-sw-piece
+            className="mt-10 flex flex-col gap-4 border-t border-line pt-8 md:mt-12"
+          >
+            {dict.selectedWork.proofs.map((proof) => (
+              <li
+                key={proof.domain}
+                className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 max-w-lg"
+              >
+                <span className="font-serif text-xl md:text-2xl">
+                  {proof.name}
+                </span>
+                <span className="text-[0.75rem] tracking-[0.12em] text-ember/75 uppercase">
+                  {proof.domain}
+                </span>
+              </li>
+            ))}
+          </ul>
+        ) : null}
 
         <div data-sw-piece className="mt-14 md:mt-16">
           <ArchiveLink
@@ -82,8 +87,8 @@ export function SelectedWork() {
               className="relative flex h-16 w-44 items-center justify-between"
               aria-hidden
             >
-              <span className="size-16 rounded-full border border-line transition-colors group-hover:border-ink" />
-              <span className="size-16 rounded-full border border-line transition-colors group-hover:border-ink" />
+              <span className="size-16 rounded-full border border-ember/30 transition-colors group-hover:border-ember" />
+              <span className="size-16 rounded-full border border-ember/30 transition-colors group-hover:border-ember" />
             </span>
             <span className="inline-flex items-center gap-3 text-[0.7rem] tracking-[0.22em] uppercase">
               {dict.selectedWork.all}

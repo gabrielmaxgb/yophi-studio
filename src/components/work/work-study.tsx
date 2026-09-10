@@ -16,8 +16,9 @@ export function WorkStudy({ slug }: { slug: CaseStudySlug }) {
   const showImpact = Boolean(copy.impact) && !impactIsPlaceholder;
 
   return (
-    <div className="bg-paper text-ink">
-      <article className="mx-auto max-w-[1400px] px-5 pt-28 pb-28 md:px-10 md:pt-36">
+    <div className="relative overflow-hidden bg-paper text-ink">
+      <div aria-hidden className="atmosphere-wash" />
+      <article className="relative mx-auto max-w-[1400px] px-5 pt-28 pb-28 md:px-10 md:pt-36">
         <Reveal>
           <Link
             href="/work"
@@ -62,7 +63,7 @@ export function WorkStudy({ slug }: { slug: CaseStudySlug }) {
           <Reveal>
             <div className="flex flex-col gap-8">
               <div className="flex flex-col gap-3">
-                <p className="text-[0.65rem] tracking-[0.22em] text-stone uppercase">
+                <p className="text-[0.65rem] tracking-[0.22em] text-ember/75 uppercase">
                   {dict.work.disciplines}
                 </p>
                 <p className="text-sm tracking-[0.12em] uppercase">
@@ -70,7 +71,7 @@ export function WorkStudy({ slug }: { slug: CaseStudySlug }) {
                 </p>
               </div>
               <div className="flex flex-col gap-3">
-                <p className="text-[0.65rem] tracking-[0.22em] text-stone uppercase">
+                <p className="text-[0.65rem] tracking-[0.22em] text-ember/75 uppercase">
                   {dict.work.outcomes}
                 </p>
                 <p className="text-sm">{copy.outcomes.join(" · ")}</p>
@@ -94,7 +95,7 @@ export function WorkStudy({ slug }: { slug: CaseStudySlug }) {
           <Reveal delay={80}>
             <div className="flex flex-col gap-10">
               <div className="flex flex-col gap-3">
-                <p className="text-[0.65rem] tracking-[0.22em] text-stone uppercase">
+                <p className="text-[0.65rem] tracking-[0.22em] text-ember/75 uppercase">
                   {dict.work.challenge}
                 </p>
                 <p className="text-lg leading-relaxed text-ink/80">
@@ -108,7 +109,7 @@ export function WorkStudy({ slug }: { slug: CaseStudySlug }) {
               </div>
 
               <div className="flex flex-col gap-3">
-                <p className="text-[0.65rem] tracking-[0.22em] text-stone uppercase">
+                <p className="text-[0.65rem] tracking-[0.22em] text-ember/75 uppercase">
                   {dict.work.intervention}
                 </p>
                 <p className="font-serif text-2xl leading-snug md:text-3xl">
@@ -118,7 +119,7 @@ export function WorkStudy({ slug }: { slug: CaseStudySlug }) {
 
               {showImpact ? (
                 <div className="flex flex-col gap-3 border-t border-line pt-8">
-                  <p className="text-[0.65rem] tracking-[0.22em] text-stone uppercase">
+                  <p className="text-[0.65rem] tracking-[0.22em] text-ember/75 uppercase">
                     {dict.work.impact}
                   </p>
                   <p className="font-serif text-xl md:text-2xl">{copy.impact}</p>

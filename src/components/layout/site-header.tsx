@@ -17,6 +17,36 @@ import {
 import { YophiMark } from "@/components/brand/yophi-logo";
 import { cn } from "@/lib/utils";
 
+function ClientPass({
+  label,
+  className,
+  onClick,
+}: {
+  label: string;
+  className?: string;
+  onClick?: () => void;
+}) {
+  return (
+    <Link
+      href="/entrar"
+      onClick={onClick}
+      aria-label="Entrar na área do cliente"
+      className={cn(
+        "group relative inline-flex min-h-9 items-center gap-2.5 overflow-hidden bg-foam px-3 text-[0.58rem] tracking-[0.24em] text-deep uppercase",
+        "transition-[background-color,color] duration-300 hover:bg-ember hover:text-foam",
+        "md:min-h-10 md:gap-3 md:px-4 md:text-[0.62rem] md:tracking-[0.32em]",
+        className
+      )}
+    >
+      <span
+        aria-hidden
+        className="h-1.5 w-1.5 bg-ember transition-colors duration-300 group-hover:bg-foam"
+      />
+      {label}
+    </Link>
+  );
+}
+
 export function SiteHeader() {
   const { dict } = useI18n();
   const pathname = usePathname();
@@ -123,14 +153,15 @@ export function SiteHeader() {
           </ul>
         </nav>
 
-        {/* Mobile — raw cue, no plate */}
+        {/* Client pass — membership plate, not a sales CTA */}
         <div
           data-nav-in
-          className="pointer-events-auto absolute top-5 right-5 md:hidden"
+          className="pointer-events-auto absolute top-5 right-5 flex items-center gap-4 md:top-8 md:right-8 lg:right-10"
         >
+          <ClientPass label={dict.nav.client} />
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger
-              className="text-[0.7rem] tracking-[0.28em] text-ink/80 uppercase"
+              className="text-[0.7rem] tracking-[0.28em] text-ink/80 uppercase md:hidden"
               aria-label={dict.nav.openMenu}
             >
               Menu
@@ -170,7 +201,14 @@ export function SiteHeader() {
                     );
                   })}
                 </nav>
-                <YophiMark className="h-10 w-auto text-ink/40" />
+                <div className="flex flex-col gap-8">
+                  <ClientPass
+                    label={dict.nav.client}
+                    onClick={() => setOpen(false)}
+                    className="w-fit"
+                  />
+                  <YophiMark className="h-10 w-auto text-ink/40" />
+                </div>
               </div>
             </SheetContent>
           </Sheet>

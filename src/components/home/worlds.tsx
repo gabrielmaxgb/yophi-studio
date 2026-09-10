@@ -44,17 +44,22 @@ export function Worlds() {
   );
 
   return (
-    <section ref={rootRef} className="border-y border-line bg-mist text-ink">
-      <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-28">
+    <section
+      ref={rootRef}
+      className="relative overflow-hidden border-y border-line bg-mist text-ink"
+    >
+      <div aria-hidden className="atmosphere-wash atmosphere-wash-flip" />
+      <div className="relative mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-28">
         <p
           data-w-eyebrow
-          className="text-[0.65rem] tracking-[0.28em] text-stone uppercase"
+          className="text-[0.65rem] tracking-[0.28em] text-ember/75 uppercase"
         >
           {dict.worlds.eyebrow}
         </p>
 
         <div className="mt-12 flex flex-col gap-14 md:mt-16 md:gap-20">
           <div data-w-creative className="max-w-sm md:max-w-md">
+            <span aria-hidden className="mb-4 block h-px w-8 bg-ember/70" />
             <p className="font-serif text-3xl tracking-[0.06em] uppercase md:text-4xl">
               {dict.worlds.creative}
             </p>
@@ -67,6 +72,10 @@ export function Worlds() {
             data-w-digital
             className="max-w-md self-end md:max-w-lg md:text-right"
           >
+            <span
+              aria-hidden
+              className="mb-4 block h-px w-8 bg-ember/70 md:ml-auto"
+            />
             <p className="font-serif text-4xl tracking-[0.06em] uppercase md:text-5xl">
               {dict.worlds.digital}
             </p>
