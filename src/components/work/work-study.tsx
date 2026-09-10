@@ -43,7 +43,7 @@ export function WorkStudy({ slug }: { slug: CaseStudySlug }) {
                 : "aspect-[3/4] w-full"
             }
           >
-            <div className="absolute inset-6 z-10 flex flex-col justify-between border border-ink/20 px-6 pt-5 pb-8 text-ink md:inset-10 md:px-8 md:pt-6 md:pb-10">
+            <div className="absolute inset-6 z-10 flex flex-col justify-between border border-ink/20 px-6 pt-5 pb-8 text-ink drop-shadow-[0_1px_12px_rgba(0,0,0,0.55)] md:inset-10 md:px-8 md:pt-6 md:pb-10">
               <div className="flex items-center justify-between gap-4">
                 <p className="text-[0.65rem] leading-none tracking-[0.24em] text-ink/80 uppercase">
                   {copy.sector}

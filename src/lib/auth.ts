@@ -8,10 +8,22 @@ if (!secret || secret.length < 32) {
   throw new Error("BETTER_AUTH_SECRET must be set (≥32 chars).");
 }
 
+function resolveAuthBaseURL() {
+  const explicit = process.env.BETTER_AUTH_URL?.replace(/\/$/, "");
+  if (explicit) return explicit;
+
+  const host =
+    process.env.VERCEL_ENV === "production"
+      ? process.env.VERCEL_PROJECT_PRODUCTION_URL
+      : process.env.VERCEL_URL;
+  if (host) return `https://${host.replace(/^https?:\/\//, "")}`;
+  return "http://localhost:3000";
+}
+
 export const auth = betterAuth({
   database: prismaAdapter(prisma, { provider: "postgresql" }),
   secret,
-  baseURL: process.env.BETTER_AUTH_URL ?? "http://localhost:3000",
+  baseURL: resolveAuthBaseURL(),
   emailAndPassword: {
     enabled: true,
     disableSignUp: true, // only studio creates accounts server-side

@@ -11,7 +11,6 @@ type CaseStudyCoverProps = {
   alt: string;
   className?: string;
   imageClassName?: string;
-  overlayClassName?: string;
   sizes: string;
   priority?: boolean;
   children?: React.ReactNode;
@@ -22,7 +21,6 @@ export function CaseStudyCover({
   alt,
   className,
   imageClassName,
-  overlayClassName,
   sizes,
   priority,
   children,
@@ -65,12 +63,6 @@ export function CaseStudyCover({
         className={cn(
           "object-cover object-center transition-transform duration-700 ease-out group-hover:scale-[1.03]",
           imageClassName
-        )}
-      />
-      <div
-        className={cn(
-          "pointer-events-none absolute inset-0 bg-linear-to-t from-ink/70 via-ink/15 to-ink/20",
-          overlayClassName
         )}
       />
       {children}
