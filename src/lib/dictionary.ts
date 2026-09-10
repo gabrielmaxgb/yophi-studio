@@ -50,6 +50,7 @@ export type Dictionary = {
 		digital: string;
 		digitalCopy: string;
 		meet: string;
+		imageAlt: string;
 	};
 	services: {
 		eyebrow: string;
@@ -181,6 +182,8 @@ export const dict: Dictionary = {
 		digitalCopy:
 			"Sites, produtos e sistemas que facilitam entender, escolher, comprar e voltar.",
 		meet: "Criativo × Tecnologia",
+		imageAlt:
+			"Figura no escuro com o texto ESCAPE THE ORDINARY projetado no rosto e no tronco.",
 	},
 	services: {
 		eyebrow: "Serviços",
