@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { ArchiveGate } from "@/components/work/archive-gate";
+import { InstagramDock } from "@/components/layout/instagram-dock";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { StudioCursor } from "@/components/motion/studio-cursor";
@@ -27,6 +28,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       </a>
       <StudioCursor />
       <SiteHeader />
+      <InstagramDock />
       <main id="conteudo" className="flex-1" tabIndex={-1}>
         {children}
       </main>

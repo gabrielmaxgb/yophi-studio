@@ -79,6 +79,7 @@ export type Dictionary = {
 		presence: string;
 		presenceLine: string;
 		presenceLine2: string;
+		instagram: string;
 		copyright: string;
 		tag: string;
 	};
@@ -127,6 +128,9 @@ export type Dictionary = {
 		presenceHint: string;
 		submit: string;
 		whatsapp: string;
+		instagram: string;
+		copyEmail: string;
+		emailCopied: string;
 		successTitle: string;
 		successBody: string;
 		sendError: string;
@@ -239,6 +243,7 @@ export const dict: Dictionary = {
 		presence: "Estúdio",
 		presenceLine: "Conteúdo, design",
 		presenceLine2: "e tecnologia.",
+		instagram: "Instagram",
 		copyright: "YOPHI digital studio",
 		tag: "Criativo × Tecnologia",
 	},
@@ -377,7 +382,7 @@ export const dict: Dictionary = {
 		eyebrow: "Contato",
 		headline: "Uma conversa. Vinte minutos.",
 		intro: "Quem é, o que está no ar. Escreve aqui ou chama no WhatsApp.",
-		email: "hello@yophi.studio",
+		email: "digital@yophistudio.com",
 		tag: "Criativo × Tecnologia",
 		name: "Nome",
 		emailLabel: "E-mail",
@@ -385,6 +390,9 @@ export const dict: Dictionary = {
 		presenceHint: "Site, Instagram — o endereço.",
 		submit: "Mandar por e-mail",
 		whatsapp: "Chamar no WhatsApp",
+		instagram: "Ver no Instagram",
+		copyEmail: "Copiar e-mail",
+		emailCopied: "E-mail copiado",
 		successTitle: "Chegou.",
 		successBody: "A gente olha o que está no ar e volta com um horário.",
 		sendError: "Não chegou. Tenta de novo ou chama no WhatsApp.",

@@ -1,6 +1,7 @@
 import { YophiMark } from "@/components/brand/yophi-logo";
 import { ApprovalResponse } from "@/components/portal/approval-response";
 import { StudioWorkspace } from "@/components/portal/studio-workspace";
+import { ChangePasswordForm } from "@/components/portal/change-password-form";
 import { RequestCreator } from "@/components/portal/studio-forms";
 import {
   Panel,
@@ -27,8 +28,25 @@ export default async function ContaPage({
 }: {
   searchParams: Promise<{ m?: string; p?: string }>;
 }) {
-  const user = await requireUser();
+  const user = await requireUser({ allowPendingPassword: true });
   const params = await searchParams;
+
+  if (user.role === "CLIENT" && user.mustChangePassword) {
+    return (
+      <PortalShell
+        brand={
+          <div className="flex items-center gap-3">
+            <YophiMark className="h-7 w-auto" />
+            <span className="font-serif tracking-[0.16em] uppercase">Conta</span>
+          </div>
+        }
+        aside={<SignOutButton />}
+        nav={<p className="text-sm text-ink/55">Primeiro acesso</p>}
+      >
+        <ChangePasswordForm />
+      </PortalShell>
+    );
+  }
 
   // Same URL for everyone — studio sees admin tools, clients see their dashboard.
   if (user.role === "STUDIO") {

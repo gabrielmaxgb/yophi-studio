@@ -17,7 +17,7 @@ async function main() {
     await prisma.$transaction([
       prisma.user.update({
         where: { id: existing.id },
-        data: { role: "STUDIO", banned: false, emailVerified: true },
+        data: { role: "STUDIO", banned: false, emailVerified: true, mustChangePassword: false },
       }),
       prisma.account.updateMany({
         where: { userId: existing.id, providerId: "credential" },

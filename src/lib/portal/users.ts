@@ -13,15 +13,17 @@ export async function createCredentialUser(input: {
 }) {
   const email = input.email.trim().toLowerCase();
   const passwordHash = await hashPassword(input.password);
+  const isStudio = input.role === "STUDIO";
 
   return prisma.$transaction(async (tx) => {
     const user = await tx.user.create({
       data: {
         email,
         name: input.name.trim(),
-        emailVerified: true,
+        emailVerified: isStudio,
         role: input.role,
         banned: false,
+        mustChangePassword: !isStudio,
       },
     });
 

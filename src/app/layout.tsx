@@ -4,6 +4,10 @@ import { LocaleProvider } from "@/components/i18n/locale-provider";
 import { SiteChrome } from "@/components/layout/site-chrome";
 import { dict } from "@/lib/dictionary";
 import { defaultOgImage, siteName, siteUrl } from "@/lib/site";
+import {
+  studioEmail,
+  studioInstagramUrl,
+} from "@/lib/studio-contact";
 import "./globals.css";
 
 const sans = DM_Sans({
@@ -42,6 +46,15 @@ export const metadata: Metadata = {
   },
 };
 
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: siteName,
+  url: siteUrl,
+  email: studioEmail,
+  sameAs: [studioInstagramUrl],
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -54,6 +67,12 @@ export default function RootLayout({
       className={`${sans.variable} ${serif.variable}`}
     >
       <body className="min-h-dvh flex flex-col" suppressHydrationWarning>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd),
+          }}
+        />
         <LocaleProvider dict={dict}>
           <SiteChrome>{children}</SiteChrome>
         </LocaleProvider>

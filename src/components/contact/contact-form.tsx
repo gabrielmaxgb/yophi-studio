@@ -7,7 +7,9 @@ import { Reveal } from "@/components/motion/reveal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { studioWhatsAppUrl } from "@/lib/studio-contact";
+import { InstagramIcon } from "@/components/brand/instagram-icon";
+import { StudioEmail } from "@/components/contact/studio-email";
+import { studioInstagramUrl, studioWhatsAppUrl } from "@/lib/studio-contact";
 
 const whatsappHref = `${studioWhatsAppUrl}?text=${encodeURIComponent(
   "Oi. Quero marcar uma conversa."
@@ -78,7 +80,7 @@ export function ContactForm() {
             {dict.contact.intro}
           </p>
         </Reveal>
-        <Reveal delay={200} className="mt-10">
+        <Reveal delay={200} className="mt-10 flex flex-col items-start gap-5">
           <a
             href={whatsappHref}
             target="_blank"
@@ -91,6 +93,21 @@ export function ContactForm() {
               →
             </span>
           </a>
+          <div className="flex flex-col items-start gap-2">
+            <a
+              href={studioInstagramUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="group inline-flex min-h-10 w-fit items-center gap-2.5 text-[0.7rem] tracking-[0.22em] text-ink/70 uppercase transition-colors hover:text-ink"
+            >
+              <InstagramIcon className="size-4" />
+              {dict.contact.instagram}
+              <span className="transition-transform group-hover:translate-x-1">
+                →
+              </span>
+            </a>
+            <StudioEmail linkClassName="text-ink/70 hover:text-ink" />
+          </div>
         </Reveal>
       </div>
 

@@ -15,7 +15,9 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { YophiMark } from "@/components/brand/yophi-logo";
+import { StudioEmail } from "@/components/contact/studio-email";
 import { cn } from "@/lib/utils";
+import { studioInstagramUrl } from "@/lib/studio-contact";
 
 function ClientPass({
   label,
@@ -207,6 +209,18 @@ export function SiteHeader() {
                     onClick={() => setOpen(false)}
                     className="w-fit"
                   />
+                  <div className="flex flex-col items-start gap-2">
+                    <a
+                      href={studioInstagramUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={() => setOpen(false)}
+                      className="text-[0.7rem] tracking-[0.28em] text-ink/50 uppercase transition-colors hover:text-ink"
+                    >
+                      {dict.footer.instagram}
+                    </a>
+                    <StudioEmail linkClassName="text-ink/60 hover:text-ink" />
+                  </div>
                   <YophiMark className="h-10 w-auto text-ink/40" />
                 </div>
               </div>

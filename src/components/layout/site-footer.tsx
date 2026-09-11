@@ -6,6 +6,8 @@ import { YophiLogo } from "@/components/brand/yophi-logo";
 import { ArchiveLink } from "@/components/work/archive-gate";
 import { useI18n } from "@/components/i18n/locale-provider";
 import { prefersReducedMotion } from "@/lib/motion";
+import { StudioEmail } from "@/components/contact/studio-email";
+import { studioInstagramUrl } from "@/lib/studio-contact";
 
 export function SiteFooter() {
   const { dict } = useI18n();
@@ -77,6 +79,17 @@ export function SiteFooter() {
             <br />
             {dict.footer.presenceLine2}
           </p>
+          <div className="flex flex-col gap-1.5 md:items-end">
+            <a
+              href={studioInstagramUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex min-h-9 items-center text-sm text-ink/85 transition-colors hover:text-ink"
+            >
+              {dict.footer.instagram}
+            </a>
+            <StudioEmail align="end" />
+          </div>
         </div>
       </div>
 

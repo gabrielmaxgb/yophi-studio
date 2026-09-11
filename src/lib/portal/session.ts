@@ -12,22 +12,39 @@ export async function getSessionUser(): Promise<SessionUser | null> {
     headers: await headers(),
   });
   if (!session?.user) return null;
-  const role =
-    (session.user as { role?: string }).role === "STUDIO" ? "STUDIO" : "CLIENT";
-  const banned = Boolean((session.user as { banned?: boolean }).banned);
-  if (banned) return null;
+  const row = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: {
+      role: true,
+      banned: true,
+      emailVerified: true,
+      mustChangePassword: true,
+    },
+  });
+  if (!row || row.banned) return null;
   return {
     id: session.user.id,
     email: session.user.email,
     name: session.user.name,
-    role,
-    banned,
+    role: row.role === "STUDIO" ? "STUDIO" : "CLIENT",
+    banned: row.banned,
+    emailVerified: row.emailVerified,
+    mustChangePassword: row.mustChangePassword,
   };
 }
 
-export async function requireUser(): Promise<SessionUser> {
+export async function requireUser(opts?: {
+  allowPendingPassword?: boolean;
+}): Promise<SessionUser> {
   const user = await getSessionUser();
   if (!user) redirect("/entrar");
+  if (
+    !opts?.allowPendingPassword &&
+    user.role === "CLIENT" &&
+    user.mustChangePassword
+  ) {
+    throw new Error("Troca a senha provisória antes de continuar.");
+  }
   return user;
 }
 

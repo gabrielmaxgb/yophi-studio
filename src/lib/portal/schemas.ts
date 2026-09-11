@@ -35,11 +35,7 @@ export const createClientSchema = z.object({
     .min(2, "Nome curto demais.")
     .max(120, "Nome longo demais."),
   contactName: z.string().trim().min(2).max(120),
-  contactEmail: z.string().trim().email("E-mail inválido.").toLowerCase(),
-  temporaryPassword: z
-    .string()
-    .min(10, "Senha temporária: mínimo 10 caracteres.")
-    .max(128),
+  contactEmail: z.string().trim().email("E-mail obrigatório.").toLowerCase(),
   services: z
     .array(contractedServiceSchema)
     .min(1, "Selecione ao menos um serviço.")
@@ -147,6 +143,19 @@ export const createContentSchema = z.object({
   ]),
   scheduledAt: z.string().datetime().optional().or(z.literal("")),
 });
+
+export const officialPasswordSchema = z
+  .object({
+    password: z
+      .string()
+      .min(10, "Senha: mínimo 10 caracteres.")
+      .max(128),
+    confirm: z.string(),
+  })
+  .refine((data) => data.password === data.confirm, {
+    message: "As senhas não batem.",
+    path: ["confirm"],
+  });
 
 export function slugify(input: string) {
   return input

@@ -1,9 +1,13 @@
 "use server";
 
+import { headers } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { ZodError } from "zod";
+import { hashPassword } from "better-auth/crypto";
+import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { modulesForServices } from "@/lib/portal/catalog";
+import { generateTemporaryPassword } from "@/lib/portal/password";
 import {
   createAccessSchema,
   createApprovalSchema,
@@ -12,6 +16,7 @@ import {
   createContentSchema,
   createRequestSchema,
   respondApprovalSchema,
+  officialPasswordSchema,
   slugify,
   updateBriefSchema,
   updateServicesSchema,
@@ -50,6 +55,8 @@ export async function createClientAction(input: unknown) {
   });
   if (existing) fail("Já existe um usuário com este e-mail.");
 
+  const temporaryPassword = generateTemporaryPassword();
+
   let baseSlug = slugify(data.companyName) || "cliente";
   let slug = baseSlug;
   let i = 1;
@@ -60,7 +67,7 @@ export async function createClientAction(input: unknown) {
   const user = await createCredentialUser({
     email: data.contactEmail,
     name: data.contactName,
-    password: data.temporaryPassword,
+    password: temporaryPassword,
     role: "CLIENT",
   });
 
@@ -91,12 +98,83 @@ export async function createClientAction(input: unknown) {
     include: { services: true },
   });
 
-  
+  let emailSent = false;
+  try {
+    await auth.api.signInMagicLink({
+      body: {
+        email: data.contactEmail,
+        callbackURL: "/conta",
+        metadata: {
+          name: data.contactName,
+          password: temporaryPassword,
+        },
+      },
+      headers: await headers(),
+    });
+    emailSent = true;
+  } catch (error) {
+    console.error("Failed to send client magic link:", error);
+  }
+
   return {
     projectId: project.id,
     slug: project.slug,
+    email: data.contactEmail,
+    temporaryPassword,
+    emailSent,
     modules: modulesForServices(project.services.map((s) => s.serviceKey)),
   };
+}
+
+export async function setOfficialPasswordAction(input: unknown) {
+  const user = await requireUser({ allowPendingPassword: true });
+  if (!user.mustChangePassword) fail("A senha já foi definida.");
+
+  const data = parseOrFail(officialPasswordSchema, input);
+  const passwordHash = await hashPassword(data.password);
+
+  const authSession = await auth.api.getSession({
+    headers: await headers(),
+  });
+  const keepToken = authSession?.session?.token;
+
+  const account = await prisma.account.findFirst({
+    where: { userId: user.id, providerId: "credential" },
+    select: { id: true },
+  });
+
+  await prisma.$transaction(async (tx) => {
+    if (account) {
+      await tx.account.update({
+        where: { id: account.id },
+        data: { password: passwordHash },
+      });
+    } else {
+      await tx.account.create({
+        data: {
+          userId: user.id,
+          accountId: user.id,
+          providerId: "credential",
+          password: passwordHash,
+        },
+      });
+    }
+
+    await tx.user.update({
+      where: { id: user.id },
+      data: { mustChangePassword: false, emailVerified: true },
+    });
+    await tx.verification.deleteMany({
+      where: { identifier: user.email },
+    });
+    await tx.session.deleteMany({
+      where: keepToken
+        ? { userId: user.id, token: { not: keepToken } }
+        : { userId: user.id },
+    });
+  });
+
+  revalidatePath("/conta");
 }
 
 export async function updateProjectServicesAction(input: unknown) {

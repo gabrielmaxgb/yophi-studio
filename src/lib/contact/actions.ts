@@ -1,8 +1,10 @@
 "use server";
 
 import { createHash } from "node:crypto";
+import { headers } from "next/headers";
 import { Resend } from "resend";
 import { z } from "zod";
+import { clientIp, rateLimit } from "@/lib/rate-limit";
 import { studioEmail } from "@/lib/studio-contact";
 
 const schema = z.object({
@@ -35,8 +37,20 @@ export async function sendContact(input: unknown): Promise<ContactResult> {
     return { status: "error", message: "Confere os campos." };
   }
 
-  // Honeypot — treat as success so bots don't retry.
   if (parsed.data.trap) return { status: "sent" };
+
+  const ip = clientIp(await headers());
+  const byIp = rateLimit(`contact:ip:${ip}`, {
+    limit: 5,
+    windowMs: 10 * 60 * 1000,
+  });
+  const byEmail = rateLimit(`contact:email:${parsed.data.email}`, {
+    limit: 3,
+    windowMs: 60 * 60 * 1000,
+  });
+  if (!byIp || !byEmail) {
+    return { status: "error", message: "Tenta de novo daqui a pouco." };
+  }
 
   const key = process.env.RESEND_API_KEY?.trim();
   if (!key) {

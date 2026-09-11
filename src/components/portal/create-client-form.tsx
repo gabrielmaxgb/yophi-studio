@@ -17,7 +17,12 @@ export function CreateClientForm() {
   const router = useRouter();
   const [pending, start] = useTransition();
   const [error, setError] = useState<string | null>(null);
-  const [ok, setOk] = useState<string | null>(null);
+  const [created, setCreated] = useState<{
+    slug: string;
+    email: string;
+    temporaryPassword: string;
+    emailSent: boolean;
+  } | null>(null);
   const [selected, setSelected] = useState<Record<string, true>>({});
 
   const selectedKeys = useMemo(() => Object.keys(selected), [selected]);
@@ -35,19 +40,28 @@ export function CreateClientForm() {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     const form = e.currentTarget;
+    const contactEmail = String(fd.get("contactEmail") ?? "").trim();
+    if (!contactEmail) {
+      setError("E-mail é obrigatório.");
+      return;
+    }
 
     start(async () => {
       setError(null);
-      setOk(null);
+      setCreated(null);
       try {
         const result = await createClientAction({
           companyName: String(fd.get("companyName") ?? ""),
           contactName: String(fd.get("contactName") ?? ""),
-          contactEmail: String(fd.get("contactEmail") ?? ""),
-          temporaryPassword: String(fd.get("temporaryPassword") ?? ""),
+          contactEmail,
           services: selectedKeys.map((serviceKey) => ({ serviceKey })),
         });
-        setOk(`Cliente criado. Projeto /${result.slug}`);
+        setCreated({
+          slug: result.slug,
+          email: result.email,
+          temporaryPassword: result.temporaryPassword,
+          emailSent: result.emailSent,
+        });
         router.refresh();
         form.reset();
         setSelected({});
@@ -74,16 +88,6 @@ export function CreateClientForm() {
               type="email"
               required
               autoComplete="off"
-            />
-          </Field>
-          <Field label="Senha temporária (≥10)">
-            <input
-              className={fieldClass}
-              name="temporaryPassword"
-              type="text"
-              required
-              minLength={10}
-              autoComplete="new-password"
             />
           </Field>
         </div>
@@ -121,7 +125,25 @@ export function CreateClientForm() {
         </div>
 
         {error ? <p className="text-sm text-ember">{error}</p> : null}
-        {ok ? <p className="text-sm text-ink/70">{ok}</p> : null}
+        {created ? (
+          <div className="border border-line bg-mist/40 p-4 text-sm leading-relaxed text-ink/80">
+            <p>
+              Cliente criado. Projeto{" "}
+              <span className="text-ink">/{created.slug}</span>
+            </p>
+            <p className="mt-3 text-[0.65rem] tracking-[0.16em] text-stone uppercase">
+              Senha provisória
+            </p>
+            <p className="mt-1 font-mono text-base tracking-wide text-ink">
+              {created.temporaryPassword}
+            </p>
+            <p className="mt-3 text-ink/60">
+              {created.emailSent
+                ? `Mandamos o link de acesso para ${created.email}.`
+                : `O e-mail não saiu. Passa a senha para ${created.email}.`}
+            </p>
+          </div>
+        ) : null}
 
         <div className="flex flex-wrap gap-3">
           <button
