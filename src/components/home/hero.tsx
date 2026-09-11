@@ -1,12 +1,12 @@
 "use client";
 
-import { useRef, type CSSProperties } from "react";
+import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArchiveLink } from "@/components/work/archive-gate";
 import { useI18n } from "@/components/i18n/locale-provider";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { isFinePointer, prefersReducedMotion } from "@/lib/motion";
+import { prefersReducedMotion } from "@/lib/motion";
 
 const letters = ["Y", "O", "P", "H", "I"] as const;
 
@@ -27,10 +27,7 @@ export function Hero() {
       const copy = root.querySelectorAll("[data-hero-copy]");
       const meta = root.querySelectorAll("[data-hero-meta]");
       const head = root.querySelector("[data-hero-head]");
-      const spin = root.querySelector<HTMLElement>("[data-hero-spin]");
       const glows = root.querySelectorAll("[data-hero-glow]");
-      const glowEmber = root.querySelector<HTMLElement>("[data-hero-glow='ember']");
-      const glowSteel = root.querySelector<HTMLElement>("[data-hero-glow='steel']");
       const formMeta = root.querySelector("[data-form-meta]");
       const reduced = prefersReducedMotion();
 
@@ -39,165 +36,72 @@ export function Hero() {
           [wash, glyphs, mark, tagline, line, copy, meta, head, glows, formMeta],
           { clearProps: "all" }
         );
-      } else {
-        gsap.set(glyphs, {
-          autoAlpha: 0,
-          y: (i) => (i === 2 ? 40 : 20),
-          x: (i) => (i < 2 ? -24 : i > 2 ? 24 : 0),
-        });
-        gsap.set(tagline, { autoAlpha: 0, y: 10 });
-        gsap.set(line, { autoAlpha: 0, y: 24 });
-        gsap.set(copy, { autoAlpha: 0, y: 16 });
-        gsap.set(meta, { autoAlpha: 0, y: 14 });
-        gsap.set(head, {
-          autoAlpha: 0,
-          scale: 0.9,
-          filter: "blur(10px) brightness(0.55)",
-          transformOrigin: "50% 55%",
-        });
-        gsap.set(glows, { autoAlpha: 0, scale: 0.7 });
-        gsap.set(formMeta, { autoAlpha: 0, y: 12 });
-        gsap.set(mark, { autoAlpha: 0 });
-        gsap.set(wash, { autoAlpha: 0.7 });
-
-        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-        tl.to(wash, { autoAlpha: 1, duration: 1.2, ease: "power2.out" }, 0)
-          .to(mark, { autoAlpha: 0.14, duration: 1 }, 0.05)
-          .to(
-            glyphs,
-            {
-              autoAlpha: 1,
-              x: 0,
-              y: 0,
-              duration: 1.2,
-              stagger: { each: 0.07, from: "center" },
-            },
-            0.08
-          )
-          .to(tagline, { autoAlpha: 1, y: 0, duration: 0.8 }, 0.45)
-          .to(glows, { autoAlpha: 1, scale: 1, duration: 1.1, stagger: 0.08 }, 0.2)
-          .to(
-            head,
-            {
-              autoAlpha: 1,
-              scale: 1,
-              filter: "blur(0px) brightness(1)",
-              duration: 1.35,
-              ease: "expo.out",
-            },
-            0.22
-          )
-          .to(line, { autoAlpha: 1, y: 0, duration: 0.95 }, 0.55)
-          .to(copy, { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.06 }, 0.7)
-          .to(meta, { autoAlpha: 1, y: 0, duration: 0.75 }, 0.85)
-          .to(formMeta, { autoAlpha: 1, y: 0, duration: 0.7 }, 0.9);
-
-        gsap.to(wash, {
-          yPercent: 12,
-          ease: "none",
-          scrollTrigger: {
-            trigger: root,
-            start: "top top",
-            end: "bottom top",
-            scrub: 1.2,
-          },
-        });
+        return;
       }
 
-      if (reduced || !isFinePointer() || !spin) return;
-
-      const restX = 0.72;
-      const restY = 0.28;
-      let ready = false;
-      let inView = true;
-
-      gsap.set(spin, {
-        "--lx": `${restX * 100}%`,
-        "--ly": `${restY * 100}%`,
-        "--sx": `${restX * 100}%`,
-        "--sy": `${restY * 100}%`,
-        "--li": 0.85,
+      gsap.set(glyphs, {
+        autoAlpha: 0,
+        y: (i) => (i === 2 ? 40 : 20),
+        x: (i) => (i < 2 ? -24 : i > 2 ? 24 : 0),
       });
-
-      const paintLight = (x: number, y: number, intensity: number) => {
-        const sx = x * 0.78 + 0.5 * 0.22;
-        const sy = y * 0.78 + 0.36 * 0.22;
-
-        gsap.to(spin, {
-          duration: 0.55,
-          ease: "power3.out",
-          overwrite: "auto",
-          "--lx": `${x * 100}%`,
-          "--ly": `${y * 100}%`,
-          "--sx": `${sx * 100}%`,
-          "--sy": `${sy * 100}%`,
-          "--li": intensity,
-        });
-
-        if (glowEmber) {
-          gsap.to(glowEmber, {
-            duration: 0.7,
-            ease: "power3.out",
-            overwrite: "auto",
-            xPercent: (x - 0.5) * 36,
-            yPercent: (y - 0.28) * 24,
-          });
-        }
-
-        if (glowSteel) {
-          gsap.to(glowSteel, {
-            duration: 0.75,
-            ease: "power3.out",
-            overwrite: "auto",
-            xPercent: (0.5 - x) * 28,
-            yPercent: (0.55 - y) * 18,
-          });
-        }
-      };
-
-      const onMove = (event: PointerEvent) => {
-        if (!ready || !inView) return;
-        const rect = spin.getBoundingClientRect();
-        if (!rect.width || !rect.height) return;
-
-        const x = (event.clientX - rect.left) / rect.width;
-        const y = (event.clientY - rect.top) / rect.height;
-        const intensity = gsap.utils.clamp(
-          0.42,
-          1,
-          1.05 - Math.hypot(x - 0.5, y - 0.38) * 0.38
-        );
-
-        paintLight(x, y, intensity);
-      };
-
-      const restLight = () => {
-        paintLight(restX, restY, 0.85);
-      };
-
-      const arm = gsap.delayedCall(1.15, () => {
-        ready = true;
+      gsap.set(tagline, { autoAlpha: 0, y: 10 });
+      gsap.set(line, { autoAlpha: 0, y: 24 });
+      gsap.set(copy, { autoAlpha: 0, y: 16 });
+      gsap.set(meta, { autoAlpha: 0, y: 14 });
+      gsap.set(head, {
+        autoAlpha: 0,
+        scale: 0.9,
+        filter: "blur(10px) brightness(0.55)",
+        transformOrigin: "50% 55%",
       });
+      gsap.set(glows, { autoAlpha: 0, scale: 0.7 });
+      gsap.set(formMeta, { autoAlpha: 0, y: 12 });
+      gsap.set(mark, { autoAlpha: 0 });
+      gsap.set(wash, { autoAlpha: 0.7 });
 
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          inView = entry.isIntersecting;
-          if (!inView) restLight();
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      tl.to(wash, { autoAlpha: 1, duration: 1.2, ease: "power2.out" }, 0)
+        .to(mark, { autoAlpha: 0.14, duration: 1 }, 0.05)
+        .to(
+          glyphs,
+          {
+            autoAlpha: 1,
+            x: 0,
+            y: 0,
+            duration: 1.2,
+            stagger: { each: 0.07, from: "center" },
+          },
+          0.08
+        )
+        .to(tagline, { autoAlpha: 1, y: 0, duration: 0.8 }, 0.45)
+        .to(glows, { autoAlpha: 1, scale: 1, duration: 1.1, stagger: 0.08 }, 0.2)
+        .to(
+          head,
+          {
+            autoAlpha: 1,
+            scale: 1,
+            filter: "blur(0px) brightness(1)",
+            duration: 1.35,
+            ease: "expo.out",
+          },
+          0.22
+        )
+        .to(line, { autoAlpha: 1, y: 0, duration: 0.95 }, 0.55)
+        .to(copy, { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.06 }, 0.7)
+        .to(meta, { autoAlpha: 1, y: 0, duration: 0.75 }, 0.85)
+        .to(formMeta, { autoAlpha: 1, y: 0, duration: 0.7 }, 0.9);
+
+      gsap.to(wash, {
+        yPercent: 12,
+        ease: "none",
+        scrollTrigger: {
+          trigger: root,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1.2,
         },
-        { threshold: 0.2 }
-      );
-      observer.observe(root);
-
-      window.addEventListener("pointermove", onMove, { passive: true });
-      document.documentElement.addEventListener("mouseleave", restLight);
-
-      return () => {
-        arm.kill();
-        observer.disconnect();
-        window.removeEventListener("pointermove", onMove);
-        document.documentElement.removeEventListener("mouseleave", restLight);
-      };
+      });
     },
     { scope: rootRef }
   );
@@ -338,19 +242,7 @@ export function Hero() {
               data-hero-head
               className="relative flex h-full w-full items-start justify-center mask-[linear-gradient(to_bottom,black_70%,transparent_100%)] md:max-h-[78vh] md:items-center md:mask-none"
             >
-              <div
-                data-hero-spin
-                className="relative isolate aspect-1377/1825 h-full w-auto md:scale-[1.12]"
-                style={
-                  {
-                    "--lx": "72%",
-                    "--ly": "28%",
-                    "--sx": "68%",
-                    "--sy": "26%",
-                    "--li": 0.85,
-                  } as CSSProperties
-                }
-              >
+              <div className="relative aspect-1377/1825 h-full w-auto md:scale-[1.12]">
                 <Image
                   src="/philosophy/head.webp"
                   alt={dict.philosophy.imageAlt}
@@ -360,12 +252,6 @@ export function Hero() {
                   sizes="(max-width: 768px) 88vw, 42vw"
                   className="object-contain object-top select-none drop-shadow-[0_40px_80px_rgba(0,0,0,0.55)]"
                 />
-                <div
-                  aria-hidden
-                  className="hero-light-layer hero-light-shade"
-                />
-                <div aria-hidden className="hero-light-layer hero-light-key" />
-                <div aria-hidden className="hero-light-layer hero-light-spec" />
               </div>
             </div>
           </figure>

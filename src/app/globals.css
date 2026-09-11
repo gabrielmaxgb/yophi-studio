@@ -109,36 +109,6 @@
   --sidebar-ring: #b55c38;
 }
 
-@property --li {
-  syntax: "<number>";
-  inherits: true;
-  initial-value: 1;
-}
-
-@property --lx {
-  syntax: "<percentage>";
-  inherits: true;
-  initial-value: 72%;
-}
-
-@property --ly {
-  syntax: "<percentage>";
-  inherits: true;
-  initial-value: 28%;
-}
-
-@property --sx {
-  syntax: "<percentage>";
-  inherits: true;
-  initial-value: 68%;
-}
-
-@property --sy {
-  syntax: "<percentage>";
-  inherits: true;
-  initial-value: 26%;
-}
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -300,63 +270,6 @@
     height: 1px;
     width: 2.5rem;
     background: color-mix(in srgb, var(--ember) 70%, transparent);
-  }
-
-  .hero-light-layer {
-    pointer-events: none;
-    position: absolute;
-    inset: 0;
-    mask-image: url("/philosophy/head.webp");
-    mask-mode: alpha;
-    mask-size: contain;
-    mask-position: top center;
-    mask-repeat: no-repeat;
-    -webkit-mask-image: url("/philosophy/head.webp");
-    -webkit-mask-size: contain;
-    -webkit-mask-position: top center;
-    -webkit-mask-repeat: no-repeat;
-  }
-
-  .hero-light-shade {
-    background: radial-gradient(
-      ellipse 85% 95% at var(--lx, 72%) var(--ly, 28%),
-      transparent 0%,
-      rgba(5, 5, 5, 0.08) 28%,
-      rgba(5, 5, 5, calc(0.38 + (1 - var(--li, 1)) * 0.18)) 68%
-    );
-    mix-blend-mode: multiply;
-  }
-
-  .hero-light-key {
-    background: radial-gradient(
-      circle 42% at var(--lx, 72%) var(--ly, 28%),
-      rgba(255, 214, 176, calc(0.42 * var(--li, 1))) 0%,
-      rgba(201, 106, 62, calc(0.28 * var(--li, 1))) 26%,
-      transparent 58%
-    );
-    mix-blend-mode: overlay;
-  }
-
-  .hero-light-spec {
-    background: radial-gradient(
-      circle 16% at var(--sx, 68%) var(--sy, 26%),
-      rgba(255, 244, 228, calc(0.55 * var(--li, 1))) 0%,
-      rgba(201, 106, 62, calc(0.12 * var(--li, 1))) 28%,
-      transparent 46%
-    );
-    mix-blend-mode: screen;
-  }
-
-  @media (pointer: coarse) {
-    .hero-light-layer {
-      display: none;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero-light-layer {
-      display: none;
-    }
   }
 }
 
