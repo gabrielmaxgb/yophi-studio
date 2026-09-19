@@ -35,15 +35,11 @@ export function WorkStudy({ slug }: { slug: CaseStudySlug }) {
           <CaseStudyCover
             src={study.image}
             alt={`${study.client} — ${copy.sector}`}
-            sizes="(max-width: 768px) 100vw, 1400px"
+            sizes="(max-width: 480px) 100vw, 384px"
             priority
-            className={
-              study.cover === "wide"
-                ? "aspect-[40/21] w-full"
-                : "aspect-[3/4] w-full"
-            }
+            className="mx-auto aspect-3/4 w-full max-w-sm"
           >
-            <div className="absolute inset-6 z-10 flex flex-col justify-between border border-ink/20 px-6 pt-5 pb-8 text-ink drop-shadow-[0_1px_12px_rgba(0,0,0,0.55)] md:inset-10 md:px-8 md:pt-6 md:pb-10">
+            <div className="absolute inset-4 z-10 flex flex-col justify-between border border-ink/20 px-4 pt-4 pb-5 text-ink drop-shadow-[0_1px_12px_rgba(0,0,0,0.55)] md:inset-5 md:px-5 md:pt-5 md:pb-6">
               <div className="flex items-center justify-between gap-4">
                 <p className="text-[0.65rem] leading-none tracking-[0.24em] text-ink/80 uppercase">
                   {copy.sector}
@@ -52,7 +48,7 @@ export function WorkStudy({ slug }: { slug: CaseStudySlug }) {
                   {String(index + 1).padStart(2, "0")}
                 </p>
               </div>
-              <h1 className="font-serif text-[clamp(2.4rem,7vw,5.5rem)] leading-[0.88] tracking-[0.04em]">
+              <h1 className="font-serif text-[clamp(1.7rem,5vw,2.5rem)] leading-[0.9] tracking-[0.04em]">
                 {study.client}
               </h1>
             </div>

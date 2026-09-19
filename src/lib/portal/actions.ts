@@ -34,6 +34,10 @@ function fail(message: string): never {
   throw new Error(message);
 }
 
+function revalidatePortal() {
+  revalidatePath("/conta", "layout");
+}
+
 function parseOrFail<T>(schema: { parse: (input: unknown) => T }, input: unknown): T {
   try {
     return schema.parse(input);
@@ -116,6 +120,8 @@ export async function createClientAction(input: unknown) {
     console.error("Failed to send client magic link:", error);
   }
 
+  revalidatePortal();
+
   return {
     projectId: project.id,
     slug: project.slug,
@@ -174,7 +180,7 @@ export async function setOfficialPasswordAction(input: unknown) {
     });
   });
 
-  revalidatePath("/conta");
+  revalidatePortal();
 }
 
 export async function updateProjectServicesAction(input: unknown) {
@@ -219,8 +225,7 @@ export async function updateProjectServicesAction(input: unknown) {
     }
   });
 
-  
-  revalidatePath("/conta");
+  revalidatePortal();
 }
 
 export async function updateProjectStatusAction(input: unknown) {
@@ -239,8 +244,7 @@ export async function updateProjectStatusAction(input: unknown) {
     },
   });
 
-  
-  revalidatePath("/conta");
+  revalidatePortal();
 }
 
 export async function updateBriefAction(input: unknown) {
@@ -258,8 +262,7 @@ export async function updateBriefAction(input: unknown) {
     },
   });
 
-  
-  revalidatePath("/conta");
+  revalidatePortal();
 }
 
 export async function createApprovalAction(input: unknown) {
@@ -278,8 +281,7 @@ export async function createApprovalAction(input: unknown) {
     },
   });
 
-  
-  revalidatePath("/conta");
+  revalidatePortal();
 }
 
 export async function respondApprovalAction(input: unknown) {
@@ -304,7 +306,7 @@ export async function respondApprovalAction(input: unknown) {
     },
   });
 
-  revalidatePath("/conta");
+  revalidatePortal();
   
 }
 
@@ -324,7 +326,7 @@ export async function createRequestAction(input: unknown) {
     },
   });
 
-  revalidatePath("/conta");
+  revalidatePortal();
   
 }
 
@@ -344,8 +346,7 @@ export async function setRequestStatusAction(
     data: { status },
   });
 
-  
-  revalidatePath("/conta");
+  revalidatePortal();
 }
 
 export async function createAssetAction(input: unknown) {
@@ -363,8 +364,7 @@ export async function createAssetAction(input: unknown) {
     },
   });
 
-  
-  revalidatePath("/conta");
+  revalidatePortal();
 }
 
 export async function createAccessAction(input: unknown) {
@@ -382,8 +382,7 @@ export async function createAccessAction(input: unknown) {
     },
   });
 
-  
-  revalidatePath("/conta");
+  revalidatePortal();
 }
 
 export async function createContentAction(input: unknown) {
@@ -401,8 +400,7 @@ export async function createContentAction(input: unknown) {
     },
   });
 
-  
-  revalidatePath("/conta");
+  revalidatePortal();
 }
 
 export async function getPortalBootstrap() {

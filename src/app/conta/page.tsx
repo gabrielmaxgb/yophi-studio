@@ -1,6 +1,7 @@
+import { redirect } from "next/navigation";
 import { YophiMark } from "@/components/brand/yophi-logo";
 import { ApprovalResponse } from "@/components/portal/approval-response";
-import { StudioWorkspace } from "@/components/portal/studio-workspace";
+import { StudioDashboard } from "@/components/portal/studio-dashboard";
 import { ChangePasswordForm } from "@/components/portal/change-password-form";
 import { RequestCreator } from "@/components/portal/studio-forms";
 import {
@@ -16,12 +17,7 @@ import {
   type PortalModule,
 } from "@/lib/portal/catalog";
 import { getPortalBootstrap } from "@/lib/portal/actions";
-import { requireUser } from "@/lib/portal/session";
-
-export const metadata = {
-  title: "Conta",
-  robots: { index: false, follow: false },
-};
+import { isProjectId, requireUser } from "@/lib/portal/session";
 
 export default async function ContaPage({
   searchParams,
@@ -48,9 +44,11 @@ export default async function ContaPage({
     );
   }
 
-  // Same URL for everyone — studio sees admin tools, clients see their dashboard.
   if (user.role === "STUDIO") {
-    return <StudioWorkspace user={user} projectId={params.p} />;
+    if (params.p && isProjectId(params.p)) {
+      redirect(`/conta/projetos/${params.p}`);
+    }
+    return <StudioDashboard />;
   }
 
   const { project, modules } = await getPortalBootstrap();

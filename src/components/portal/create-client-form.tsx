@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState, useTransition } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   btnPrimary,
@@ -18,6 +19,7 @@ export function CreateClientForm() {
   const [pending, start] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const [created, setCreated] = useState<{
+    projectId: string;
     slug: string;
     email: string;
     temporaryPassword: string;
@@ -57,6 +59,7 @@ export function CreateClientForm() {
           services: selectedKeys.map((serviceKey) => ({ serviceKey })),
         });
         setCreated({
+          projectId: result.projectId,
           slug: result.slug,
           email: result.email,
           temporaryPassword: result.temporaryPassword,
@@ -72,7 +75,7 @@ export function CreateClientForm() {
   }
 
   return (
-    <Panel title="Novo cliente">
+    <Panel title="Cadastro">
       <form onSubmit={onSubmit} className="flex flex-col gap-6">
         <div className="grid gap-4 md:grid-cols-2">
           <Field label="Empresa">
@@ -130,6 +133,14 @@ export function CreateClientForm() {
             <p>
               Cliente criado. Projeto{" "}
               <span className="text-ink">/{created.slug}</span>
+            </p>
+            <p className="mt-2">
+              <Link
+                href={`/conta/projetos/${created.projectId}`}
+                className="text-ember"
+              >
+                Abrir o projeto
+              </Link>
             </p>
             <p className="mt-3 text-[0.65rem] tracking-[0.16em] text-stone uppercase">
               Senha provisória

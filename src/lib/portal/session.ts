@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { auth, type SessionUser } from "@/lib/auth";
@@ -7,7 +8,7 @@ import {
   type PortalModule,
 } from "@/lib/portal/catalog";
 
-export async function getSessionUser(): Promise<SessionUser | null> {
+export const getSessionUser = cache(async (): Promise<SessionUser | null> => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -31,7 +32,7 @@ export async function getSessionUser(): Promise<SessionUser | null> {
     emailVerified: row.emailVerified,
     mustChangePassword: row.mustChangePassword,
   };
-}
+});
 
 export async function requireUser(opts?: {
   allowPendingPassword?: boolean;
@@ -55,6 +56,18 @@ export async function requireStudio(): Promise<SessionUser> {
     throw new Error("Apenas o estúdio pode fazer isso.");
   }
   return user;
+}
+
+/** Studio pages. Clients go back to /conta. */
+export async function requireStudioPage(): Promise<SessionUser> {
+  const user = await requireUser({ allowPendingPassword: true });
+  if (user.role !== "STUDIO") redirect("/conta");
+  return user;
+}
+
+/** Prisma cuid() — blocks path traversal in /conta/projetos/[id]. */
+export function isProjectId(id: string): boolean {
+  return /^c[a-z0-9]{20,31}$/i.test(id);
 }
 
 /** Prevents IDOR: client may only touch projects they belong to. */

@@ -157,12 +157,12 @@ export const dict: Dictionary = {
 	},
 	hero: {
 		headline: "A presença digital que a sua empresa merece",
-		body: "Posicionamento, conteúdo, sites e sistemas para quem já entrega bem — e ainda some quando alguém encontra a marca.",
+		body: "Posicionamento, conteúdo, sites e sistemas para sua operação digital.",
 		audience: "",
 		cta: "Começar o seu projeto",
-		ctaSecondary: "Ver o trabalho",
+		ctaSecondary: "Conheça nosso trabalho",
 		ctaHint:
-			"Nome, o que está no ar. A gente marca 20 minutos.",
+			"Entre em contato e vamos falar sobre o posicionamento digital da sua empresa e negócio.",
 		formLabel: "Forma",
 		formAside:
 			"Do que o seu negócio é ao que o cliente entende, lembra e escolhe.",
@@ -380,8 +380,9 @@ export const dict: Dictionary = {
 		metaDescription:
 			"Marca uma conversa com a YOPHI. Manda o que está no ar. Vinte minutos.",
 		eyebrow: "Contato",
-		headline: "Uma conversa. Vinte minutos.",
-		intro: "Quem é, o que está no ar. Escreve aqui ou chama no WhatsApp.",
+		headline: "Marque uma conversa com a YOPHI",
+		intro:
+			"Entre em contato e vamos falar sobre o posicionamento digital da sua empresa e negócio.",
 		email: "digital@yophistudio.com",
 		tag: "Criativo × Tecnologia",
 		name: "Nome",
